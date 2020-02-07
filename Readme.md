@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
-* Студент: [Юлия Орлова](https://up.htmlacademy.ru/react/3/user/1146161).
-* Наставник: `Неизвестно`.
+- Студент: [Юлия Орлова](https://up.htmlacademy.ru/react/3/user/1146161).
+- Наставник: [Дмитрий Авдеев].
 
 ---
 
