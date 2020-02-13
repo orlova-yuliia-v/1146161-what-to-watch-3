@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 
-// eslint-disable-next-line react/prop-types
+const movieTitleHandler = () => {};
+
 const App = ({promoName, promoGenre, promoYear, filmsTitle}) => (
-  <Main promoName={promoName} promoGenre={promoGenre} promoYear={promoYear} filmsTitle={filmsTitle} />
+  <Main promoName={promoName} promoGenre={promoGenre} promoYear={promoYear} filmsTitle={filmsTitle} onMovieTitleClick={movieTitleHandler} />
 );
 
 App.propTypes = {
