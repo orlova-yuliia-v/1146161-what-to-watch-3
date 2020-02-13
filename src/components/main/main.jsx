@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Main = ({promoName, promoGenre, promoYear, filmsTitle}) => (
+const Main = ({promoName, promoGenre, promoYear, filmsTitle, onMovieTitleClick}) => (
   <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -146,7 +146,9 @@ const Main = ({promoName, promoGenre, promoYear, filmsTitle}) => (
                 />
               </div>
               <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">
+                <a
+                  onClick={onMovieTitleClick}
+                  className="small-movie-card__link" href="movie-page.html">
                   {title}
                 </a>
               </h3>
@@ -181,7 +183,8 @@ Main.propTypes = {
   promoName: PropTypes.string.isRequired,
   promoGenre: PropTypes.string.isRequired,
   promoYear: PropTypes.number.isRequired,
-  filmsTitle: PropTypes.array.isRequired
+  filmsTitle: PropTypes.array.isRequired,
+  onMovieTitleClick: PropTypes.func.isRequired
 };
 
 export default Main;

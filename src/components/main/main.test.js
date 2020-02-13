@@ -16,6 +16,7 @@ it(`should render correctly`, () => {
      promoGenre={PromoData.PROMO_GENRE}
      promoYear={PromoData.PROMO_YEAR}
      filmsTitle={filmsTitle}
+     onMovieTitleClick={() => {}}
    />)
    .toJSON();
 
