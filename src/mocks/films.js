@@ -1,14 +1,4 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import App from "./app.jsx";
-
-const PromoData = {
-  TITLE: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  YEAR: 2014
-};
-
-const films = [
+export default [
   {
     title: `Fantastic Beasts: The Crimes of Grindelwal`,
     poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`
@@ -42,16 +32,3 @@ const films = [
     poster: `img/johnny-english.jpg`
   }
 ];
-
-it(`should render correctly`, () => {
-  const tree = renderer
-   .create(<App
-     promoTitle={PromoData.TITLE}
-     promoGenre={PromoData.GENRE}
-     promoYear={PromoData.YEAR}
-     films={films}
-   />)
-   .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
