@@ -58,7 +58,7 @@ export default [
   {
     title: `We need to talk about Kevin`,
     poster: `img/we-need-to-talk-about-kevin.jpg`,
-    bgPosterUrl: `https://cs11.pikabu.ru/post_img/big/2019/02/03/8/1549199981191383504.jpg`,
+    bgPosterUrl: `https://miro.medium.com/max/3200/1*JjQYm84zQnZ8sl1RgA45NA.jpeg`,
     genre: `Thrillers`,
     releaseYear: 2011,
     director: `Lynne Ramsay`,
