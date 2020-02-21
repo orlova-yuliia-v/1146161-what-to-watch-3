@@ -61,7 +61,7 @@ App.propTypes = {
   promoTitle: PropTypes.string.isRequired,
   promoGenre: PropTypes.string.isRequired,
   promoYear: PropTypes.number.isRequired,
-  films: PropTypes.arrayOf.isRequired
+  films: PropTypes.array.isRequired
 };
 
 export default App;
