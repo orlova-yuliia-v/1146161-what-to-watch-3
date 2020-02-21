@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SmallMovieCard from "./small-movie-card.jsx";
+import MovieDetails from "./movie-details.jsx";
 
 const film = {
   title: `Some title`,
@@ -20,11 +20,8 @@ const film = {
 it(`should render correctly`, () => {
   const tree = renderer
     .create(
-        <SmallMovieCard
+        <MovieDetails
           film={film}
-          onMovieEnter={() => {}}
-          onMovieLeave={() => {}}
-          onMovieTitleClick={() => {}}
         />
     )
     .toJSON();

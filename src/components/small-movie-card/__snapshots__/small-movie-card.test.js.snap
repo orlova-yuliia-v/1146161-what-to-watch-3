@@ -11,9 +11,9 @@ exports[`should render correctly 1`] = `
     className="small-movie-card__image"
   >
     <img
-      alt="Bohemian Rhapsody"
+      alt="Some title"
       height="175"
-      src="img/bohemian-rhapsody.jpg"
+      src="1.jpg"
       width="280"
     />
   </div>
@@ -24,7 +24,7 @@ exports[`should render correctly 1`] = `
       className="small-movie-card__link"
       href="movie-page.html"
     >
-      Bohemian Rhapsody
+      Some title
     </a>
   </h3>
 </article>

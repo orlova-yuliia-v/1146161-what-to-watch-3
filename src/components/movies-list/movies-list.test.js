@@ -4,36 +4,116 @@ import MoviesList from '../movies-list/movies-list.jsx';
 
 const films = [
   {
-    title: `Fantastic Beasts: The Crimes of Grindelwal`,
-    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    bgPosterUrl: `https://image-url.com/1.jpg`,
+    genre: `Some genre`,
+    releaseYear: 2020,
+    director: `Director name`,
+    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    runTime: `2h 00m`,
+    ratingScore: 7.5,
+    ratingLevel: `Good`,
+    ratingCount: 1234,
+    description: `Film description`
   },
   {
-    title: `Bohemian Rhapsody`,
-    poster: `img/bohemian-rhapsody.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    bgPosterUrl: `https://img-url.com/1.jpg`,
+    genre: `Some genre`,
+    releaseYear: 2020,
+    director: `Director name`,
+    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    runTime: `2h 00m`,
+    ratingScore: 7.5,
+    ratingLevel: `Good`,
+    ratingCount: 1234,
+    description: `Film description`
   },
   {
-    title: `Macbeth`,
-    poster: `img/macbeth.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    bgPosterUrl: `https://img-url.com/1.jpg`,
+    genre: `Some genre`,
+    releaseYear: 2020,
+    director: `Director name`,
+    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    runTime: `2h 00m`,
+    ratingScore: 7.5,
+    ratingLevel: `Good`,
+    ratingCount: 1234,
+    description: `Film description`
   },
   {
-    title: `Aviator`,
-    poster: `img/aviator.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    bgPosterUrl: `https://img-url.com/1.jpg`,
+    genre: `Some genre`,
+    releaseYear: 2020,
+    director: `Director name`,
+    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    runTime: `2h 00m`,
+    ratingScore: 7.5,
+    ratingLevel: `Good`,
+    ratingCount: 1234,
+    description: `Film description`
   },
   {
-    title: `We need to talk about Kevin`,
-    poster: `img/we-need-to-talk-about-kevin.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    bgPosterUrl: `https://img-url.com/1.jpg`,
+    genre: `Some genre`,
+    releaseYear: 2020,
+    director: `Director name`,
+    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    runTime: `2h 00m`,
+    ratingScore: 7.5,
+    ratingLevel: `Good`,
+    ratingCount: 1234,
+    description: `Film description`
   },
   {
-    title: `What We Do in the Shadows`,
-    poster: `img/what-we-do-in-the-shadows.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    bgPosterUrl: `https://img-url.com/1.jpg`,
+    genre: `Some genre`,
+    releaseYear: 2020,
+    director: `Director name`,
+    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    runTime: `2h 00m`,
+    ratingScore: 7.5,
+    ratingLevel: `Good`,
+    ratingCount: 1234,
+    description: `Film description`
   },
   {
-    title: `Revenant`,
-    poster: `img/revenant.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    bgPosterUrl: `https://img-url.com/1.jpg`,
+    genre: `Some genre`,
+    releaseYear: 2020,
+    director: `Director name`,
+    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    runTime: `2h 00m`,
+    ratingScore: 7.5,
+    ratingLevel: `Good`,
+    ratingCount: 1234,
+    description: `Film description`
   },
   {
-    title: `Johnny English`,
-    poster: `img/johnny-english.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    bgPosterUrl: `https://img-url.com/1.jpg`,
+    genre: `Some genre`,
+    releaseYear: 2020,
+    director: `Director name`,
+    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    runTime: `2h 00m`,
+    ratingScore: 7.5,
+    ratingLevel: `Good`,
+    ratingCount: 1234,
+    description: `Film description`
   }
 ];
 
