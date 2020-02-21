@@ -1,14 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 
-const MovieDetails = () => {
+const MovieDetails = ({film}) => {
+  const {title, poster, bgPosterUrl, genre, releaseYear, director, starring, runTime} = film;
 
   return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={bgPosterUrl} alt={title}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -31,10 +33,10 @@ const MovieDetails = () => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{releaseYear}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -59,7 +61,7 @@ const MovieDetails = () => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={poster} alt={title} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
@@ -81,23 +83,15 @@ const MovieDetails = () => {
                 <div className="movie-card__text-col">
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Director</strong>
-                    <span className="movie-card__details-value">Wes Andreson</span>
+                    <span className="movie-card__details-value">{director}</span>
                   </p>
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Starring</strong>
                     <span className="movie-card__details-value">
-                    Bill Murray, <br />
-                    Edward Norton, <br />
-                    Jude Law, <br />
-                    Willem Dafoe, <br />
-                    Saoirse Ronan, <br />
-                    Tony Revoloru, <br />
-                    Tilda Swinton, <br />
-                    Tom Wilkinson, <br />
-                    Owen Wilkinson, <br />
-                    Adrien br /ody, <br />
-                    Ralph Fiennes, <br />
-                    Jeff Goldblum
+                      {starring.map((actor, i) => (
+                        <React.Fragment key={i}>
+                          {actor} <br/>
+                        </React.Fragment>))}
                     </span>
                   </p>
                 </div>
@@ -105,15 +99,15 @@ const MovieDetails = () => {
                 <div className="movie-card__text-col">
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Run Time</strong>
-                    <span className="movie-card__details-value">1h 39m</span>
+                    <span className="movie-card__details-value">{runTime}</span>
                   </p>
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Genre</strong>
-                    <span className="movie-card__details-value">Comedy</span>
+                    <span className="movie-card__details-value">{genre}</span>
                   </p>
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Released</strong>
-                    <span className="movie-card__details-value">2014</span>
+                    <span className="movie-card__details-value">{releaseYear}</span>
                   </p>
                 </div>
               </div>
@@ -183,4 +177,20 @@ const MovieDetails = () => {
   );
 };
 
+MovieDetails.propTypes = {
+  film: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    bgPosterUrl: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    releaseYear: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    runTime: PropTypes.string.isRequired,
+    ratingScore: PropTypes.number.isRequired,
+    ratingLevel: PropTypes.string.isRequired,
+    ratingCount: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired
+  }).isRequired
+};
 export default MovieDetails;
