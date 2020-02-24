@@ -8,7 +8,8 @@ class MoviesList extends PureComponent {
     super(props);
 
     this.state = {
-      activeMovieCard: null
+      activeMovieCard: null,
+      isPlaying: false
     };
 
     this._handleCardEnter = this._handleCardEnter.bind(this);
@@ -16,19 +17,22 @@ class MoviesList extends PureComponent {
   }
 
   _handleCardEnter(film) {
-    this.setState(
-        {activeMovieCard: film}
-    );
+    this.setState((prevState) => ({
+      activeMovieCard: film,
+      isPlaying: !prevState.isPlaying
+    }));
   }
+
   _handleCardLeave() {
-    this.setState(
-        {activeMovieCard: null}
-    );
+    this.setState((prevState) => ({
+      activeMovieCard: null,
+      isPlaying: !prevState.isPlaying
+    }));
   }
 
   render() {
-
     const {films, onMovieTitleClick} = this.props;
+    const {activeMovieCard} = this.state;
 
     return (
 
@@ -41,7 +45,11 @@ class MoviesList extends PureComponent {
                 film={film}
                 onMovieEnter={this._handleCardEnter}
                 onMovieLeave={this._handleCardLeave}
-                onMovieTitleClick={() => onMovieTitleClick(film)}
+                onMovieTitleClick={(evt) => {
+                  evt.preventDefault();
+                  onMovieTitleClick(film);
+                }}
+                activeMovieCard={activeMovieCard}
               />
             );
           })
