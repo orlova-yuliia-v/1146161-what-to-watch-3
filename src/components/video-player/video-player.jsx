@@ -21,13 +21,14 @@ class VideoPlayer extends PureComponent {
 
     if (this.props.isPlaying) {
       video.play();
+    } else {
+      video.pause();
     }
   }
 
   componentWillUnmount() {
     const video = this._videoRef.current;
 
-    video.onplay = null;
     video.previewUrl = ``;
   }
 

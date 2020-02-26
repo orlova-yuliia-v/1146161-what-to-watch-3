@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card.jsx';
 
+const SHOW_PREVIEW_DELAY = 1000;
 
 class MoviesList extends PureComponent {
   constructor(props) {
@@ -17,9 +18,15 @@ class MoviesList extends PureComponent {
   }
 
   _handleCardEnter(film) {
-    this.setState((prevState) => ({
-      activeMovieCard: film,
-      isPlaying: !prevState.isPlaying
+    const mouseEnterTimer = setTimeout(() => {
+      this.setState((prevState) => ({
+        activeMovieCard: film,
+        isPlaying: !prevState.isPlaying
+      }));
+    }, SHOW_PREVIEW_DELAY);
+
+    this.setState(() => ({
+      mouseEnterTimer
     }));
   }
 
