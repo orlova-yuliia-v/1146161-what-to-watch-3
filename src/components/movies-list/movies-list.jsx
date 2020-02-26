@@ -35,7 +35,6 @@ class MoviesList extends PureComponent {
     const {activeMovieCard} = this.state;
 
     return (
-
       <div className="catalog__movies-list">
         {
           films.map((film, i) => {
@@ -49,7 +48,7 @@ class MoviesList extends PureComponent {
                   evt.preventDefault();
                   onMovieTitleClick(film);
                 }}
-                activeMovieCard={activeMovieCard}
+                isPlaying={activeMovieCard === film}
               />
             );
           })
@@ -65,7 +64,7 @@ MoviesList.propTypes = {
     poster: PropTypes.string.isRequired
   })
   ),
-  onMovieTitleClick: PropTypes.func.isRequired
+  onMovieTitleClick: PropTypes.func.isRequired,
 };
 
 export default MoviesList;

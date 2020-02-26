@@ -1,63 +1,57 @@
-import React, {PureComponent, Fragment} from 'react';
+import React, {PureComponent, createRef} from 'react';
 import propTypes from "prop-types";
 
 class VideoPlayer extends PureComponent {
   constructor(props) {
     super(props);
 
+    this._videoRef = createRef();
+
     this.state = {
-      isPlaying: this.props.isPlaying
+      isPlaying: props.isPlaying
     };
   }
 
   componentDidMount() {
     const {previewUrl} = this.props;
-    this._video.previewUrl = previewUrl;
 
-    this._video = new Video(previewUrl);
+    const video = this._videoRef.current;
 
-    this._video.onplay = () => {
-      this.setState({
-        isPlaying: true
-      });
-    };
+    video.src = previewUrl;
 
-    this._video.onpause = () => {
-      this.setState({
-        isPlaying: false
-      });
-    };
+    if (this.props.isPlaying) {
+      video.play();
+    }
   }
 
   componentWillUnmount() {
-    this._video.onplay = null;
-    this._video.onpause = null;
-    this._video.previewUrl = ``;
-    this._video = null;
+    const video = this._videoRef.current;
+
+    video.onplay = null;
+    video.previewUrl = ``;
   }
 
   render() {
     const {poster, previewUrl} = this.props;
 
     return (
-      <Fragment>
-        <video
-          poster={poster}
-          src={previewUrl}
-          muted={true}
-          width="280"
-          height="175"
-        />
-      </Fragment>
+      <video ref={this._videoRef}
+        poster={poster}
+        src={previewUrl}
+        muted={true}
+        width="280"
+        height="175"
+      />
     );
   }
 
-
   componentDidUpdate() {
-    if (this.state.isPlaying) {
-      this._video.play();
+    const video = this._videoRef.current;
+
+    if (this.props.isPlaying) {
+      video.play();
     } else {
-      this._video.pause();
+      video.pause();
     }
   }
 }
