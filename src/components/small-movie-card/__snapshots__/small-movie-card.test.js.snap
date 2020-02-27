@@ -10,10 +10,11 @@ exports[`should render correctly 1`] = `
   <div
     className="small-movie-card__image"
   >
-    <img
-      alt="Some title"
+    <video
       height="175"
-      src="1.jpg"
+      muted={true}
+      poster="1.jpg"
+      src="https://preview-url.com/1.mp4"
       width="280"
     />
   </div>

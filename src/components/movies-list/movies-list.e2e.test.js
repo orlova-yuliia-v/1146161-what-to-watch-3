@@ -19,7 +19,8 @@ const mock = {
       ratingScore: 7.5,
       ratingLevel: `Good`,
       ratingCount: 1234,
-      description: `Film description`
+      description: `Film description`,
+      previewUrl: `https://preview-url.com/1.mp4`
     },
     {
       title: `Some title`,
@@ -33,7 +34,8 @@ const mock = {
       ratingScore: 7.5,
       ratingLevel: `Good`,
       ratingCount: 1234,
-      description: `Film description`
+      description: `Film description`,
+      previewUrl: `https://preview-url.com/1.mp4`
     },
     {
       title: `Some title`,
@@ -47,7 +49,8 @@ const mock = {
       ratingScore: 7.5,
       ratingLevel: `Good`,
       ratingCount: 1234,
-      description: `Film description`
+      description: `Film description`,
+      previewUrl: `https://preview-url.com/1.mp4`
     },
     {
       title: `Some title`,
@@ -61,7 +64,8 @@ const mock = {
       ratingScore: 7.5,
       ratingLevel: `Good`,
       ratingCount: 1234,
-      description: `Film description`
+      description: `Film description`,
+      previewUrl: `https://preview-url.com/1.mp4`
     },
     {
       title: `Some title`,
@@ -75,7 +79,8 @@ const mock = {
       ratingScore: 7.5,
       ratingLevel: `Good`,
       ratingCount: 1234,
-      description: `Film description`
+      description: `Film description`,
+      previewUrl: `https://preview-url.com/1.mp4`
     },
     {
       title: `Some title`,
@@ -89,7 +94,8 @@ const mock = {
       ratingScore: 7.5,
       ratingLevel: `Good`,
       ratingCount: 1234,
-      description: `Film description`
+      description: `Film description`,
+      previewUrl: `https://preview-url.com/1.mp4`
     },
     {
       title: `Some title`,
@@ -103,7 +109,8 @@ const mock = {
       ratingScore: 7.5,
       ratingLevel: `Good`,
       ratingCount: 1234,
-      description: `Film description`
+      description: `Film description`,
+      previewUrl: `https://preview-url.com/1.mp4`
     },
     {
       title: `Some title`,
@@ -117,7 +124,8 @@ const mock = {
       ratingScore: 7.5,
       ratingLevel: `Good`,
       ratingCount: 1234,
-      description: `Film description`
+      description: `Film description`,
+      previewUrl: `https://preview-url.com/1.mp4`
     }
   ]
 };

@@ -267,7 +267,6 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Some title"
               height="175"
               src="1.jpg"
               width="280"
@@ -294,7 +293,6 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Some title"
               height="175"
               src="1.jpg"
               width="280"
@@ -321,7 +319,6 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Some title"
               height="175"
               src="1.jpg"
               width="280"
@@ -348,7 +345,6 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Some title"
               height="175"
               src="1.jpg"
               width="280"
@@ -375,7 +371,6 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Some title"
               height="175"
               src="1.jpg"
               width="280"
@@ -402,7 +397,6 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Some title"
               height="175"
               src="1.jpg"
               width="280"
@@ -429,7 +423,6 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Some title"
               height="175"
               src="1.jpg"
               width="280"
@@ -456,7 +449,6 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="Some title"
               height="175"
               src="1.jpg"
               width="280"

@@ -14,7 +14,8 @@ const film = {
   ratingScore: 7.5,
   ratingLevel: `Good`,
   ratingCount: 1234,
-  description: `Film description`
+  description: `Film description`,
+  previewUrl: `https://preview-url.com/1.mp4`
 };
 
 it(`should render correctly`, () => {
@@ -25,8 +26,19 @@ it(`should render correctly`, () => {
           onMovieEnter={() => {}}
           onMovieLeave={() => {}}
           onMovieTitleClick={() => {}}
-        />
-    )
+          isPlaying={true}
+        />,
+        {
+          createNodeMock: (element) => {
+            if (element.type === `video`) {
+              return {
+                paused: undefined, // mock enzyme behavior
+                play: () => {}
+              };
+            }
+            return null;
+          }
+        })
     .toJSON();
 
   expect(tree).toMatchSnapshot();

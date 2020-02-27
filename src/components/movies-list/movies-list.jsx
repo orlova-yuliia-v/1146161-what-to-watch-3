@@ -51,8 +51,7 @@ class MoviesList extends PureComponent {
                 film={film}
                 onMovieEnter={this._handleCardEnter}
                 onMovieLeave={this._handleCardLeave}
-                onMovieTitleClick={(evt) => {
-                  evt.preventDefault();
+                onMovieTitleClick={() => {
                   onMovieTitleClick(film);
                 }}
                 isPlaying={activeMovieCard === film}
