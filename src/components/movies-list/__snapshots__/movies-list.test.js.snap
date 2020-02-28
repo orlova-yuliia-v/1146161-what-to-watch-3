@@ -14,7 +14,6 @@ exports[`should render correctly 1`] = `
       className="small-movie-card__image"
     >
       <img
-        alt="Some title"
         height="175"
         src="1.jpg"
         width="280"
@@ -41,7 +40,6 @@ exports[`should render correctly 1`] = `
       className="small-movie-card__image"
     >
       <img
-        alt="Some title"
         height="175"
         src="1.jpg"
         width="280"
@@ -68,7 +66,6 @@ exports[`should render correctly 1`] = `
       className="small-movie-card__image"
     >
       <img
-        alt="Some title"
         height="175"
         src="1.jpg"
         width="280"
@@ -95,7 +92,6 @@ exports[`should render correctly 1`] = `
       className="small-movie-card__image"
     >
       <img
-        alt="Some title"
         height="175"
         src="1.jpg"
         width="280"
@@ -122,7 +118,6 @@ exports[`should render correctly 1`] = `
       className="small-movie-card__image"
     >
       <img
-        alt="Some title"
         height="175"
         src="1.jpg"
         width="280"
@@ -149,7 +144,6 @@ exports[`should render correctly 1`] = `
       className="small-movie-card__image"
     >
       <img
-        alt="Some title"
         height="175"
         src="1.jpg"
         width="280"
@@ -176,7 +170,6 @@ exports[`should render correctly 1`] = `
       className="small-movie-card__image"
     >
       <img
-        alt="Some title"
         height="175"
         src="1.jpg"
         width="280"
@@ -203,7 +196,6 @@ exports[`should render correctly 1`] = `
       className="small-movie-card__image"
     >
       <img
-        alt="Some title"
         height="175"
         src="1.jpg"
         width="280"

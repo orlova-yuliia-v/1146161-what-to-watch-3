@@ -21,12 +21,13 @@ const films = [
     ratingScore: 7.5,
     ratingLevel: `Good`,
     ratingCount: 1234,
-    description: `Film description`
+    description: `Film description`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
     title: `Some title`,
     poster: `1.jpg`,
-    bgPosterUrl: `https://img-url.com/1.jpg`,
+    bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
@@ -35,12 +36,13 @@ const films = [
     ratingScore: 7.5,
     ratingLevel: `Good`,
     ratingCount: 1234,
-    description: `Film description`
+    description: `Film description`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
     title: `Some title`,
     poster: `1.jpg`,
-    bgPosterUrl: `https://img-url.com/1.jpg`,
+    bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
@@ -49,12 +51,13 @@ const films = [
     ratingScore: 7.5,
     ratingLevel: `Good`,
     ratingCount: 1234,
-    description: `Film description`
+    description: `Film description`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
     title: `Some title`,
     poster: `1.jpg`,
-    bgPosterUrl: `https://img-url.com/1.jpg`,
+    bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
@@ -63,12 +66,13 @@ const films = [
     ratingScore: 7.5,
     ratingLevel: `Good`,
     ratingCount: 1234,
-    description: `Film description`
+    description: `Film description`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
     title: `Some title`,
     poster: `1.jpg`,
-    bgPosterUrl: `https://img-url.com/1.jpg`,
+    bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
@@ -77,12 +81,13 @@ const films = [
     ratingScore: 7.5,
     ratingLevel: `Good`,
     ratingCount: 1234,
-    description: `Film description`
+    description: `Film description`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
     title: `Some title`,
     poster: `1.jpg`,
-    bgPosterUrl: `https://img-url.com/1.jpg`,
+    bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
@@ -91,12 +96,13 @@ const films = [
     ratingScore: 7.5,
     ratingLevel: `Good`,
     ratingCount: 1234,
-    description: `Film description`
+    description: `Film description`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
     title: `Some title`,
     poster: `1.jpg`,
-    bgPosterUrl: `https://img-url.com/1.jpg`,
+    bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
@@ -105,12 +111,13 @@ const films = [
     ratingScore: 7.5,
     ratingLevel: `Good`,
     ratingCount: 1234,
-    description: `Film description`
+    description: `Film description`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
     title: `Some title`,
     poster: `1.jpg`,
-    bgPosterUrl: `https://img-url.com/1.jpg`,
+    bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
@@ -119,7 +126,8 @@ const films = [
     ratingScore: 7.5,
     ratingLevel: `Good`,
     ratingCount: 1234,
-    description: `Film description`
+    description: `Film description`,
+    previewUrl: `https://preview-url.com/1.mp4`
   }
 ];
 

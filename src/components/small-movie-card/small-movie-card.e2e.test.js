@@ -8,8 +8,11 @@ configure({adapter: new Adapter()});
 const mock = {
   film: {
     title: `one`,
-    poster: `pic-one`
+    poster: `pic-one`,
+    previewUrl: `https://preview-url.com/1.mp4`,
+    isPlaying: true
   }
+
 };
 
 it(`should pass data to handler on hover`, () => {
@@ -22,6 +25,7 @@ it(`should pass data to handler on hover`, () => {
         onMovieEnter={() => onMovieEnter(film)}
         onMovieLeave={() => onMovieEnter()}
         onMovieTitleClick={() => {}}
+        isPlaying={true}
       />
   );
 

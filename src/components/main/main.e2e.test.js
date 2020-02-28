@@ -15,36 +15,44 @@ const PromoData = {
 
 const films = [
   {
-    title: `Fantastic Beasts: The Crimes of Grindelwal`,
-    poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
-    title: `Bohemian Rhapsody`,
-    poster: `img/bohemian-rhapsody.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
-    title: `Macbeth`,
-    poster: `img/macbeth.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
-    title: `Aviator`,
-    poster: `img/aviator.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
-    title: `We need to talk about Kevin`,
-    poster: `img/we-need-to-talk-about-kevin.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
-    title: `What We Do in the Shadows`,
-    poster: `img/what-we-do-in-the-shadows.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
-    title: `Revenant`,
-    poster: `img/revenant.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    previewUrl: `https://preview-url.com/1.mp4`
   },
   {
-    title: `Johnny English`,
-    poster: `img/johnny-english.jpg`
+    title: `Some title`,
+    poster: `1.jpg`,
+    previewUrl: `https://preview-url.com/1.mp4`
   }
 ];
 

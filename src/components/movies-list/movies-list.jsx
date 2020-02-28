@@ -2,13 +2,15 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card.jsx';
 
+const SHOW_PREVIEW_DELAY = 1000;
 
 class MoviesList extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      activeMovieCard: null
+      activeMovieCard: null,
+      isPlaying: false
     };
 
     this._handleCardEnter = this._handleCardEnter.bind(this);
@@ -16,22 +18,31 @@ class MoviesList extends PureComponent {
   }
 
   _handleCardEnter(film) {
-    this.setState(
-        {activeMovieCard: film}
-    );
+    this.mouseEnterTimer = setTimeout(() => {
+      this.setState((prevState) => ({
+        activeMovieCard: film,
+        isPlaying: !prevState.isPlaying
+      }));
+    }, SHOW_PREVIEW_DELAY);
   }
+
   _handleCardLeave() {
-    this.setState(
-        {activeMovieCard: null}
-    );
+    this.setState((prevState) => ({
+      activeMovieCard: null,
+      isPlaying: !prevState.isPlaying
+    }));
+    clearTimeout(this.mouseEnterTimer);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.mouseEnterTimer);
   }
 
   render() {
-
     const {films, onMovieTitleClick} = this.props;
+    const {activeMovieCard} = this.state;
 
     return (
-
       <div className="catalog__movies-list">
         {
           films.map((film, i) => {
@@ -41,7 +52,10 @@ class MoviesList extends PureComponent {
                 film={film}
                 onMovieEnter={this._handleCardEnter}
                 onMovieLeave={this._handleCardLeave}
-                onMovieTitleClick={() => onMovieTitleClick(film)}
+                onMovieTitleClick={() => {
+                  onMovieTitleClick(film);
+                }}
+                isPlaying={activeMovieCard === film}
               />
             );
           })
@@ -57,7 +71,7 @@ MoviesList.propTypes = {
     poster: PropTypes.string.isRequired
   })
   ),
-  onMovieTitleClick: PropTypes.func.isRequired
+  onMovieTitleClick: PropTypes.func.isRequired,
 };
 
 export default MoviesList;
