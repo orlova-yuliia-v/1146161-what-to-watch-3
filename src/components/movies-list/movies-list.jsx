@@ -35,6 +35,11 @@ class MoviesList extends PureComponent {
       activeMovieCard: null,
       isPlaying: !prevState.isPlaying
     }));
+    clearTimeout(this.mouseEnterTimer);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.mouseEnterTimer);
   }
 
   render() {
