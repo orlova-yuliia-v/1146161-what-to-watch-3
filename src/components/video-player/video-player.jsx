@@ -6,14 +6,13 @@ class VideoPlayer extends PureComponent {
     super(props);
 
     this._videoRef = createRef();
-
   }
 
   componentDidMount() {
     const video = this._videoRef.current;
 
-    // paused, play - undefined in Node js
-    if (video.paused) {
+    // play - undefined in Node js
+    if (this.props.isPlaying) {
       video.play();
     }
   }
