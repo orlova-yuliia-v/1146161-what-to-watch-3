@@ -14,12 +14,18 @@ it(`should render correctly`, () => {
     poster={poster}
     previewUrl={previewUrl}
     isPlaying={true}
-  />, {
-    createNodeMock: () => {
-      return {};
+  />,
+  {
+    createNodeMock: (element) => {
+      if (element.type === `video`) {
+        return {
+          play: () => {}
+        };
+      }
+      return null;
     }
   })
-    .toJSON();
+.toJSON();
 
   expect(tree).toMatchSnapshot();
 });
