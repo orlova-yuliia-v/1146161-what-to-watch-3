@@ -18,16 +18,12 @@ class MoviesList extends PureComponent {
   }
 
   _handleCardEnter(film) {
-    const mouseEnterTimer = setTimeout(() => {
+    this.mouseEnterTimer = setTimeout(() => {
       this.setState((prevState) => ({
         activeMovieCard: film,
         isPlaying: !prevState.isPlaying
       }));
     }, SHOW_PREVIEW_DELAY);
-
-    this.setState(() => ({
-      mouseEnterTimer
-    }));
   }
 
   _handleCardLeave() {
