@@ -3,7 +3,6 @@
 exports[`should render correctly 1`] = `
 <video
   height="175"
-  muted={true}
   poster="1.jpg"
   src="https://preview-url.com/1.mp4"
   width="280"
