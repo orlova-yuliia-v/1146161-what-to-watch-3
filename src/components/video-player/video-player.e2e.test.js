@@ -16,8 +16,8 @@ const film = {
 it(`should play video`, () => {
   window.HTMLMediaElement.prototype.play = () => {};
   const {poster, previewUrl} = film;
-  const play = jest.spyOn(window.HTMLMediaElement.prototype, `play`)
-  const videoPlayer = mount(
+  const play = jest.spyOn(window.HTMLMediaElement.prototype, `play`);
+  mount(
       <VideoPlayer poster={poster} previewUrl={previewUrl} isPlaying={true} />
   );
   expect(play).toHaveBeenCalledTimes(1);
@@ -25,14 +25,14 @@ it(`should play video`, () => {
 });
 
 it(`should pause video`, () => {
+
   window.HTMLMediaElement.prototype.pause = () => {};
-  const pause = jest.spyOn(window.HTMLMediaElement.prototype, `pause`)
+  const pause = jest.spyOn(window.HTMLMediaElement.prototype, `pause`);
   const {poster, previewUrl} = film;
   const videoPlayer = mount(
       <VideoPlayer poster={poster} previewUrl={previewUrl} isPlaying={true} />
   );
-  const {_videoRef} = videoPlayer.instance();
-  _videoRef.current.pause();
+  videoPlayer.setProps({isPlaying: false});
   expect(pause).toHaveBeenCalledTimes(1);
   pause.mockRestore();
 });
