@@ -12,7 +12,6 @@ const film = {
   starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
   runTime: `2h 00m`,
   ratingScore: 7.5,
-  ratingLevel: `Good`,
   ratingCount: 1234,
   description: `Film description`,
   previewUrl: `https://preview-url.com/1.mp4`,
