@@ -10,7 +10,8 @@ class VideoPlayer extends PureComponent {
 
   componentDidMount() {
     const video = this._videoRef.current;
-    video.muted = true; // https://github.com/facebook/react/issues/10389
+
+    // play - undefined in Node js
     if (this.props.isPlaying) {
       video.play();
     }
@@ -23,6 +24,7 @@ class VideoPlayer extends PureComponent {
       <video ref={this._videoRef}
         poster={poster}
         src={previewUrl}
+        muted={true}
         width="280"
         height="175"
       />
@@ -31,6 +33,7 @@ class VideoPlayer extends PureComponent {
 
   componentDidUpdate() {
     const video = this._videoRef.current;
+
     if (this.props.isPlaying) {
       video.play();
     } else {
