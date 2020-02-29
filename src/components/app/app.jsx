@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import Main from "../main/main.jsx";
-import MovieDetails from "../movie-details/movie-details.jsx";
+import MoviePage from "../movie-page/movie-page.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -26,7 +26,7 @@ class App extends PureComponent {
     const {selectedFilm} = this.state;
 
     if (selectedFilm) {
-      return <MovieDetails film={selectedFilm} />;
+      return <MoviePage film={selectedFilm} />;
     }
 
     return (
@@ -47,8 +47,8 @@ class App extends PureComponent {
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/dev-film-details">
-            {selectedFilm ? <MovieDetails film={selectedFilm}/> : null}
+          <Route exact path="/dev-film-page">
+            {selectedFilm ? <MoviePage film={selectedFilm}/> : null}
           </Route>
         </Switch>
       </BrowserRouter>

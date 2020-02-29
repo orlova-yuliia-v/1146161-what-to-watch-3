@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 
-const MovieDetails = ({film}) => {
+const MoviePage = ({film}) => {
   const {title, poster, bgPosterUrl, genre, releaseYear} = film;
 
   return (
@@ -131,7 +131,7 @@ const MovieDetails = ({film}) => {
   );
 };
 
-MovieDetails.propTypes = {
+MoviePage.propTypes = {
   film: PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
@@ -140,4 +140,4 @@ MovieDetails.propTypes = {
     releaseYear: PropTypes.number.isRequired
   }).isRequired
 };
-export default MovieDetails;
+export default MoviePage;
