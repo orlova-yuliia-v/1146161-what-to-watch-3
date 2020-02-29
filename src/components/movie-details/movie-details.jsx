@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import Tabs from "../tabs/tabs.jsx";
 
 const MovieDetails = ({film}) => {
-  const {title, poster, bgPosterUrl, genre, releaseYear, director, starring, runTime} = film;
+  const {title, poster, bgPosterUrl, genre, releaseYear} = film;
 
   return (
     <React.Fragment>
@@ -64,54 +64,8 @@ const MovieDetails = ({film}) => {
               <img src={poster} alt={title} width="218" height="327" />
             </div>
 
-            <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
+            <Tabs film={film} />
 
-              <div className="movie-card__text movie-card__row">
-                <div className="movie-card__text-col">
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Director</strong>
-                    <span className="movie-card__details-value">{director}</span>
-                  </p>
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Starring</strong>
-                    <span className="movie-card__details-value">
-                      {starring.map((actor, i) => (
-                        <React.Fragment key={i}>
-                          {actor} <br/>
-                        </React.Fragment>))}
-                    </span>
-                  </p>
-                </div>
-
-                <div className="movie-card__text-col">
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Run Time</strong>
-                    <span className="movie-card__details-value">{runTime}</span>
-                  </p>
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Genre</strong>
-                    <span className="movie-card__details-value">{genre}</span>
-                  </p>
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Released</strong>
-                    <span className="movie-card__details-value">{releaseYear}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -183,14 +137,7 @@ MovieDetails.propTypes = {
     poster: PropTypes.string.isRequired,
     bgPosterUrl: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    releaseYear: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runTime: PropTypes.string.isRequired,
-    ratingScore: PropTypes.number.isRequired,
-    ratingLevel: PropTypes.string.isRequired,
-    ratingCount: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired
+    releaseYear: PropTypes.number.isRequired
   }).isRequired
 };
 export default MovieDetails;
