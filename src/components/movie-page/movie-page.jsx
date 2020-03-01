@@ -1,8 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import MoviesList from "../movies-list/movies-list.jsx";
 import Tabs from "../tabs/tabs.jsx";
+import films from "../../mocks/films.js";
 
-const MoviePage = ({film}) => {
+const MAX_SIMILAR_FILMS_NUMBER = 4;
+
+const getSimilarFilms = (film, maxNumber = MAX_SIMILAR_FILMS_NUMBER) => {
+  return films.filter(
+      (similarFilm) =>
+        similarFilm.genre === film.genre && similarFilm.title !== film.title).slice(0, maxNumber);
+};
+
+const MoviePage = ({film, onMovieTitleClick}) => {
   const {title, poster, bgPosterUrl, genre, releaseYear} = film;
 
   return (
@@ -63,9 +73,7 @@ const MoviePage = ({film}) => {
             <div className="movie-card__poster movie-card__poster--big">
               <img src={poster} alt={title} width="218" height="327" />
             </div>
-
             <Tabs film={film} />
-
           </div>
         </div>
       </section>
@@ -73,44 +81,10 @@ const MoviePage = ({film}) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__movies-list">
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-movie-card catalog__movies-card">
-              <div className="small-movie-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-movie-card__title">
-                <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-              </h3>
-            </article>
-          </div>
+          <MoviesList
+            films={getSimilarFilms(film, MAX_SIMILAR_FILMS_NUMBER)}
+            onMovieTitleClick={onMovieTitleClick}
+          />
         </section>
 
         <footer className="page-footer">
@@ -138,6 +112,7 @@ MoviePage.propTypes = {
     bgPosterUrl: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired
-  }).isRequired
+  }).isRequired,
+  onMovieTitleClick: PropTypes.func.isRequired
 };
 export default MoviePage;
