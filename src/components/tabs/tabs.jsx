@@ -27,17 +27,23 @@ class Tabs extends PureComponent {
   }
 
   _getRatingLevel(ratingScore) {
-    switch (ratingScore) {
-      case ratingScore >= 0 && ratingScore < 3:
-        return `Bad`;
-      case ratingScore >= 3 && ratingScore < 5:
-        return `Normal`;
-      case ratingScore >= 5 && ratingScore < 8:
-        return `Good`;
-      case ratingScore >= 8 && ratingScore < 10:
-        return `Very good`;
-      case ratingScore === 10:
-        return `Awesome`;
+    if (ratingScore < 0) {
+      throw new Error(`Score can't be negative`);
+    }
+    if (ratingScore < 3) {
+      return `Bad`;
+    }
+    if (ratingScore < 5) {
+      return `Normal`;
+    }
+    if (ratingScore < 8) {
+      return `Good`;
+    }
+    if (ratingScore < 10) {
+      return `Very good`;
+    }
+    if (ratingScore === 10) {
+      return `Awesome`;
     }
     return ``;
   }
@@ -61,7 +67,7 @@ class Tabs extends PureComponent {
                   this._handleTabClick(TabName.OVERVIEW);
                 }}
               >
-                Overview
+                  Overview
               </a>
             </li>
             <li
@@ -75,7 +81,7 @@ class Tabs extends PureComponent {
                   this._handleTabClick(TabName.DETAILS);
                 }}
               >
-                Details
+                 Details
               </a>
             </li>
             <li
@@ -89,7 +95,7 @@ class Tabs extends PureComponent {
                   this._handleTabClick(TabName.REVIEWS);
                 }}
               >
-                Reviews
+                  Reviews
               </a>
             </li>
           </ul>
@@ -118,7 +124,7 @@ class Tabs extends PureComponent {
 
               <p className="movie-card__starring">
                 <strong>
-                  Starring: {`${film.starring.join(`, `)} and other`}
+                    Starring: {`${film.starring.join(`, `)} and other`}
                 </strong>
               </p>
             </div>
@@ -140,7 +146,7 @@ class Tabs extends PureComponent {
                   <span className="movie-card__details-value">
                     {film.starring.map((actor, i) => (
                       <React.Fragment key={i}>
-                        {actor}
+                        {`${actor}, `} <br/>
                       </React.Fragment>))}
                   </span>
                 </p>
@@ -215,5 +221,4 @@ Tabs.propTypes = {
     ).isRequired
   }).isRequired
 };
-
 export default Tabs;
