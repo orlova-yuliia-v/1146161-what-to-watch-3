@@ -26,7 +26,7 @@ class App extends PureComponent {
     const {selectedFilm} = this.state;
 
     if (selectedFilm) {
-      return <MoviePage film={selectedFilm} />;
+      return <MoviePage film={selectedFilm} onMovieTitleClick={this._handleTitleClick}/>;
     }
 
     return (
@@ -48,7 +48,7 @@ class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/dev-film-page">
-            {selectedFilm ? <MoviePage film={selectedFilm}/> : null}
+            {selectedFilm ? <MoviePage film={selectedFilm} onMovieTitleClick={this._handleTitleClick}/> : null}
           </Route>
         </Switch>
       </BrowserRouter>

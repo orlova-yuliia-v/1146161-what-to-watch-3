@@ -145,8 +145,9 @@ class Tabs extends PureComponent {
                   <strong className="movie-card__details-name">Starring</strong>
                   <span className="movie-card__details-value">
                     {film.starring.map((actor, i) => (
-                      <React.Fragment key={i}>
-                        {`${actor}, `} <br/>
+                      <React.Fragment key={actor}>
+                        {actor}
+                        {i < film.starring.length - 1 && <React.Fragment>,<br/></React.Fragment> }
                       </React.Fragment>))}
                   </span>
                 </p>
