@@ -161,31 +161,31 @@ Array [
               className="movie-nav__list"
             >
               <li
-                className="movie-nav__item"
+                className="movie-nav__item movie-nav__item--active"
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
                 >
                   Overview
                 </a>
               </li>
               <li
-                className="movie-nav__item movie-nav__item--active"
+                className="movie-nav__item "
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
                 >
                   Details
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item "
               >
                 <a
                   className="movie-nav__link"
-                  href="#"
+                  onClick={[Function]}
                 >
                   Reviews
                 </a>
@@ -193,100 +193,51 @@ Array [
             </ul>
           </nav>
           <div
-            className="movie-card__text movie-card__row"
+            className="movie-rating"
           >
             <div
-              className="movie-card__text-col"
+              className="movie-rating__score"
             >
-              <p
-                className="movie-card__details-item"
-              >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Director
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  Director name
-                </span>
-              </p>
-              <p
-                className="movie-card__details-item"
-              >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Starring
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  Actor 1
-                   
-                  <br />
-                  Actor 2
-                   
-                  <br />
-                  Actor 3
-                   
-                  <br />
-                  Actor 4
-                   
-                  <br />
-                  Actor 5
-                   
-                  <br />
-                </span>
-              </p>
+              7.5
             </div>
-            <div
-              className="movie-card__text-col"
+            <p
+              className="movie-rating__meta"
             >
-              <p
-                className="movie-card__details-item"
+              <span
+                className="movie-rating__level"
               >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Run Time
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  2h 00m
-                </span>
-              </p>
-              <p
-                className="movie-card__details-item"
+                Good
+              </span>
+              <span
+                className="movie-rating__count"
               >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Genre
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  Some genre
-                </span>
-              </p>
-              <p
-                className="movie-card__details-item"
-              >
-                <strong
-                  className="movie-card__details-name"
-                >
-                  Released
-                </strong>
-                <span
-                  className="movie-card__details-value"
-                >
-                  2020
-                </span>
-              </p>
-            </div>
+                1234
+                 ratings
+              </span>
+            </p>
+          </div>
+          <div
+            className="movie-card__text"
+          >
+            <p>
+              Film description
+            </p>
+            <p
+              className="movie-card__director"
+            >
+              <strong>
+                Director: 
+                Director name
+              </strong>
+            </p>
+            <p
+              className="movie-card__starring"
+            >
+              <strong>
+                Starring: 
+                Actor 1, Actor 2, Actor 3, Actor 4, Actor 5 and other
+              </strong>
+            </p>
           </div>
         </div>
       </div>
@@ -305,104 +256,7 @@ Array [
       </h2>
       <div
         className="catalog__movies-list"
-      >
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Fantastic Beasts: The Crimes of Grindelwald"
-              height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Fantastic Beasts: The Crimes of Grindelwald
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Bohemian Rhapsody"
-              height="175"
-              src="img/bohemian-rhapsody.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Bohemian Rhapsody
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Macbeth"
-              height="175"
-              src="img/macbeth.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Macbeth
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="Aviator"
-              height="175"
-              src="img/aviator.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Aviator
-            </a>
-          </h3>
-        </article>
-      </div>
+      />
     </section>
     <footer
       className="page-footer"
