@@ -12,6 +12,16 @@ const ActionType = {
   GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`
 };
 
+const ActionCreator = {
+  changeGenre: (genre) => ({
+    type: ActionType.CHANGE_GENRE,
+    payload: genre
+  }),
+  getMoviesByGenre: (genre) => ({
+    type: ActionType.GET_MOVIES_BY_GENRE,
+    payload: genre
+  })
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -22,11 +32,13 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.GET_MOVIES_BY_GENRE:
       return extend(state, {
-        films: state.films.filter((film) => film.genre === action.payload)
+        films: action.payload === ALL_GENRES ?
+          state.films :
+          state.films.filter((film) => film.genre === action.payload)
       });
   }
 
   return state;
 };
 
-export {reducer, ActionType};
+export {reducer, ActionType, ActionCreator};
