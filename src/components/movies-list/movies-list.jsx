@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card.jsx';
+import {connect} from "react-redux";
+import {ALL_GENRES} from "../../const.js";
 
 const SHOW_PREVIEW_DELAY = 1000;
 
@@ -74,4 +76,12 @@ MoviesList.propTypes = {
   onMovieTitleClick: PropTypes.func.isRequired,
 };
 
-export default MoviesList;
+const mapStateToProps = (state) => ({
+  films: state.selectedGenre === ALL_GENRES ?
+    state.films :
+    state.films.filter((film) => film.genre === state.selectedGenre),
+  selectedGenre: state.selectedGenre
+});
+
+export {MoviesList};
+export default connect(mapStateToProps)(MoviesList);
