@@ -22,11 +22,16 @@ class GenresList extends PureComponent {
           <li
             key={availableGenre + index}
             className={`catalog__genres-item ${selectedGenre === availableGenre ? `catalog__genres-item--active` : ``}`}
-            onClick={() => {
-              changeGenre(availableGenre);
-            }}
           >
-            <a href="#" className="catalog__genres-link">{availableGenre}</a>
+            <a
+              href="#"
+              className="catalog__genres-link"
+              onClick={() => {
+                changeGenre(availableGenre);
+              }}
+            >
+              {availableGenre}
+            </a>
           </li>
         ))}
       </ul>
