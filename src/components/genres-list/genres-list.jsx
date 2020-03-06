@@ -4,13 +4,15 @@ import {ALL_GENRES} from "../../const.js";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 
+const MAX_GENRES_NUMBER = 10;
+
 class GenresList extends PureComponent {
   constructor(props) {
     super(props);
   }
 
   getGenresList(films) {
-    return [ALL_GENRES, ...new Set(films.map(({genre}) => genre))];
+    return [ALL_GENRES, ...new Set(films.map(({genre}) => genre))].slice(0, MAX_GENRES_NUMBER);
   }
 
   render() {
