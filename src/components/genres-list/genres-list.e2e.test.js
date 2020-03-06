@@ -1,17 +1,10 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
+import {configure, shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {GenresList} from "./genres-list.jsx";
 import {ALL_GENRES} from "../../const.js";
-import App from "./app.jsx";
 
-const mockStore = configureStore([]);
-
-const PromoData = {
-  TITLE: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  YEAR: 2014
-};
+configure({adapter: new Adapter()});
 
 const films = [
   {
@@ -192,24 +185,23 @@ const films = [
   }
 ];
 
-it(`should render correctly`, () => {
-  const store = mockStore({
-    selectedGenre: ALL_GENRES,
-    films
+it(`should call a callback when genre link is clicked`, () => {
+  const onChangeGenreHandler = jest.fn();
+
+  const genresList = shallow(
+      <GenresList
+        films={films}
+        selectedGenre={ALL_GENRES}
+        changeGenre={onChangeGenreHandler}
+      />
+  );
+  const genreLink = genresList.find(`a.catalog__genres-link`);
+
+  genreLink.forEach((link) => {
+    link.simulate(`click`);
   });
 
-  const tree = renderer
-   .create(
-       <Provider store={store}>
-         <App
-           promoTitle={PromoData.TITLE}
-           promoGenre={PromoData.GENRE}
-           promoYear={PromoData.YEAR}
-           films={films}
-         />
-       </Provider>
-   )
-   .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
+  expect(onChangeGenreHandler.mock.calls[0][0]).toBe(ALL_GENRES);
+  expect(onChangeGenreHandler.mock.calls.length).toBe(genreLink.length);
+}
+);

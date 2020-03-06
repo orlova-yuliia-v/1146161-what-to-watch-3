@@ -2,16 +2,10 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import GenresList from "./genres-list.jsx";
 import {ALL_GENRES} from "../../const.js";
-import App from "./app.jsx";
 
 const mockStore = configureStore([]);
-
-const PromoData = {
-  TITLE: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  YEAR: 2014
-};
 
 const films = [
   {
@@ -199,17 +193,16 @@ it(`should render correctly`, () => {
   });
 
   const tree = renderer
-   .create(
-       <Provider store={store}>
-         <App
-           promoTitle={PromoData.TITLE}
-           promoGenre={PromoData.GENRE}
-           promoYear={PromoData.YEAR}
-           films={films}
-         />
-       </Provider>
-   )
-   .toJSON();
+    .create(
+        <Provider store={store}>
+          <GenresList
+            films={films}
+            selectedGenre={ALL_GENRES}
+            changeGenre={() => {}}
+          />
+        </Provider>
+    )
+    .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
