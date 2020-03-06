@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MoviesList from "../movies-list/movies-list.jsx";
+import {MoviesList} from "../movies-list/movies-list.jsx";
 import Tabs from "../tabs/tabs.jsx";
 import films from "../../mocks/films.js";
 

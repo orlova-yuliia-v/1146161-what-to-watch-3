@@ -1,6 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import {ALL_GENRES} from "../../const.js";
 import App from "./app.jsx";
+
+const mockStore = configureStore([]);
 
 const PromoData = {
   TITLE: `The Grand Budapest Hotel`,
@@ -18,13 +23,13 @@ const films = [
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: `2h 00m`,
-    ratingScore: parseFloat(`7.5`),
+    ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
     previewUrl: `https://preview-url.com/1.mp4`,
     reviews: [
       {
-        ratingScore: parseFloat(`8.5`),
+        ratingScore: 8.5,
         date: `September 8, 2019`,
         author: `Yuliia Orlova`,
         text: `Review text`
@@ -40,13 +45,13 @@ const films = [
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: `2h 00m`,
-    ratingScore: parseFloat(`7.5`),
+    ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
     previewUrl: `https://preview-url.com/1.mp4`,
     reviews: [
       {
-        ratingScore: parseFloat(`8.5`),
+        ratingScore: 8.5,
         date: `September 8, 2019`,
         author: `Yuliia Orlova`,
         text: `Review text`
@@ -62,13 +67,13 @@ const films = [
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: `2h 00m`,
-    ratingScore: parseFloat(`7.5`),
+    ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
     previewUrl: `https://preview-url.com/1.mp4`,
     reviews: [
       {
-        ratingScore: parseFloat(`8.5`),
+        ratingScore: 8.5,
         date: `September 8, 2019`,
         author: `Yuliia Orlova`,
         text: `Review text`
@@ -84,13 +89,13 @@ const films = [
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: `2h 00m`,
-    ratingScore: parseFloat(`7.5`),
+    ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
     previewUrl: `https://preview-url.com/1.mp4`,
     reviews: [
       {
-        ratingScore: parseFloat(`8.5`),
+        ratingScore: 8.5,
         date: `September 8, 2019`,
         author: `Yuliia Orlova`,
         text: `Review text`
@@ -106,13 +111,13 @@ const films = [
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: `2h 00m`,
-    ratingScore: parseFloat(`7.5`),
+    ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
     previewUrl: `https://preview-url.com/1.mp4`,
     reviews: [
       {
-        ratingScore: parseFloat(`8.5`),
+        ratingScore: 8.5,
         date: `September 8, 2019`,
         author: `Yuliia Orlova`,
         text: `Review text`
@@ -128,13 +133,13 @@ const films = [
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: `2h 00m`,
-    ratingScore: parseFloat(`7.5`),
+    ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
     previewUrl: `https://preview-url.com/1.mp4`,
     reviews: [
       {
-        ratingScore: parseFloat(`8.5`),
+        ratingScore: 8.5,
         date: `September 8, 2019`,
         author: `Yuliia Orlova`,
         text: `Review text`
@@ -150,13 +155,13 @@ const films = [
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: `2h 00m`,
-    ratingScore: parseFloat(`7.5`),
+    ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
     previewUrl: `https://preview-url.com/1.mp4`,
     reviews: [
       {
-        ratingScore: parseFloat(`8.5`),
+        ratingScore: 8.5,
         date: `September 8, 2019`,
         author: `Yuliia Orlova`,
         text: `Review text`
@@ -188,13 +193,22 @@ const films = [
 ];
 
 it(`should render correctly`, () => {
+  const store = mockStore({
+    selectedGenre: ALL_GENRES,
+    films
+  });
+
   const tree = renderer
-   .create(<App
-     promoTitle={PromoData.TITLE}
-     promoGenre={PromoData.GENRE}
-     promoYear={PromoData.YEAR}
-     films={films}
-   />)
+   .create(
+       <Provider store={store}>
+         <App
+           promoTitle={PromoData.TITLE}
+           promoGenre={PromoData.GENRE}
+           promoYear={PromoData.YEAR}
+           films={films}
+         />
+       </Provider>
+   )
    .toJSON();
 
   expect(tree).toMatchSnapshot();
