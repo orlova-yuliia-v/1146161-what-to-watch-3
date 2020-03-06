@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         showedMovies: state.showedMovies + 8
       });
-    case ActionCreator.RESET_SHOWED_MOVIES_AMOUNT:
+    case ActionType.RESET_SHOWED_MOVIES_AMOUNT:
       return extend(state, {
         showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
       });
