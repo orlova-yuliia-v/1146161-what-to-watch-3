@@ -187,12 +187,14 @@ const films = [
 
 it(`should call a callback when genre link is clicked`, () => {
   const onChangeGenreHandler = jest.fn();
+  const resetShowedMoviesAmountHandler = jest.fn();
 
   const genresList = shallow(
       <GenresList
         films={films}
         selectedGenre={ALL_GENRES}
         changeGenre={onChangeGenreHandler}
+        resetShowedMoviesAmount={resetShowedMoviesAmountHandler}
       />
   );
   const genreLink = genresList.find(`a.catalog__genres-link`);
@@ -203,5 +205,6 @@ it(`should call a callback when genre link is clicked`, () => {
 
   expect(onChangeGenreHandler.mock.calls[0][0]).toBe(ALL_GENRES);
   expect(onChangeGenreHandler.mock.calls.length).toBe(genreLink.length);
+  expect(resetShowedMoviesAmountHandler.mock.calls.length).toBe(genreLink.length);
 }
 );
