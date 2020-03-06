@@ -3,7 +3,7 @@ export default [
     title: `Fantastic Beasts: The Crimes of Grindelwal`,
     poster: `img/fantastic-beasts-the-crimes-of-grindelwald.jpg`,
     bgPosterUrl: `https://d2eib6r9tuf5y8.cloudfront.net/l/assets/img/article/article-2491-kqk17iex/keyvisual.jpg`,
-    genre: `Kids & Family`,
+    genre: `Comedies`,
     releaseYear: 2018,
     director: `David Yates`,
     starring: [`Johnny Depp`, `Kevin Guthrie`, `Eddie Redmayne`, `Katherine Waterston`, `Dan Fogler`],
@@ -37,7 +37,7 @@ export default [
     title: `Bohemian Rhapsody`,
     poster: `img/bohemian-rhapsody.jpg`,
     bgPosterUrl: `https://www.quicksilvertranslate.com/wp-content/uploads/bohemian-rhapsody-1.jpg`,
-    genre: `Dramas`,
+    genre: `Crime`,
     releaseYear: 2018,
     director: `Bryan Singer`,
     starring: [`Rami Malek`, `Lucy Boynton`, `Gwilym Lee`, `Ben Hardy`, `Joseph Mazzello`],
@@ -71,7 +71,7 @@ export default [
     title: `Macbeth`,
     poster: `img/macbeth.jpg`,
     bgPosterUrl: `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQysPLT4Y_MGSTpM8VeSqBtUojC0cqdt5KRmL4H1x-PIBhURSQh`,
-    genre: `Dramas`,
+    genre: `Documentary`,
     releaseYear: 2015,
     director: `Justin Kurzel`,
     starring: [`Michael Fassbender`, `Marion Cotillard`, `Jack Madigan`, `David Thewlis`,	`Paddy Considine`],
@@ -173,7 +173,7 @@ export default [
     title: `What We Do in the Shadows`,
     poster: `img/what-we-do-in-the-shadows.jpg`,
     bgPosterUrl: `https://posmotre.li/images/thumb/3/34/5407168.jpg/300px-5407168.jpg`,
-    genre: `Horror`,
+    genre: `Kids & Family`,
     releaseYear: 2014,
     director: `Jemaine Clement`,
     starring: [`Jemaine Clement`, `Taika Waititi`, `Cori Gonzalez-Macuer`, `Ben Fransham`, `Jonny Brugh`],
@@ -207,7 +207,7 @@ export default [
     title: `The Revenant`,
     poster: `img/revenant.jpg`,
     bgPosterUrl: `https://cdn-static.denofgeek.com/sites/denofgeek/files/styles/main_wide/public/2016/01/the-revenant.jpg?itok=3W5SlZrf`,
-    genre: `Dramas`,
+    genre: `Romance`,
     releaseYear: 2015,
     director: `Alejandro G. Iñárritu`,
     starring: [`Leonardo DiCaprio`, `Tom Hardy`, `Will Poulter`, `Domhnall Gleeson`, `Forrest Goodluck`],
@@ -241,7 +241,7 @@ export default [
     title: `Johnny English`,
     poster: `img/johnny-english.jpg`,
     bgPosterUrl: `https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRPfWdV243AAGFeKH0asJ6rluuMuOD5E-VBvoOlB_g2K35jT6ff`,
-    genre: `Kids & Family`,
+    genre: `Sci-Fi`,
     releaseYear: 2003,
     director: `Peter Howitt`,
     starring: [`Rowan Atkinson`, `John Malkovich`, `Natalie Imbruglia`, `Tasha de Vasconcelos`, `Ben Miller`],
@@ -249,6 +249,74 @@ export default [
     ratingScore: 6.2,
     ratingCount: 987,
     description: `After a sudden attack on MI5, Johnny English, Britain's most confident, yet unintelligent spy, becomes Britain's only spy`,
+    previewUrl: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    reviews: [
+      {
+        ratingScore: 9.5,
+        date: `August 21, 2018`,
+        author: `Jon Snow`,
+        text: `This is the best film I've ever seen!`
+      },
+      {
+        ratingScore: 5.2,
+        date: `April 10, 2019`,
+        author: `Daenerys Targaryen`,
+        text: `I'm not impressed with the movie.`
+      },
+      {
+        ratingScore: 8.4,
+        date: `October 18, 2019`,
+        author: `Sansa Stark`,
+        text: `This movie is not bad but I don't like the ending.`
+      }
+    ]
+  },
+  {
+    title: `War of the Worlds`,
+    poster: `img/war-of-the-worlds.jpg`,
+    bgPosterUrl: `https://art-apple.ru/albums/posters/cinema_35.jpg`,
+    genre: `Thrillers`,
+    releaseYear: 2005,
+    director: `Steven Spielberg`,
+    starring: [`Tom Cruise`, `Dakota Fanning`, `Miranda Otto`, `Tim Robbins`, `Justin Chatwin`],
+    runTime: `1h 56m`,
+    ratingScore: 9.2,
+    ratingCount: 4390,
+    description: `As Earth is invaded by alien tripod fighting machines, one family fights for survival in this action film`,
+    previewUrl: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+    reviews: [
+      {
+        ratingScore: 9.5,
+        date: `August 21, 2018`,
+        author: `Jon Snow`,
+        text: `This is the best film I've ever seen!`
+      },
+      {
+        ratingScore: 5.2,
+        date: `April 10, 2019`,
+        author: `Daenerys Targaryen`,
+        text: `I'm not impressed with the movie.`
+      },
+      {
+        ratingScore: 8.4,
+        date: `October 18, 2019`,
+        author: `Sansa Stark`,
+        text: `This movie is not bad but I don't like the ending.`
+      }
+    ]
+  },
+  {
+    title: `Pulp Fiction`,
+    poster: `img/pulp-fiction.jpg`,
+    bgPosterUrl: `https://i1.ytimg.com/vi/pUjfksveBaY/maxresdefault.jpg`,
+    genre: `Dramas`,
+    releaseYear: 1994,
+    director: `Quentin Tarantino`,
+    starring: [`John Travolta`, `Samuel L. Jackson`, `Uma Thurman`, `Bruce Willis`, `Tim Roth`],
+    runTime: `2h 34m`,
+    ratingScore: 8.2,
+    ratingCount: 3490,
+    description: `The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption`,
     previewUrl: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
     reviews: [
       {
