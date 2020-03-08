@@ -6,6 +6,8 @@ import configureStore from "redux-mock-store";
 import Main from "./main.jsx";
 import {ALL_GENRES} from "../../const.js";
 
+const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
+
 const mockStore = configureStore([]);
 
 Enzyme.configure({
@@ -200,7 +202,8 @@ const films = [
 it(`should call a callback when the movie title is pressed`, () => {
   const store = mockStore({
     selectedGenre: ALL_GENRES,
-    films
+    films,
+    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
   });
 
   const onMovieTitleClick = jest.fn();

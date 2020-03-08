@@ -73,14 +73,15 @@ MoviesList.propTypes = {
     poster: PropTypes.string.isRequired
   })
   ),
-  onMovieTitleClick: PropTypes.func.isRequired,
+  onMovieTitleClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   films: state.selectedGenre === ALL_GENRES ?
-    state.films :
-    state.films.filter((film) => film.genre === state.selectedGenre),
-  selectedGenre: state.selectedGenre
+    state.films.slice(0, state.showedMovies) :
+    state.films.filter((film) => film.genre === state.selectedGenre).slice(0, state.showedMovies),
+  selectedGenre: state.selectedGenre,
+  showedMovies: state.showedMovies
 });
 
 export {MoviesList};

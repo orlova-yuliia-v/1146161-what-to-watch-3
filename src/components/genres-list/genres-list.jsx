@@ -4,17 +4,19 @@ import {ALL_GENRES} from "../../const.js";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer.js";
 
+const MAX_GENRES_NUMBER = 10;
+
 class GenresList extends PureComponent {
   constructor(props) {
     super(props);
   }
 
   getGenresList(films) {
-    return [ALL_GENRES, ...new Set(films.map(({genre}) => genre))];
+    return [ALL_GENRES, ...new Set(films.map(({genre}) => genre))].slice(0, MAX_GENRES_NUMBER);
   }
 
   render() {
-    const {films, selectedGenre, changeGenre} = this.props;
+    const {films, selectedGenre, changeGenre, resetShowedMoviesAmount} = this.props;
 
     return (
       <ul className="catalog__genres-list">
@@ -28,6 +30,7 @@ class GenresList extends PureComponent {
               className="catalog__genres-link"
               onClick={() => {
                 changeGenre(availableGenre);
+                resetShowedMoviesAmount();
               }}
             >
               {availableGenre}
@@ -43,7 +46,8 @@ GenresList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     genre: PropTypes.string.isRequired})),
   selectedGenre: PropTypes.string.isRequired,
-  changeGenre: PropTypes.func.isRequired
+  changeGenre: PropTypes.func.isRequired,
+  resetShowedMoviesAmount: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -54,6 +58,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeGenre(genre) {
     dispatch(ActionCreator.changeGenre(genre));
+  },
+
+  resetShowedMoviesAmount() {
+    dispatch(ActionCreator.resetShowedMoviesAmount());
   }
 });
 

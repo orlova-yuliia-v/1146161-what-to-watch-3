@@ -1,10 +1,13 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import {GenresList} from "./genres-list.jsx";
+import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import ShowMoreButton from "./show-more-button.jsx";
 import {ALL_GENRES} from "../../const.js";
 
-configure({adapter: new Adapter()});
+const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
+
+const mockStore = configureStore([]);
 
 const films = [
   {
@@ -185,26 +188,25 @@ const films = [
   }
 ];
 
-it(`should call a callback when genre link is clicked`, () => {
-  const onChangeGenreHandler = jest.fn();
-  const resetShowedMoviesAmountHandler = jest.fn();
 
-  const genresList = shallow(
-      <GenresList
-        films={films}
-        selectedGenre={ALL_GENRES}
-        changeGenre={onChangeGenreHandler}
-        resetShowedMoviesAmount={resetShowedMoviesAmountHandler}
-      />
-  );
-  const genreLink = genresList.find(`a.catalog__genres-link`);
-
-  genreLink.forEach((link) => {
-    link.simulate(`click`);
+it(`Should render SimilarMovies component`, () => {
+  const store = mockStore({
+    selectedGenre: ALL_GENRES,
+    films,
+    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
   });
 
-  expect(onChangeGenreHandler.mock.calls[0][0]).toBe(ALL_GENRES);
-  expect(onChangeGenreHandler.mock.calls.length).toBe(genreLink.length);
-  expect(resetShowedMoviesAmountHandler.mock.calls.length).toBe(genreLink.length);
-}
-);
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <ShowMoreButton
+            films={[]}
+            showedMovies={DEFAULT_SHOWED_MOVIES_NUMBER}
+            showMoreMovies={() => {}}
+          />
+        </Provider>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

@@ -5,6 +5,8 @@ import configureStore from "redux-mock-store";
 import GenresList from "./genres-list.jsx";
 import {ALL_GENRES} from "../../const.js";
 
+const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
+
 const mockStore = configureStore([]);
 
 const films = [
@@ -189,7 +191,8 @@ const films = [
 it(`should render correctly`, () => {
   const store = mockStore({
     selectedGenre: ALL_GENRES,
-    films
+    films,
+    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
   });
 
   const tree = renderer
@@ -199,6 +202,7 @@ it(`should render correctly`, () => {
             films={films}
             selectedGenre={ALL_GENRES}
             changeGenre={() => {}}
+            resetShowedMoviesAmount ={() => {}}
           />
         </Provider>
     )
