@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {ALL_GENRES} from "../../const.js";
 import {connect} from "react-redux";
@@ -6,41 +6,36 @@ import {ActionCreator} from "../../reducer.js";
 
 const MAX_GENRES_NUMBER = 10;
 
-class GenresList extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const getGenresList = (films) => {
+  return [ALL_GENRES, ...new Set(films.map(({genre}) => genre))].slice(0, MAX_GENRES_NUMBER);
+};
 
-  getGenresList(films) {
-    return [ALL_GENRES, ...new Set(films.map(({genre}) => genre))].slice(0, MAX_GENRES_NUMBER);
-  }
+const GenresList = (props) => {
+  const {films, selectedGenre, changeGenre, resetShowedMoviesAmount} = props;
 
-  render() {
-    const {films, selectedGenre, changeGenre, resetShowedMoviesAmount} = this.props;
-
-    return (
-      <ul className="catalog__genres-list">
-        {this.getGenresList(films).map((availableGenre, index) => (
-          <li
-            key={availableGenre + index}
-            className={`catalog__genres-item ${selectedGenre === availableGenre ? `catalog__genres-item--active` : ``}`}
+  return (
+    <ul className="catalog__genres-list">
+      {getGenresList(films).map((availableGenre, index) => (
+        <li
+          key={availableGenre + index}
+          className={`catalog__genres-item ${selectedGenre === availableGenre ? `catalog__genres-item--active` : ``}`}
+        >
+          <a
+            href="#"
+            className="catalog__genres-link"
+            onClick={() => {
+              changeGenre(availableGenre);
+              resetShowedMoviesAmount();
+            }}
           >
-            <a
-              href="#"
-              className="catalog__genres-link"
-              onClick={() => {
-                changeGenre(availableGenre);
-                resetShowedMoviesAmount();
-              }}
-            >
-              {availableGenre}
-            </a>
-          </li>
-        ))}
-      </ul>
-    );
-  }
-}
+            {availableGenre}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 
 GenresList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({

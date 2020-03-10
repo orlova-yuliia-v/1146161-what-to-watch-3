@@ -3,6 +3,11 @@ import PropTypes from "prop-types";
 import {MoviesList} from "../movies-list/movies-list.jsx";
 import Tabs from "../tabs/tabs.jsx";
 import films from "../../mocks/films.js";
+import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
+import withActiveTab from '../../hocs/with-active-tab/with-active-tab.jsx';
+
+const MoviesListWrapped = withActiveMovieCard(MoviesList);
+const TabsWrapped = withActiveTab(Tabs);
 
 const MAX_SIMILAR_FILMS_NUMBER = 4;
 
@@ -73,7 +78,7 @@ const MoviePage = ({film, onMovieTitleClick}) => {
             <div className="movie-card__poster movie-card__poster--big">
               <img src={poster} alt={title} width="218" height="327" />
             </div>
-            <Tabs film={film} />
+            <TabsWrapped film={film} />
           </div>
         </div>
       </section>
@@ -81,7 +86,7 @@ const MoviePage = ({film, onMovieTitleClick}) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <MoviesList
+          <MoviesListWrapped
             films={getSimilarFilms(film, MAX_SIMILAR_FILMS_NUMBER)}
             onMovieTitleClick={onMovieTitleClick}
           />
