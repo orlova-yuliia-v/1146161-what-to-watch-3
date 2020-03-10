@@ -1,71 +1,33 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card.jsx';
 import {connect} from "react-redux";
 import {ALL_GENRES} from "../../const.js";
+import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 
-const SHOW_PREVIEW_DELAY = 1000;
+const SmallMovieCardtWrapped = withActiveMovieCard(SmallMovieCard);
 
-class MoviesList extends PureComponent {
-  constructor(props) {
-    super(props);
+const MoviesList = (props) => {
+  const {films, onMovieTitleClick} = props;
 
-    this.state = {
-      activeMovieCard: null,
-      isPlaying: false
-    };
-
-    this._handleCardEnter = this._handleCardEnter.bind(this);
-    this._handleCardLeave = this._handleCardLeave.bind(this);
-  }
-
-  _handleCardEnter(film) {
-    this.mouseEnterTimer = setTimeout(() => {
-      this.setState((prevState) => ({
-        activeMovieCard: film,
-        isPlaying: !prevState.isPlaying
-      }));
-    }, SHOW_PREVIEW_DELAY);
-  }
-
-  _handleCardLeave() {
-    this.setState((prevState) => ({
-      activeMovieCard: null,
-      isPlaying: !prevState.isPlaying
-    }));
-    clearTimeout(this.mouseEnterTimer);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.mouseEnterTimer);
-  }
-
-  render() {
-    const {films, onMovieTitleClick} = this.props;
-    const {activeMovieCard} = this.state;
-
-    return (
-      <div className="catalog__movies-list">
-        {
-          films.map((film, i) => {
-            return (
-              <SmallMovieCard
-                key={`film-${i}`}
-                film={film}
-                onMovieEnter={this._handleCardEnter}
-                onMovieLeave={this._handleCardLeave}
-                onMovieTitleClick={() => {
-                  onMovieTitleClick(film);
-                }}
-                isPlaying={activeMovieCard === film}
-              />
-            );
-          })
-        }
-      </div>
-    );
-  }
-}
+  return (
+    <div className="catalog__movies-list">
+      {
+        films.map((film, i) => {
+          return (
+            <SmallMovieCardtWrapped
+              key={`film-${i}`}
+              film={film}
+              onMovieTitleClick={() => {
+                onMovieTitleClick(film);
+              }}
+            />
+          );
+        })
+      }
+    </div>
+  );
+};
 
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
