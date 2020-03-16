@@ -6,6 +6,8 @@ import MoviePage from "./movie-page.jsx";
 import {ALL_GENRES} from "../../const.js";
 import films from "../../mocks/films.js";
 
+const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
+
 const mockStore = configureStore([]);
 
 const film = {
@@ -34,7 +36,9 @@ const film = {
 it(`should render correctly`, () => {
   const store = mockStore({
     selectedGenre: ALL_GENRES,
-    films
+    films,
+    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
+    isFullVideoPlayerVisible: false
   });
 
   const tree = renderer
@@ -43,6 +47,8 @@ it(`should render correctly`, () => {
           <MoviePage
             film={film}
             onMovieTitleClick={() => {}}
+            isFullVideoPlayerVisible={false}
+            onVisibilityChange={() => {}}
           />
         </Provider>,
         {

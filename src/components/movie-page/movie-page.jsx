@@ -5,9 +5,13 @@ import Tabs from "../tabs/tabs.jsx";
 import films from "../../mocks/films.js";
 import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab.jsx';
+import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
+import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
+
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
+const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const MAX_SIMILAR_FILMS_NUMBER = 4;
 
@@ -17,10 +21,16 @@ const getSimilarFilms = (film, maxNumber = MAX_SIMILAR_FILMS_NUMBER) => {
         similarFilm.genre === film.genre && similarFilm.title !== film.title).slice(0, maxNumber);
 };
 
-const MoviePage = ({film, onMovieTitleClick}) => {
+const MoviePage = ({film, onMovieTitleClick, isFullVideoPlayerVisible, onVisibilityChange}) => {
   const {title, poster, bgPosterUrl, genre, releaseYear} = film;
 
-  return (
+  return isFullVideoPlayerVisible ? (
+    <FullVideoPlayerWrapped
+      onExitButtonClick={onVisibilityChange}
+      film={film}
+      autoPlay={true}
+    />
+  ) : (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
@@ -55,7 +65,7 @@ const MoviePage = ({film, onMovieTitleClick}) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button" onClick={onVisibilityChange}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -118,6 +128,8 @@ MoviePage.propTypes = {
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired
   }).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired
+  onMovieTitleClick: PropTypes.func.isRequired,
+  onVisibilityChange: PropTypes.func.isRequired,
+  isFullVideoPlayerVisible: PropTypes.bool.isRequired
 };
 export default MoviePage;

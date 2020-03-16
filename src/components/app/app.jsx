@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 
@@ -22,24 +24,33 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {promoTitle, promoGenre, promoYear, films} = this.props;
+    const {promoFilm, films, isFullVideoPlayerVisible, onVisibilityChange} = this.props;
     const {selectedFilm} = this.state;
 
-    if (selectedFilm) {
-      return <MoviePage film={selectedFilm} onMovieTitleClick={this._handleTitleClick}/>;
+    if (selectedFilm !== null) {
+      return (
+        <MoviePage
+          film={selectedFilm}
+          onMovieTitleClick={this._handleTitleClick}
+          isFullVideoPlayerVisible={isFullVideoPlayerVisible}
+          onVisibilityChange={onVisibilityChange}
+        />
+      );
     }
-
     return (
       <Main
-        promoTitle={promoTitle}
-        promoGenre={promoGenre}
-        promoYear={promoYear}
+        promoFilm={promoFilm}
+        films={films}
         onMovieTitleClick={this._handleTitleClick}
-        films={films} />);
+        isFullVideoPlayerVisible={isFullVideoPlayerVisible}
+        onVisibilityChange={onVisibilityChange}
+      />
+    );
   }
 
   render() {
     const {selectedFilm} = this.state;
+    const {isFullVideoPlayerVisible, onVisibilityChange} = this.props;
 
     return (
       <BrowserRouter>
@@ -48,7 +59,14 @@ class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/dev-film-page">
-            {selectedFilm ? <MoviePage film={selectedFilm} onMovieTitleClick={this._handleTitleClick}/> : null}
+            {selectedFilm ?
+              <MoviePage
+                film={selectedFilm}
+                onMovieTitleClick={this._handleTitleClick}
+                isFullVideoPlayerVisible={isFullVideoPlayerVisible}
+                onVisibilityChange={onVisibilityChange}
+              /> :
+              null}
           </Route>
         </Switch>
       </BrowserRouter>
@@ -58,10 +76,28 @@ class App extends PureComponent {
 
 
 App.propTypes = {
-  promoTitle: PropTypes.string.isRequired,
-  promoGenre: PropTypes.string.isRequired,
-  promoYear: PropTypes.number.isRequired,
-  films: PropTypes.array.isRequired
+  promoFilm: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    releaseYear: PropTypes.number.isRequired,
+    poster: PropTypes.string.isRequired,
+    bgPosterUrl: PropTypes.string.isRequired,
+    previewUrl: PropTypes.string.isRequired
+  }).isRequired,
+  films: PropTypes.array.isRequired,
+  onVisibilityChange: PropTypes.func.isRequired,
+  isFullVideoPlayerVisible: PropTypes.bool.isRequired
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  isFullVideoPlayerVisible: state.isFullVideoPlayerVisible
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onVisibilityChange() {
+    dispatch(ActionCreator.changeVisibility());
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
