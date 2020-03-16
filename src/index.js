@@ -6,10 +6,13 @@ import App from "./components/app/app.jsx";
 import films from "./mocks/films.js";
 import {reducer} from "./reducer.js";
 
-const PromoData = {
-  TITLE: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  YEAR: 2014
+const promoFilmMock = {
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  releaseYear: 2014,
+  poster: `img/the-grand-budapest-hotel-poster.jpg`,
+  bgPosterUrl: `img/bg-the-grand-budapest-hotel.jpg`,
+  previewUrl: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
 };
 
 const store = createStore(
@@ -20,9 +23,7 @@ const store = createStore(
 ReactDOM.render(
     <Provider store={store}>
       <App
-        promoTitle={PromoData.TITLE}
-        promoGenre={PromoData.GENRE}
-        promoYear={PromoData.YEAR}
+        promoFilm={promoFilmMock}
         films={films}
       />
     </Provider>,
