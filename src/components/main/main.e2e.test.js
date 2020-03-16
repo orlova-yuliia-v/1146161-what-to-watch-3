@@ -14,10 +14,13 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const PromoData = {
-  TITLE: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  YEAR: 2014
+const promoFilmMock = {
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  releaseYear: 2014,
+  poster: `img/the-grand-budapest-hotel-poster.jpg`,
+  bgPosterUrl: `img/bg-the-grand-budapest-hotel.jpg`,
+  previewUrl: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
 };
 
 const films = [
@@ -211,11 +214,11 @@ it(`should call a callback when the movie title is pressed`, () => {
   const main = mount(
       <Provider store={store}>
         <Main
-          promoTitle={PromoData.TITLE}
-          promoGenre={PromoData.GENRE}
-          promoYear={PromoData.YEAR}
+          promoFilm={promoFilmMock}
           films={films}
           onMovieTitleClick={onMovieTitleClick}
+          isFullVideoPlayerVisible={false}
+          onVisibilityChange={() => {}}
         />
       </Provider>
   );

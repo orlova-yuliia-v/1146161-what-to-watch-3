@@ -8,7 +8,8 @@ it(`should return initial state without additional parameters`, () => {
   expect(reducer(void 0, {})).toEqual({
     selectedGenre: ALL_GENRES,
     films,
-    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
+    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
+    isFullVideoPlayerVisible: false
   });
 });
 
@@ -57,6 +58,16 @@ it(`should reset showed movies counter after changing genre`, () => {
   });
 });
 
+it(`should correctly change state of FullVideoPlayer Visibility`, () => {
+  expect(reducer({
+    isFullVideoPlayerVisible: false
+  }, {
+    type: ActionType.CHANGE_VISIBILITY,
+  })).toEqual({
+    isFullVideoPlayerVisible: true
+  });
+});
+
 describe(`Action creators work correctly`, () => {
   it(`Action creator for genre changing returns correct action`, () => {
     expect(ActionCreator.changeGenre(`Dramas`)).toEqual({
@@ -79,5 +90,10 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
+  it(`Action creator for changeVisibility returns correct action`, () => {
+    expect(ActionCreator.changeVisibility()).toEqual({
+      type: ActionType.CHANGE_VISIBILITY,
+    });
+  });
 });
 

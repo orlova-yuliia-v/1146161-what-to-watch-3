@@ -9,10 +9,13 @@ const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
 
 const mockStore = configureStore([]);
 
-const PromoData = {
-  TITLE: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  YEAR: 2014
+const promoFilmMock = {
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  releaseYear: 2014,
+  poster: `img/the-grand-budapest-hotel-poster.jpg`,
+  bgPosterUrl: `img/bg-the-grand-budapest-hotel.jpg`,
+  previewUrl: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
 };
 
 const films = [
@@ -198,17 +201,18 @@ it(`should render correctly`, () => {
   const store = mockStore({
     selectedGenre: ALL_GENRES,
     films,
-    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
+    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
+    isFullVideoPlayerVisible: false
   });
 
   const tree = renderer
    .create(
        <Provider store={store}>
          <App
-           promoTitle={PromoData.TITLE}
-           promoGenre={PromoData.GENRE}
-           promoYear={PromoData.YEAR}
+           promoFilm={promoFilmMock}
            films={films}
+           isFullVideoPlayerVisible={false}
+           onVisibilityChange={() => {}}
          />
        </Provider>
    )
