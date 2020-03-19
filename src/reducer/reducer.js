@@ -1,11 +1,12 @@
-import {extend} from "./utils.js";
-import {ALL_GENRES} from "./const.js";
+import {extend} from "../utils.js";
+import {ALL_GENRES} from "../const.js";
 
 const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
 
 const initialState = {
   selectedGenre: ALL_GENRES,
   films: [],
+  promoFilm: {},
   showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
   isFullVideoPlayerVisible: false
 };
@@ -15,7 +16,8 @@ const ActionType = {
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   RESET_SHOWED_MOVIES_AMOUNT: `RESET_SHOWED_MOVIES_AMOUNT`,
   CHANGE_VISIBILITY: `CHANGE_VISIBILITY`,
-  GET_MOVIES: `GET_MOVIES`
+  GET_MOVIES: `GET_MOVIES`,
+  GET_PROMO_MOVIE: `GET_PROMO_MOVIE`
 };
 
 const Operation = {
@@ -24,6 +26,11 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.getMovies(response.data));
       });
+  },
+  getPromoMovie: () => (dispatch, getState, api) => {
+    return api.get(`/films/promo`).then((response) => {
+      dispatch(ActionCreator.getPromoMovie(response.data));
+    });
   }
 };
 
@@ -40,7 +47,16 @@ const ActionCreator = {
     type: ActionType.RESET_SHOWED_MOVIES_AMOUNT,
     payload: null
   }),
-  changeVisibility: () => ({type: ActionType.CHANGE_VISIBILITY})
+  changeVisibility: () => ({type: ActionType.CHANGE_VISIBILITY}),
+
+  getMovies: (films) => ({
+    type: ActionType.GET_MOVIES,
+    payload: films
+  }),
+  getPromoMovie: (film) => ({
+    type: ActionType.GET_PROMO_MOVIE,
+    payload: film
+  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -59,6 +75,14 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CHANGE_VISIBILITY:
       return Object.assign({}, state, {isFullVideoPlayerVisible: !state.isFullVideoPlayerVisible});
+    case ActionType.GET_MOVIES:
+      return extend(state, {
+        films: action.payload
+      });
+    case ActionType.GET_PROMO_MOVIE:
+      return extend(state, {
+        promoFilm: action.payload
+      });
   }
 
   return state;
