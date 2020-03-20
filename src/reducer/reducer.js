@@ -7,6 +7,7 @@ const initialState = {
   selectedGenre: ALL_GENRES,
   films: [],
   promoFilm: {},
+  movieComments: [],
   showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
   isFullVideoPlayerVisible: false
 };
@@ -17,7 +18,8 @@ const ActionType = {
   RESET_SHOWED_MOVIES_AMOUNT: `RESET_SHOWED_MOVIES_AMOUNT`,
   CHANGE_VISIBILITY: `CHANGE_VISIBILITY`,
   GET_MOVIES: `GET_MOVIES`,
-  GET_PROMO_MOVIE: `GET_PROMO_MOVIE`
+  GET_PROMO_MOVIE: `GET_PROMO_MOVIE`,
+  GET_COMMENTS: `GET_COMMENTS`,
 };
 
 const Operation = {
@@ -31,8 +33,12 @@ const Operation = {
     return api.get(`/films/promo`).then((response) => {
       dispatch(ActionCreator.getPromoMovie(response.data));
     });
-  }
-};
+  },
+  getComments: (movieId) => (dispatch, getState, api) => {
+    return api.get(`/comments/${movieId}`).then((response) => {
+      dispatch(ActionCreator.getComments(response.data));
+    });
+  }};
 
 const ActionCreator = {
   changeGenre: (genre) => ({
@@ -56,6 +62,10 @@ const ActionCreator = {
   getPromoMovie: (film) => ({
     type: ActionType.GET_PROMO_MOVIE,
     payload: film
+  }),
+  getComments: (comments) => ({
+    type: ActionType.GET_COMMENTS,
+    payload: comments
   })
 };
 
@@ -82,6 +92,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.GET_PROMO_MOVIE:
       return extend(state, {
         promoFilm: action.payload
+      });
+    case ActionType.GET_COMMENTS:
+      return extend(state, {
+        currentFilmComments: action.payload
       });
   }
 
