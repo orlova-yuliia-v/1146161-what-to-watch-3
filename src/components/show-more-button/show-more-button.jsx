@@ -4,10 +4,10 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state.js";
 
 const ShowMoreButton = (props) => {
-  const {films, showedMovies, showMoreMovies} = props;
+  const {movies, showedMovies, showMoreMovies} = props;
 
   return (
-    showedMovies < films.length ? (
+    showedMovies < movies.length ? (
       <div className="catalog__more">
         <button
           className="catalog__button"
@@ -23,13 +23,13 @@ const ShowMoreButton = (props) => {
 };
 
 ShowMoreButton.propTypes = {
-  films: PropTypes.array.isRequired,
+  movies: PropTypes.array.isRequired,
   showedMovies: PropTypes.number.isRequired,
   showMoreMovies: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
+  movies: state.movies,
   showedMovies: state.showedMovies
 });
 

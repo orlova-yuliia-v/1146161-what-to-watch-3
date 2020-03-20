@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import VideoPlayer from "../video-player/video-player.jsx";
 
 const SmallMovieCard = (props) => {
-  const {film, onMovieEnter, onMovieLeave, onMovieTitleClick, isPlaying} = props;
-  const {title, poster, previewUrl} = film;
+  const {movie, onMovieEnter, onMovieLeave, onMovieTitleClick, isPlaying} = props;
+  const {title, poster, previewUrl} = movie;
 
   return (
     <article className="small-movie-card catalog__movies-card"
@@ -33,7 +33,7 @@ SmallMovieCard.propTypes = {
   onMovieEnter: PropTypes.func.isRequired,
   onMovieLeave: PropTypes.func.isRequired,
   onMovieTitleClick: PropTypes.func.isRequired,
-  film: (PropTypes.shape({
+  movie: (PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     previewUrl: PropTypes.string.isRequired

@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import {MoviesList} from "../movies-list/movies-list.jsx";
 import Tabs from "../tabs/tabs.jsx";
-import films from "../../mocks/films.js";
 import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab.jsx';
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
@@ -13,21 +12,21 @@ const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
-const MAX_SIMILAR_FILMS_NUMBER = 4;
+const MAX_SIMILAR_MOVIES_NUMBER = 4;
 
-const getSimilarFilms = (film, maxNumber = MAX_SIMILAR_FILMS_NUMBER) => {
-  return films.filter(
-      (similarFilm) =>
-        similarFilm.genre === film.genre && similarFilm.title !== film.title).slice(0, maxNumber);
+const getSimilarMovies = (movie, maxNumber = MAX_SIMILAR_MOVIES_NUMBER) => {
+  return movies.filter(
+      (similarMovie) =>
+        similarMovie.genre === movie.genre && similarMovie.title !== movie.title).slice(0, maxNumber);
 };
 
-const MoviePage = ({film, onMovieTitleClick, isFullVideoPlayerVisible, onVisibilityChange}) => {
-  const {title, poster, bgPosterUrl, genre, releaseYear} = film;
+const MoviePage = ({movie, onMovieTitleClick, isFullVideoPlayerVisible, onVisibilityChange}) => {
+  const {title, poster, bgPosterUrl, genre, releaseYear} = movie;
 
   return isFullVideoPlayerVisible ? (
     <FullVideoPlayerWrapped
       onExitButtonClick={onVisibilityChange}
-      film={film}
+      movie={movie}
       autoPlay={true}
     />
   ) : (
@@ -88,7 +87,7 @@ const MoviePage = ({film, onMovieTitleClick, isFullVideoPlayerVisible, onVisibil
             <div className="movie-card__poster movie-card__poster--big">
               <img src={poster} alt={title} width="218" height="327" />
             </div>
-            <TabsWrapped film={film} />
+            <TabsWrapped movie={movie} />
           </div>
         </div>
       </section>
@@ -97,7 +96,7 @@ const MoviePage = ({film, onMovieTitleClick, isFullVideoPlayerVisible, onVisibil
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesListWrapped
-            films={getSimilarFilms(film, MAX_SIMILAR_FILMS_NUMBER)}
+            movies={getSimilarMovies(movie, MAX_SIMILAR_MOVIES_NUMBER)}
             onMovieTitleClick={onMovieTitleClick}
           />
         </section>
@@ -121,7 +120,7 @@ const MoviePage = ({film, onMovieTitleClick, isFullVideoPlayerVisible, onVisibil
 };
 
 MoviePage.propTypes = {
-  film: PropTypes.shape({
+  movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     bgPosterUrl: PropTypes.string.isRequired,

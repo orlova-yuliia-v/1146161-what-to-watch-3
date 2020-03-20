@@ -11,26 +11,26 @@ class App extends PureComponent {
     super(props);
 
     this.state = {
-      selectedFilm: null
+      selectedMovie: null
     };
 
     this._handleTitleClick = this._handleTitleClick.bind(this);
   }
 
-  _handleTitleClick(film) {
+  _handleTitleClick(movie) {
     this.setState(
-        {selectedFilm: film}
+        {selectedMovie: movie}
     );
   }
 
   _renderApp() {
-    const {promoFilm, films, isFullVideoPlayerVisible, onVisibilityChange} = this.props;
-    const {selectedFilm} = this.state;
+    const {promoMovie, movies, isFullVideoPlayerVisible, onVisibilityChange} = this.props;
+    const {selectedMovie} = this.state;
 
-    if (selectedFilm !== null) {
+    if (selectedMovie !== null) {
       return (
         <MoviePage
-          film={selectedFilm}
+          movie={selectedMovie}
           onMovieTitleClick={this._handleTitleClick}
           isFullVideoPlayerVisible={isFullVideoPlayerVisible}
           onVisibilityChange={onVisibilityChange}
@@ -39,8 +39,8 @@ class App extends PureComponent {
     }
     return (
       <Main
-        promoFilm={promoFilm}
-        films={films}
+        promoMovie={promoMovie}
+        movies={movies}
         onMovieTitleClick={this._handleTitleClick}
         isFullVideoPlayerVisible={isFullVideoPlayerVisible}
         onVisibilityChange={onVisibilityChange}
@@ -49,7 +49,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {selectedFilm} = this.state;
+    const {selectedMovie} = this.state;
     const {isFullVideoPlayerVisible, onVisibilityChange} = this.props;
 
     return (
@@ -59,9 +59,9 @@ class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/dev-film-page">
-            {selectedFilm ?
+            {selectedMovie ?
               <MoviePage
-                film={selectedFilm}
+                movie={selectedMovie}
                 onMovieTitleClick={this._handleTitleClick}
                 isFullVideoPlayerVisible={isFullVideoPlayerVisible}
                 onVisibilityChange={onVisibilityChange}
@@ -76,7 +76,7 @@ class App extends PureComponent {
 
 
 App.propTypes = {
-  promoFilm: PropTypes.shape({
+  promoMovie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired,
@@ -84,7 +84,7 @@ App.propTypes = {
     bgPosterUrl: PropTypes.string.isRequired,
     previewUrl: PropTypes.string.isRequired
   }).isRequired,
-  films: PropTypes.array.isRequired,
+  movies: PropTypes.array.isRequired,
   onVisibilityChange: PropTypes.func.isRequired,
   isFullVideoPlayerVisible: PropTypes.bool.isRequired
 };

@@ -8,18 +8,18 @@ import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-m
 const SmallMovieCardtWrapped = withActiveMovieCard(SmallMovieCard);
 
 const MoviesList = (props) => {
-  const {films, onMovieTitleClick} = props;
+  const {movies, onMovieTitleClick} = props;
 
   return (
     <div className="catalog__movies-list">
       {
-        films.map((film, i) => {
+        movies.map((movie, i) => {
           return (
             <SmallMovieCardtWrapped
-              key={`film-${i}`}
-              film={film}
+              key={`movie-${i}`}
+              movie={movie}
               onMovieTitleClick={() => {
-                onMovieTitleClick(film);
+                onMovieTitleClick(movie);
               }}
             />
           );
@@ -30,7 +30,7 @@ const MoviesList = (props) => {
 };
 
 MoviesList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
+  movies: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired
   })
@@ -39,9 +39,9 @@ MoviesList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  films: state.selectedGenre === ALL_GENRES ?
-    state.films.slice(0, state.showedMovies) :
-    state.films.filter((film) => film.genre === state.selectedGenre).slice(0, state.showedMovies),
+  movies: state.selectedGenre === ALL_GENRES ?
+    state.movies.slice(0, state.showedMovies) :
+    state.movies.filter((movie) => movie.genre === state.selectedGenre).slice(0, state.showedMovies),
   selectedGenre: state.selectedGenre,
   showedMovies: state.showedMovies
 });

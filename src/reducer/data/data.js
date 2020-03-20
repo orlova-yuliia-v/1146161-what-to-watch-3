@@ -1,8 +1,8 @@
 import {extend} from "../../utils.js";
 
 const initialState = {
-  films: [],
-  promoFilm: {},
+  movies: [],
+  promoMovie: {},
   movieComments: []
 };
 
@@ -31,13 +31,13 @@ const Operation = {
   }};
 
 const ActionCreator = {
-  getMovies: (films) => ({
+  getMovies: (movies) => ({
     type: ActionType.GET_MOVIES,
-    payload: films
+    payload: movies
   }),
-  getPromoMovie: (film) => ({
+  getPromoMovie: (movie) => ({
     type: ActionType.GET_PROMO_MOVIE,
-    payload: film
+    payload: movie
   }),
   getComments: (comments) => ({
     type: ActionType.GET_COMMENTS,
@@ -49,15 +49,15 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.GET_MOVIES:
       return extend(state, {
-        films: action.payload
+        movies: action.payload
       });
     case ActionType.GET_PROMO_MOVIE:
       return extend(state, {
-        promoFilm: action.payload
+        promoMovie: action.payload
       });
     case ActionType.GET_COMMENTS:
       return extend(state, {
-        currentFilmComments: action.payload
+        movieComments: action.payload
       });
   }
 

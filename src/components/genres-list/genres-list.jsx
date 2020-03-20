@@ -6,16 +6,16 @@ import {ActionCreator} from "../../reducer/state/state.js";
 
 const MAX_GENRES_NUMBER = 10;
 
-const getGenresList = (films) => {
-  return [ALL_GENRES, ...new Set(films.map(({genre}) => genre))].slice(0, MAX_GENRES_NUMBER);
+const getGenresList = (movies) => {
+  return [ALL_GENRES, ...new Set(movies.map(({genre}) => genre))].slice(0, MAX_GENRES_NUMBER);
 };
 
 const GenresList = (props) => {
-  const {films, selectedGenre, changeGenre, resetShowedMoviesAmount} = props;
+  const {movies, selectedGenre, changeGenre, resetShowedMoviesAmount} = props;
 
   return (
     <ul className="catalog__genres-list">
-      {getGenresList(films).map((availableGenre, index) => (
+      {getGenresList(movies).map((availableGenre, index) => (
         <li
           key={availableGenre + index}
           className={`catalog__genres-item ${selectedGenre === availableGenre ? `catalog__genres-item--active` : ``}`}
@@ -38,7 +38,7 @@ const GenresList = (props) => {
 
 
 GenresList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
+  movies: PropTypes.arrayOf(PropTypes.shape({
     genre: PropTypes.string.isRequired})),
   selectedGenre: PropTypes.string.isRequired,
   changeGenre: PropTypes.func.isRequired,
@@ -46,7 +46,7 @@ GenresList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
+  movies: state.movies,
   selectedGenre: state.selectedGenre
 });
 

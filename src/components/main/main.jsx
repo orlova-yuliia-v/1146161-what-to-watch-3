@@ -10,21 +10,21 @@ import {connect} from "react-redux";
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const Main = (props) => {
-  const {promoFilm, onMovieTitleClick, isFullVideoPlayerVisible, onVisibilityChange} = props;
+  const {promoMovie, onMovieTitleClick, isFullVideoPlayerVisible, onVisibilityChange} = props;
 
   return (
     isFullVideoPlayerVisible ? (
       <FullVideoPlayerWrapped
         onExitButtonClick={onVisibilityChange}
-        film={promoFilm}
+        movie={promoMovie}
         autoPlay={true}
       />
     ) : (<React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
           <img
-            src={promoFilm.bgPosterUrl}
-            alt={promoFilm.title}
+            src={promoMovie.bgPosterUrl}
+            alt={promoMovie.title}
           />
         </div>
 
@@ -55,8 +55,8 @@ const Main = (props) => {
           <div className="movie-card__info">
             <div className="movie-card__poster">
               <img
-                src={promoFilm.poster}
-                alt={promoFilm.title}
+                src={promoMovie.poster}
+                alt={promoMovie.title}
                 width="218"
                 height="327"
               />
@@ -64,10 +64,10 @@ const Main = (props) => {
 
             <div className="movie-card__desc">
               <h2
-                className="movie-card__title">{promoFilm.title}</h2>
+                className="movie-card__title">{promoMovie.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{promoFilm.genre}</span>
-                <span className="movie-card__year">{promoFilm.releaseYear}</span>
+                <span className="movie-card__genre">{promoMovie.genre}</span>
+                <span className="movie-card__year">{promoMovie.releaseYear}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -125,7 +125,7 @@ const Main = (props) => {
     ));
 };
 Main.propTypes = {
-  promoFilm: PropTypes.shape({
+  promoMovie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired,
@@ -139,6 +139,6 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  promoFilm: state.promoFilm
+  promoMovie: state.promoMovie
 });
 export default connect(mapStateToProps)(Main);
