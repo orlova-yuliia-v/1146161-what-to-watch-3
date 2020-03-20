@@ -5,6 +5,7 @@ import GenresList from '../genres-list/genres-list.jsx';
 import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
+import {connect} from "react-redux";
 
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
@@ -136,5 +137,8 @@ Main.propTypes = {
   onVisibilityChange: PropTypes.func.isRequired,
   isFullVideoPlayerVisible: PropTypes.bool.isRequired,
 };
-export default Main;
 
+const mapStateToProps = (state) => ({
+  promoFilm: state.promoFilm
+});
+export default connect(mapStateToProps)(Main);
