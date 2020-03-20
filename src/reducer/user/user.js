@@ -1,4 +1,4 @@
-import {extend} from "../utils.js";
+import {extend} from "../../utils.js";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -22,6 +22,7 @@ const Operation = {
       .catch((err) => {
         throw err;
       });
+  }};
 
 const ActionCreator = {
   requireAuthorization: (status) => {
@@ -35,7 +36,7 @@ const ActionCreator = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.REQUIRE_AUTHORIZATION:
-      return extend({}, state, {
+      return extend(state, {
         authorizationStatus: action.payload
       });
   }
@@ -43,4 +44,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer, ActionCreator, ActionType};
+export {reducer, ActionCreator, ActionType, Operation};
