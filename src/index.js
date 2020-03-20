@@ -9,15 +9,6 @@ import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {createAPI} from "./api.js";
 
-const promoFilmMock = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  releaseYear: 2014,
-  poster: `img/the-grand-budapest-hotel-poster.jpg`,
-  bgPosterUrl: `img/bg-the-grand-budapest-hotel.jpg`,
-  previewUrl: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-};
-
 const api = createAPI(() => {});
 
 const store = createStore(
@@ -26,13 +17,11 @@ const store = createStore(
 );
 
 store.dispatch(Operation.getMovies());
+store.dispatch(Operation.getPromoMovie());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        promoFilm={promoFilmMock}
-        films={store.getState().films}
-      />
+      <App />
     </Provider>,
     document.querySelector(`#root`)
 );
