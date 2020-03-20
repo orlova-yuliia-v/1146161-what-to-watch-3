@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {ALL_GENRES} from "../../const.js";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/state/state.js";
 
 const MAX_GENRES_NUMBER = 10;
 

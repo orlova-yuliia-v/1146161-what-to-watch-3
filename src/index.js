@@ -3,12 +3,14 @@ import ReactDOM from "react-dom";
 import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import App from "./components/app/app.jsx";
-import {reducer} from "../src/reducer/reducer.js";
-import {Operation} from "../src/reducer/reducer.js";
+import reducer from "../src/reducer/reducer.js";
+import {Operation as DataOperation} from "../src/reducer/data/data.js";
+import {Operation as UserOperation, ActionCreator} from "../src/reducer/user/user.js";
+import {AuthorizationStatus} from "../src/reducer/user/user.js";
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {createAPI} from "./api.js";
-import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
+
 
 const onUnauthorized = () => {
   store.dispatch(
@@ -23,8 +25,8 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
-store.dispatch(Operation.getMovies());
-store.dispatch(Operation.getPromoMovie());
+store.dispatch(DataOperation.getMovies());
+store.dispatch(DataOperation.getPromoMovie());
 store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
