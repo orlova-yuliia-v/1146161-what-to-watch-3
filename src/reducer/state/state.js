@@ -1,4 +1,4 @@
-import {extend} from "../utils.js";
+import {extend} from "../../utils.js";
 import {ALL_GENRES} from "../../const.js";
 
 const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
@@ -47,7 +47,7 @@ const reducer = (state = initialState, action) => {
         showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
       });
     case ActionType.CHANGE_VISIBILITY:
-      return Object.assign({}, state, {isFullVideoPlayerVisible: !state.isFullVideoPlayerVisible});
+      return extend(state, {isFullVideoPlayerVisible: !state.isFullVideoPlayerVisible});
   }
 
   return state;
