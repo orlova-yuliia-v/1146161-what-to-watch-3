@@ -7,7 +7,7 @@ configure({
   adapter: new Adapter()
 });
 
-const film = {
+const movie = {
   poster: `1.jpg`,
   genre: `Some genre`,
   previewUrl: `https://preview-url.com/1.mp4`
@@ -15,7 +15,7 @@ const film = {
 
 it(`should play video`, () => {
   window.HTMLMediaElement.prototype.play = () => {};
-  const {poster, previewUrl} = film;
+  const {poster, previewUrl} = movie;
   const play = jest.spyOn(window.HTMLMediaElement.prototype, `play`);
   mount(
       <VideoPlayer poster={poster} previewUrl={previewUrl} isPlaying={true} />
@@ -28,7 +28,7 @@ it(`should pause video`, () => {
 
   window.HTMLMediaElement.prototype.pause = () => {};
   const pause = jest.spyOn(window.HTMLMediaElement.prototype, `pause`);
-  const {poster, previewUrl} = film;
+  const {poster, previewUrl} = movie;
   const videoPlayer = mount(
       <VideoPlayer poster={poster} previewUrl={previewUrl} isPlaying={true} />
   );

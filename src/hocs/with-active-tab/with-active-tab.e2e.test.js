@@ -2,18 +2,14 @@ import React from "react";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withActiveTab from "./with-active-tab.jsx";
+import {TabName} from "../../const.js";
 
 configure({adapter: new Adapter()});
 
-const TabName = {
-  OVERVIEW: `overview`,
-  DETAILS: `details`,
-  REVIEWS: `reviews`
-};
 const MockComponent = () => <div />;
 const MockComponentWrapped = withActiveTab(MockComponent);
 
-const film = [
+const movie = [
   {
     title: `Some title`,
     poster: `1.jpg`,
@@ -22,7 +18,7 @@ const film = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -41,7 +37,7 @@ const film = [
 
 it(`should change tab on click`, () => {
   const wrapper = mount(<MockComponentWrapped
-    film={film}
+    movie={movie}
   />);
 
   const mockComponent = wrapper.find(MockComponent);

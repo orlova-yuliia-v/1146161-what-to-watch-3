@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import SmallMovieCard from "./small-movie-card.jsx";
 
-const film = {
+const movie = {
   title: `Some title`,
   poster: `1.jpg`,
   bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -10,7 +10,7 @@ const film = {
   releaseYear: 2020,
   director: `Director name`,
   starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-  runTime: `2h 00m`,
+  runTime: 2,
   ratingScore: 7.5,
   ratingCount: 1234,
   description: `Film description`,
@@ -29,10 +29,10 @@ it(`should render correctly`, () => {
   const tree = renderer
     .create(
         <SmallMovieCard
-          film={film}
+          movie={movie}
           onMovieEnter={() => {}}
           onMovieLeave={() => {}}
-          onMovieTitleClick={() => {}}
+          onMovieCardClick={() => {}}
           isPlaying={true}
         />,
         {

@@ -6,7 +6,7 @@ import {MoviesList} from "./movies-list";
 configure({adapter: new Adapter()});
 
 const mock = {
-  films: [
+  movies: [
     {
       title: `Some title`,
       poster: `1.jpg`,
@@ -15,7 +15,7 @@ const mock = {
       releaseYear: 2020,
       director: `Director name`,
       starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-      runTime: `2h 00m`,
+      runTime: 2,
       ratingScore: 7.5,
       ratingCount: 1234,
       description: `Film description`,
@@ -37,7 +37,7 @@ const mock = {
       releaseYear: 2020,
       director: `Director name`,
       starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-      runTime: `2h 00m`,
+      runTime: 2,
       ratingScore: 7.5,
       ratingCount: 1234,
       description: `Film description`,
@@ -59,7 +59,7 @@ const mock = {
       releaseYear: 2020,
       director: `Director name`,
       starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-      runTime: `2h 00m`,
+      runTime: 2,
       ratingScore: 7.5,
       ratingCount: 1234,
       description: `Film description`,
@@ -81,7 +81,7 @@ const mock = {
       releaseYear: 2020,
       director: `Director name`,
       starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-      runTime: `2h 00m`,
+      runTime: 2,
       ratingScore: 7.5,
       ratingCount: 1234,
       description: `Film description`,
@@ -103,7 +103,7 @@ const mock = {
       releaseYear: 2020,
       director: `Director name`,
       starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-      runTime: `2h 00m`,
+      runTime: 2,
       ratingScore: 7.5,
       ratingCount: 1234,
       description: `Film description`,
@@ -125,7 +125,7 @@ const mock = {
       releaseYear: 2020,
       director: `Director name`,
       starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-      runTime: `2h 00m`,
+      runTime: 2,
       ratingScore: 7.5,
       ratingCount: 1234,
       description: `Film description`,
@@ -147,7 +147,7 @@ const mock = {
       releaseYear: 2020,
       director: `Director name`,
       starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-      runTime: `2h 00m`,
+      runTime: 2,
       ratingScore: 7.5,
       ratingCount: 1234,
       description: `Film description`,
@@ -169,7 +169,7 @@ const mock = {
       releaseYear: 2020,
       director: `Director name`,
       starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-      runTime: `2h 00m`,
+      runTime: 2,
       ratingScore: 7.5,
       ratingCount: 1234,
       description: `Film description`,
@@ -187,13 +187,13 @@ const mock = {
 };
 
 it(`should call a callback when the movie title or poster is pressed`, () => {
-  const {films} = mock;
-  const onMovieTitleClick = jest.fn();
+  const {movies} = mock;
+  const onMovieCardClick = jest.fn();
 
   const moviesList = mount(
       <MoviesList
-        films={films}
-        onMovieTitleClick={onMovieTitleClick}
+        movies={movies}
+        onMovieCardClick={onMovieCardClick}
       />
   );
   const movieCard = moviesList.find(`article.small-movie-card.catalog__movies-card`);
@@ -202,6 +202,6 @@ it(`should call a callback when the movie title or poster is pressed`, () => {
     card.simulate(`click`);
   });
 
-  expect(onMovieTitleClick.mock.calls.length).toBe(movieCard.length);
-  expect(movieCard.length).toEqual(films.length);
+  expect(onMovieCardClick.mock.calls.length).toBe(movieCard.length);
+  expect(movieCard.length).toEqual(movies.length);
 });

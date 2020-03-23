@@ -7,7 +7,7 @@ const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
 
 configure({adapter: new Adapter()});
 
-const films = [
+const movies = [
   {
     title: `Some title`,
     poster: `1.jpg`,
@@ -16,7 +16,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -38,7 +38,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -60,7 +60,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -82,7 +82,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -104,7 +104,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -126,7 +126,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -148,7 +148,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -170,7 +170,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -192,7 +192,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -213,7 +213,7 @@ it(`should call a callback when button is clicked`, () => {
 
   const showMoreButton = shallow(
       <ShowMoreButton
-        films={films}
+        movies={movies}
         showedMovies={DEFAULT_SHOWED_MOVIES_NUMBER}
         showMoreMovies={showMoreMoviesButtonClickHandler}
       />

@@ -2,12 +2,12 @@ import React from "react";
 import renderer from "react-test-renderer";
 import VideoPlayer from "./video-player.jsx";
 
-const film = {
+const movie = {
   poster: `1.jpg`,
   previewUrl: `https://preview-url.com/1.mp4`
 };
 
-const {poster, previewUrl} = film;
+const {poster, previewUrl} = movie;
 
 it(`should render correctly`, () => {
   const tree = renderer.create(<VideoPlayer

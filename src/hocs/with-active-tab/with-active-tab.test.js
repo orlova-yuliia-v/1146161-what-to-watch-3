@@ -5,7 +5,7 @@ import withActiveTab from "./with-active-tab.jsx";
 const MockComponent = () => <div></div>;
 const MockComponentWrapped = withActiveTab(MockComponent);
 
-const film = [
+const movie = [
   {
     title: `Some title`,
     poster: `1.jpg`,
@@ -14,7 +14,7 @@ const film = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -33,7 +33,7 @@ const film = [
 it(`withActiveTab is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
-      film={film}
+      movie={movie}
     />
   ), {
     createNodeMock() {
