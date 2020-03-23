@@ -1,7 +1,5 @@
 import {extend} from "../../utils.js";
-import {ALL_GENRES} from "../../const.js";
-
-const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
+import {ALL_GENRES, DEFAULT_SHOWED_MOVIES_NUMBER} from "../../const.js";
 
 const initialState = {
   selectedGenre: ALL_GENRES,
