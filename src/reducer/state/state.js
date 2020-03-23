@@ -6,7 +6,8 @@ const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
 const initialState = {
   selectedGenre: ALL_GENRES,
   showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
-  isFullVideoPlayerVisible: false
+  isFullVideoPlayerVisible: false,
+  selectedMovieId: -1
 };
 
 const ActionType = {
@@ -14,6 +15,7 @@ const ActionType = {
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   RESET_SHOWED_MOVIES_AMOUNT: `RESET_SHOWED_MOVIES_AMOUNT`,
   CHANGE_VISIBILITY: `CHANGE_VISIBILITY`,
+  CHANGE_SELECTED_MOVIE_ID: `CHANGE_SELECTED_MOVIE_ID`
 };
 
 const ActionCreator = {
@@ -30,6 +32,10 @@ const ActionCreator = {
     payload: null
   }),
   changeVisibility: () => ({type: ActionType.CHANGE_VISIBILITY}),
+  changeSelectedMovieId: (id) => ({
+    type: ActionType.CHANGE_SELECTED_MOVIE_ID,
+    payload: id
+  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -48,6 +54,10 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CHANGE_VISIBILITY:
       return extend(state, {isFullVideoPlayerVisible: !state.isFullVideoPlayerVisible});
+    case ActionType.CHANGE_SELECTED_MOVIE_ID:
+      return extend(state, {
+        selectedMovieId: action.payload
+      });
   }
 
   return state;

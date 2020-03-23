@@ -1,37 +1,33 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/state/state.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer/state/state.js";
+import {isFullVideoPlayer} from "../../reducer/state/selectors.js";
+import {getSelectedMovie, getPromoMovie} from "../../reducer/data/selectors.js";
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      selectedMovie: null
-    };
-
-    this._handleTitleClick = this._handleTitleClick.bind(this);
+    this._handleCardClick = this._handleCardClick.bind(this);
   }
 
-  _handleTitleClick(movie) {
-    this.setState(
-        {selectedMovie: movie}
-    );
+  _handleCardClick(selectedMovieId) {
+    this.props.changeSelectedMovieId(selectedMovieId);
+    this.props.getComments(selectedMovieId);
   }
 
   _renderApp() {
-    const {promoMovie, movies, isFullVideoPlayerVisible, onVisibilityChange} = this.props;
-    const {selectedMovie} = this.state;
+    const {promoMovie, isFullVideoPlayerVisible, onVisibilityChange, selectedMovie} = this.props;
 
-    if (selectedMovie !== null) {
+    if (selectedMovie) {
       return (
         <MoviePage
           movie={selectedMovie}
-          onMovieTitleClick={this._handleTitleClick}
+          onMovieCardClick={this._handleCardClick}
           isFullVideoPlayerVisible={isFullVideoPlayerVisible}
           onVisibilityChange={onVisibilityChange}
         />
@@ -40,8 +36,7 @@ class App extends PureComponent {
     return (
       <Main
         promoMovie={promoMovie}
-        movies={movies}
-        onMovieTitleClick={this._handleTitleClick}
+        onMovieCardClick={this._handleCardClick}
         isFullVideoPlayerVisible={isFullVideoPlayerVisible}
         onVisibilityChange={onVisibilityChange}
       />
@@ -49,8 +44,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {selectedMovie} = this.state;
-    const {isFullVideoPlayerVisible, onVisibilityChange} = this.props;
+    const {isFullVideoPlayerVisible, onVisibilityChange, selectedMovie} = this.props;
 
     return (
       <BrowserRouter>
@@ -62,7 +56,7 @@ class App extends PureComponent {
             {selectedMovie ?
               <MoviePage
                 movie={selectedMovie}
-                onMovieTitleClick={this._handleTitleClick}
+                onMovieCardClick={this._handleCardClick}
                 isFullVideoPlayerVisible={isFullVideoPlayerVisible}
                 onVisibilityChange={onVisibilityChange}
               /> :
@@ -76,26 +70,44 @@ class App extends PureComponent {
 
 
 App.propTypes = {
-  promoMovie: PropTypes.shape({
+  promoMovie: PropTypes.shape().isRequired,
+  onVisibilityChange: PropTypes.func.isRequired,
+  isFullVideoPlayerVisible: PropTypes.bool.isRequired,
+  getComments: PropTypes.func.isRequired,
+  changeSelectedMovieId: PropTypes.func.isRequired,
+  selectedMovie: PropTypes.shape({
     title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+    previewUrl: PropTypes.string.isRequired,
+    bgPosterUrl: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    ratingScore: PropTypes.number.isRequired,
+    ratingCount: PropTypes.number.isRequired,
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    runTime: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    bgPosterUrl: PropTypes.string.isRequired,
-    previewUrl: PropTypes.string.isRequired
-  }).isRequired,
-  movies: PropTypes.array.isRequired,
-  onVisibilityChange: PropTypes.func.isRequired,
-  isFullVideoPlayerVisible: PropTypes.bool.isRequired
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoUrl: PropTypes.string.isRequired,
+  })
 };
 
 const mapStateToProps = (state) => ({
-  isFullVideoPlayerVisible: state.isFullVideoPlayerVisible
+  isFullVideoPlayerVisible: isFullVideoPlayer(state),
+  selectedMovie: getSelectedMovie(state),
+  promoMovie: getPromoMovie(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onVisibilityChange() {
     dispatch(ActionCreator.changeVisibility());
+  },
+  changeSelectedMovieId(id) {
+    dispatch(ActionCreator.changeSelectedMovieId(id));
   }
 });
 
