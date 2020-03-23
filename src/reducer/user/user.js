@@ -15,10 +15,12 @@ const ActionType = {
 
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
+    return api
+    .get(`/login`)
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
+
       .catch((err) => {
         throw err;
       });
