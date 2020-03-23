@@ -2,32 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import {MoviesList} from "../movies-list/movies-list.jsx";
 import Tabs from "../tabs/tabs.jsx";
-import films from "../../mocks/films.js";
 import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab.jsx';
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
-
+import {getSimilarMovies} from "../../reducer/state/selectors.js";
+import {connect} from "react-redux";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
-const MAX_SIMILAR_FILMS_NUMBER = 4;
-
-const getSimilarFilms = (film, maxNumber = MAX_SIMILAR_FILMS_NUMBER) => {
-  return films.filter(
-      (similarFilm) =>
-        similarFilm.genre === film.genre && similarFilm.title !== film.title).slice(0, maxNumber);
-};
-
-const MoviePage = ({film, onMovieTitleClick, isFullVideoPlayerVisible, onVisibilityChange}) => {
-  const {title, poster, bgPosterUrl, genre, releaseYear} = film;
+const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange}) => {
+  const {title, poster, bgPosterUrl, genre, releaseYear} = movie;
 
   return isFullVideoPlayerVisible ? (
     <FullVideoPlayerWrapped
       onExitButtonClick={onVisibilityChange}
-      film={film}
+      movie={movie}
       autoPlay={true}
     />
   ) : (
@@ -88,7 +80,7 @@ const MoviePage = ({film, onMovieTitleClick, isFullVideoPlayerVisible, onVisibil
             <div className="movie-card__poster movie-card__poster--big">
               <img src={poster} alt={title} width="218" height="327" />
             </div>
-            <TabsWrapped film={film} />
+            <TabsWrapped movie={movie} />
           </div>
         </div>
       </section>
@@ -97,8 +89,8 @@ const MoviePage = ({film, onMovieTitleClick, isFullVideoPlayerVisible, onVisibil
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesListWrapped
-            films={getSimilarFilms(film, MAX_SIMILAR_FILMS_NUMBER)}
-            onMovieTitleClick={onMovieTitleClick}
+            movies={movies}
+            onMovieCardClick={onMovieCardClick}
           />
         </section>
 
@@ -121,15 +113,28 @@ const MoviePage = ({film, onMovieTitleClick, isFullVideoPlayerVisible, onVisibil
 };
 
 MoviePage.propTypes = {
-  film: PropTypes.shape({
+  movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     bgPosterUrl: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired
   }).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    bgPosterUrl: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    releaseYear: PropTypes.number.isRequired
+  })).isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
   onVisibilityChange: PropTypes.func.isRequired,
   isFullVideoPlayerVisible: PropTypes.bool.isRequired
 };
-export default MoviePage;
+
+const mapStateToProps = (state) => ({
+  movies: getSimilarMovies(state)
+});
+
+export default connect(mapStateToProps)(MoviePage);
+

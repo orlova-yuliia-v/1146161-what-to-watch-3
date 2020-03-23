@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const FullVideoPlayer = (props) => {
   const {
     videoRef,
-    film,
+    movie,
     autoPlay,
     isPlaying,
     onPlayButtonClick,
@@ -21,8 +21,8 @@ const FullVideoPlayer = (props) => {
       <video
         className="player__video"
         ref={videoRef}
-        poster={film.poster}
-        src={film.previewUrl}
+        poster={movie.poster}
+        src={movie.previewUrl}
         width="100%"
         autoPlay={autoPlay}
         onClick={onPlayButtonClick}
@@ -77,7 +77,7 @@ const FullVideoPlayer = (props) => {
               </React.Fragment>
             )}
           </button>
-          <div className="player__name">{film.title}</div>
+          <div className="player__name">{movie.title}</div>
           <button
             type="button"
             className="player__full-screen"
@@ -96,7 +96,7 @@ const FullVideoPlayer = (props) => {
 
 
 FullVideoPlayer.propTypes = {
-  film: PropTypes.shape({
+  movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     bgPosterUrl: PropTypes.string.isRequired,

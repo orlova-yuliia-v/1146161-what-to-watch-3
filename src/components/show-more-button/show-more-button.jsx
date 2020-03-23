@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/state/state.js";
+import {getMovies} from "../../reducer/data/selectors.js";
+import {getShowedMovies} from "../../reducer/state/selectors.js";
 
 const ShowMoreButton = (props) => {
-  const {films, showedMovies, showMoreMovies} = props;
+  const {movies, showedMovies, showMoreMovies} = props;
 
   return (
-    showedMovies < films.length ? (
+    showedMovies < movies.length ? (
       <div className="catalog__more">
         <button
           className="catalog__button"
@@ -23,14 +25,14 @@ const ShowMoreButton = (props) => {
 };
 
 ShowMoreButton.propTypes = {
-  films: PropTypes.array.isRequired,
+  movies: PropTypes.array.isRequired,
   showedMovies: PropTypes.number.isRequired,
   showMoreMovies: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
-  showedMovies: state.showedMovies
+  movies: getMovies(state),
+  showedMovies: getShowedMovies(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

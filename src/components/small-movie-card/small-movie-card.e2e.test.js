@@ -6,7 +6,7 @@ import SmallMovieCard from "./small-movie-card.jsx";
 configure({adapter: new Adapter()});
 
 const mock = {
-  film: {
+  movie: {
     title: `one`,
     poster: `pic-one`,
     previewUrl: `https://preview-url.com/1.mp4`,
@@ -16,15 +16,15 @@ const mock = {
 };
 
 it(`should pass data to handler on hover`, () => {
-  const {film} = mock;
+  const {movie} = mock;
   const onMovieEnter = jest.fn();
 
   const smallMovieCard = shallow(
       <SmallMovieCard
-        film={film}
-        onMovieEnter={() => onMovieEnter(film)}
+        movie={movie}
+        onMovieEnter={() => onMovieEnter(movie)}
         onMovieLeave={() => onMovieEnter()}
-        onMovieTitleClick={() => {}}
+        onMovieCardClick={() => {}}
         isPlaying={true}
       />
   );
@@ -32,5 +32,5 @@ it(`should pass data to handler on hover`, () => {
   smallMovieCard.simulate(`mouseenter`, `mouseleave`);
 
   expect(onMovieEnter.mock.calls.length).toBe(1);
-  expect(onMovieEnter.mock.calls[0][0]).toMatchObject(film);
+  expect(onMovieEnter.mock.calls[0][0]).toMatchObject(movie);
 });

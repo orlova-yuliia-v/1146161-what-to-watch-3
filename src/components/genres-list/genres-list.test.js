@@ -3,13 +3,12 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import GenresList from "./genres-list.jsx";
-import {ALL_GENRES} from "../../const.js";
-
-const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
+import {ALL_GENRES, DEFAULT_SHOWED_MOVIES_NUMBER} from "../../const.js";
+import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
-const films = [
+const movies = [
   {
     title: `Some title`,
     poster: `1.jpg`,
@@ -18,7 +17,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -40,7 +39,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -62,7 +61,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -84,7 +83,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -106,7 +105,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -128,7 +127,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -150,7 +149,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -172,7 +171,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -190,16 +189,22 @@ const films = [
 
 it(`should render correctly`, () => {
   const store = mockStore({
-    selectedGenre: ALL_GENRES,
-    films,
-    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
+    [NameSpace.DATA]: {
+      movies,
+      promoMovie: movies[0]
+    },
+    [NameSpace.STATE]: {
+      selectedGenre: ALL_GENRES,
+      showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
+      isFullVideoPlayerVisible: false,
+      selectedMovieId: 2
+    }
   });
-
   const tree = renderer
     .create(
         <Provider store={store}>
           <GenresList
-            films={films}
+            movies={movies}
             selectedGenre={ALL_GENRES}
             changeGenre={() => {}}
             resetShowedMoviesAmount ={() => {}}

@@ -4,9 +4,8 @@ import Adapter from "enzyme-adapter-react-16";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import Main from "./main.jsx";
-import {ALL_GENRES} from "../../const.js";
-
-const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
+import {ALL_GENRES, DEFAULT_SHOWED_MOVIES_NUMBER} from "../../const.js";
+import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
@@ -14,16 +13,7 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const promoFilmMock = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  releaseYear: 2014,
-  poster: `img/the-grand-budapest-hotel-poster.jpg`,
-  bgPosterUrl: `img/bg-the-grand-budapest-hotel.jpg`,
-  previewUrl: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
-};
-
-const films = [
+const movies = [
   {
     title: `Some title`,
     poster: `1.jpg`,
@@ -32,7 +22,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -54,7 +44,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -76,7 +66,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -98,7 +88,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -120,7 +110,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -142,7 +132,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -164,7 +154,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -186,7 +176,7 @@ const films = [
     releaseYear: 2020,
     director: `Director name`,
     starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-    runTime: `2h 00m`,
+    runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
     description: `Film description`,
@@ -204,19 +194,26 @@ const films = [
 
 it(`should call a callback when the movie title is pressed`, () => {
   const store = mockStore({
-    selectedGenre: ALL_GENRES,
-    films,
-    showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
+    [NameSpace.DATA]: {
+      movies,
+      promoMovie: movies[0]
+    },
+    [NameSpace.STATE]: {
+      selectedGenre: ALL_GENRES,
+      showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
+      isFullVideoPlayerVisible: false,
+      selectedMovieId: -1
+    }
   });
 
-  const onMovieTitleClick = jest.fn();
+  const onMovieCardClick = jest.fn();
 
   const main = mount(
       <Provider store={store}>
         <Main
-          promoFilm={promoFilmMock}
-          films={films}
-          onMovieTitleClick={onMovieTitleClick}
+          promoMovie={movies[0]}
+          movies={movies}
+          onMovieCardClick={onMovieCardClick}
           isFullVideoPlayerVisible={false}
           onVisibilityChange={() => {}}
         />
@@ -229,5 +226,5 @@ it(`should call a callback when the movie title is pressed`, () => {
     title.props().onClick();
   });
 
-  expect(onMovieTitleClick.mock.calls.length).toBe(moviesTitle.length);
+  expect(onMovieCardClick.mock.calls.length).toBe(moviesTitle.length);
 });

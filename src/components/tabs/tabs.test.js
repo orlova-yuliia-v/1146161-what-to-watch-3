@@ -1,14 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Tabs from "./tabs.jsx";
+import {TabName} from "../../const.js";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
 
-const TabName = {
-  OVERVIEW: `overview`,
-  DETAILS: `details`,
-  REVIEWS: `reviews`
-};
-
-const film = {
+const movie = {
   title: `Some title`,
   poster: `1.jpg`,
   bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -16,7 +14,7 @@ const film = {
   releaseYear: 2020,
   director: `Director name`,
   starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
-  runTime: `2h 00m`,
+  runTime: 2,
   ratingScore: 7.5,
   ratingCount: 1234,
   description: `Film description`,
@@ -32,12 +30,25 @@ const film = {
 };
 
 it(`should render correctly`, () => {
+  const mockStore = configureStore([]);
+
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      promoMovie: movie
+    }
+  });
+
   const tree = renderer
-  .create(<Tabs
-    film={film}
-    activeTab={TabName.OVERVIEW}
-    onTabClick={() => {}}/>
-  ).toJSON();
+    .create(
+        <Provider store={store}>
+          <Tabs
+            movie={movie}
+            activeTab={TabName.OVERVIEW}
+            onTabClick={() => {}}
+          />
+        </Provider>
+    )
+    .toJSON();
 
   expect(tree).toMatchSnapshot();
 });

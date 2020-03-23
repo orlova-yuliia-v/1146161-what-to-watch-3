@@ -1,21 +1,19 @@
-import {extend} from "./utils.js";
-import films from "./mocks/films.js";
-import {ALL_GENRES} from "./const.js";
-
-const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
+import {extend} from "../../utils.js";
+import {ALL_GENRES, DEFAULT_SHOWED_MOVIES_NUMBER} from "../../const.js";
 
 const initialState = {
   selectedGenre: ALL_GENRES,
-  films,
   showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
-  isFullVideoPlayerVisible: false
+  isFullVideoPlayerVisible: false,
+  selectedMovieId: -1
 };
 
 const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   SHOW_MORE_MOVIES: `SHOW_MORE_MOVIES`,
   RESET_SHOWED_MOVIES_AMOUNT: `RESET_SHOWED_MOVIES_AMOUNT`,
-  CHANGE_VISIBILITY: `CHANGE_VISIBILITY`
+  CHANGE_VISIBILITY: `CHANGE_VISIBILITY`,
+  CHANGE_SELECTED_MOVIE_ID: `CHANGE_SELECTED_MOVIE_ID`
 };
 
 const ActionCreator = {
@@ -31,7 +29,11 @@ const ActionCreator = {
     type: ActionType.RESET_SHOWED_MOVIES_AMOUNT,
     payload: null
   }),
-  changeVisibility: () => ({type: ActionType.CHANGE_VISIBILITY})
+  changeVisibility: () => ({type: ActionType.CHANGE_VISIBILITY}),
+  changeSelectedMovieId: (id) => ({
+    type: ActionType.CHANGE_SELECTED_MOVIE_ID,
+    payload: id
+  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -49,7 +51,11 @@ const reducer = (state = initialState, action) => {
         showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER
       });
     case ActionType.CHANGE_VISIBILITY:
-      return Object.assign({}, state, {isFullVideoPlayerVisible: !state.isFullVideoPlayerVisible});
+      return extend(state, {isFullVideoPlayerVisible: !state.isFullVideoPlayerVisible});
+    case ActionType.CHANGE_SELECTED_MOVIE_ID:
+      return extend(state, {
+        selectedMovieId: action.payload
+      });
   }
 
   return state;

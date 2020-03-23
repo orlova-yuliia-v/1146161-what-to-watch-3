@@ -1,15 +1,12 @@
-import {reducer, ActionType, ActionCreator} from "./reducer.js";
-import films from "./mocks/films.js";
-import {ALL_GENRES} from "./const.js";
-
-const DEFAULT_SHOWED_MOVIES_NUMBER = 8;
+import {ActionCreator, ActionType, reducer} from "./state.js";
+import {ALL_GENRES, DEFAULT_SHOWED_MOVIES_NUMBER} from "../../const.js";
 
 it(`should return initial state without additional parameters`, () => {
   expect(reducer(void 0, {})).toEqual({
     selectedGenre: ALL_GENRES,
-    films,
     showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
-    isFullVideoPlayerVisible: false
+    isFullVideoPlayerVisible: false,
+    selectedMovieId: -1
   });
 });
 
@@ -68,6 +65,20 @@ it(`should correctly change state of FullVideoPlayer Visibility`, () => {
   });
 });
 
+it(`should change selected movie ID`, () => {
+  expect(
+      reducer(
+          {selectedMovieId: -1},
+          {
+            type: ActionType.CHANGE_SELECTED_MOVIE_ID,
+            payload: 3
+          }
+      )
+  ).toEqual({
+    selectedMovieId: 3
+  });
+});
+
 describe(`Action creators work correctly`, () => {
   it(`Action creator for genre changing returns correct action`, () => {
     expect(ActionCreator.changeGenre(`Dramas`)).toEqual({
@@ -95,5 +106,17 @@ describe(`Action creators work correctly`, () => {
       type: ActionType.CHANGE_VISIBILITY,
     });
   });
-});
 
+  it(`Action creator for selected movie id returns -1 by default`, () => {
+    expect(ActionCreator.changeSelectedMovieId()).toEqual({
+      type: ActionType.CHANGE_SELECTED_MOVIE_ID,
+    });
+  });
+
+  it(`Action creator for selected movie id returns correct action`, () => {
+    expect(ActionCreator.changeSelectedMovieId(3)).toEqual({
+      type: ActionType.CHANGE_SELECTED_MOVIE_ID,
+      payload: 3
+    });
+  });
+});

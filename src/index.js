@@ -1,31 +1,37 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import App from "./components/app/app.jsx";
-import films from "./mocks/films.js";
-import {reducer} from "./reducer.js";
+import reducer from "../src/reducer/reducer.js";
+import {Operation as DataOperation} from "../src/reducer/data/data.js";
+import {Operation as UserOperation, ActionCreator} from "../src/reducer/user/user.js";
+import {AuthorizationStatus} from "../src/reducer/user/user.js";
+import thunk from "redux-thunk";
+import {composeWithDevTools} from "redux-devtools-extension";
+import {createAPI} from "./api.js";
 
-const promoFilmMock = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  releaseYear: 2014,
-  poster: `img/the-grand-budapest-hotel-poster.jpg`,
-  bgPosterUrl: `img/bg-the-grand-budapest-hotel.jpg`,
-  previewUrl: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+
+const onUnauthorized = () => {
+  store.dispatch(
+      ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)
+  );
 };
+
+const api = createAPI(onUnauthorized);
 
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
+
+store.dispatch(DataOperation.getMovies());
+store.dispatch(DataOperation.getPromoMovie());
+store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        promoFilm={promoFilmMock}
-        films={films}
-      />
+      <App getComments={(movieId) => store.dispatch(DataOperation.getComments(movieId))} />
     </Provider>,
     document.querySelector(`#root`)
 );

@@ -5,25 +5,27 @@ import GenresList from '../genres-list/genres-list.jsx';
 import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
+import {getPromoMovie} from "../../reducer/data/selectors.js";
+import {connect} from "react-redux";
 
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const Main = (props) => {
-  const {promoFilm, onMovieTitleClick, isFullVideoPlayerVisible, onVisibilityChange} = props;
+  const {promoMovie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange} = props;
 
   return (
     isFullVideoPlayerVisible ? (
       <FullVideoPlayerWrapped
         onExitButtonClick={onVisibilityChange}
-        film={promoFilm}
+        movie={promoMovie}
         autoPlay={true}
       />
     ) : (<React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
           <img
-            src={promoFilm.bgPosterUrl}
-            alt={promoFilm.title}
+            src={promoMovie.bgPosterUrl}
+            alt={promoMovie.title}
           />
         </div>
 
@@ -54,8 +56,8 @@ const Main = (props) => {
           <div className="movie-card__info">
             <div className="movie-card__poster">
               <img
-                src={promoFilm.poster}
-                alt={promoFilm.title}
+                src={promoMovie.poster}
+                alt={promoMovie.title}
                 width="218"
                 height="327"
               />
@@ -63,10 +65,10 @@ const Main = (props) => {
 
             <div className="movie-card__desc">
               <h2
-                className="movie-card__title">{promoFilm.title}</h2>
+                className="movie-card__title">{promoMovie.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{promoFilm.genre}</span>
-                <span className="movie-card__year">{promoFilm.releaseYear}</span>
+                <span className="movie-card__genre">{promoMovie.genre}</span>
+                <span className="movie-card__year">{promoMovie.releaseYear}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -101,7 +103,7 @@ const Main = (props) => {
 
           <GenresList />
           <MoviesList
-            onMovieTitleClick={onMovieTitleClick}
+            onMovieCardClick={onMovieCardClick}
           />
           <ShowMoreButton />
         </section>
@@ -124,17 +126,14 @@ const Main = (props) => {
     ));
 };
 Main.propTypes = {
-  promoFilm: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseYear: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    bgPosterUrl: PropTypes.string.isRequired,
-    previewUrl: PropTypes.string.isRequired
-  }).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  promoMovie: PropTypes.shape().isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
   onVisibilityChange: PropTypes.func.isRequired,
   isFullVideoPlayerVisible: PropTypes.bool.isRequired,
 };
-export default Main;
 
+const mapStateToProps = (state) => ({
+  promoMovie: getPromoMovie(state)
+});
+
+export default connect(mapStateToProps)(Main);
