@@ -5,12 +5,13 @@ import GenresList from '../genres-list/genres-list.jsx';
 import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
+import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {connect} from "react-redux";
 
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const Main = (props) => {
-  const {promoMovie, onMovieTitleClick, isFullVideoPlayerVisible, onVisibilityChange} = props;
+  const {promoMovie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange} = props;
 
   return (
     isFullVideoPlayerVisible ? (
@@ -102,7 +103,7 @@ const Main = (props) => {
 
           <GenresList />
           <MoviesList
-            onMovieTitleClick={onMovieTitleClick}
+            onMovieCardClick={onMovieCardClick}
           />
           <ShowMoreButton />
         </section>
@@ -125,20 +126,14 @@ const Main = (props) => {
     ));
 };
 Main.propTypes = {
-  promoMovie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    releaseYear: PropTypes.number.isRequired,
-    poster: PropTypes.string.isRequired,
-    bgPosterUrl: PropTypes.string.isRequired,
-    previewUrl: PropTypes.string.isRequired
-  }).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  promoMovie: PropTypes.shape().isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
   onVisibilityChange: PropTypes.func.isRequired,
   isFullVideoPlayerVisible: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  promoMovie: state.promoMovie
+  promoMovie: getPromoMovie(state)
 });
+
 export default connect(mapStateToProps)(Main);

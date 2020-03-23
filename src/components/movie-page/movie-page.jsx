@@ -6,21 +6,14 @@ import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-m
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab.jsx';
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
-
+import {getSimilarMovies} from "../../reducer/data/selectors.js";
+import {connect} from "react-redux";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
-const MAX_SIMILAR_MOVIES_NUMBER = 4;
-
-const getSimilarMovies = (movie, maxNumber = MAX_SIMILAR_MOVIES_NUMBER) => {
-  return movies.filter(
-      (similarMovie) =>
-        similarMovie.genre === movie.genre && similarMovie.title !== movie.title).slice(0, maxNumber);
-};
-
-const MoviePage = ({movie, onMovieTitleClick, isFullVideoPlayerVisible, onVisibilityChange}) => {
+const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange}) => {
   const {title, poster, bgPosterUrl, genre, releaseYear} = movie;
 
   return isFullVideoPlayerVisible ? (
@@ -96,8 +89,8 @@ const MoviePage = ({movie, onMovieTitleClick, isFullVideoPlayerVisible, onVisibi
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesListWrapped
-            movies={getSimilarMovies(movie, MAX_SIMILAR_MOVIES_NUMBER)}
-            onMovieTitleClick={onMovieTitleClick}
+            movies={movies}
+            onMovieCardClick={onMovieCardClick}
           />
         </section>
 
@@ -127,8 +120,21 @@ MoviePage.propTypes = {
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired
   }).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    bgPosterUrl: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    releaseYear: PropTypes.number.isRequired
+  })).isRequired,
+  onMovieCardClick: PropTypes.func.isRequired,
   onVisibilityChange: PropTypes.func.isRequired,
   isFullVideoPlayerVisible: PropTypes.bool.isRequired
 };
-export default MoviePage;
+
+const mapStateToProps = (state) => ({
+  movies: getSimilarMovies(state)
+});
+
+export default connect(mapStateToProps)(MoviePage);
+// export default MoviePage;

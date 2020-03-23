@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card.jsx';
 import {connect} from "react-redux";
-import {ALL_GENRES} from "../../const.js";
 import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
+import {getShowedMovies, getGenre} from "../../reducer/state/selectors.js";
+import {getMoviesByGenre} from "../../reducer/data/selectors.js";
+
 
 const SmallMovieCardtWrapped = withActiveMovieCard(SmallMovieCard);
 
 const MoviesList = (props) => {
-  const {movies, onMovieTitleClick} = props;
+  const {movies, onMovieCardClick} = props;
 
   return (
     <div className="catalog__movies-list">
@@ -18,8 +20,8 @@ const MoviesList = (props) => {
             <SmallMovieCardtWrapped
               key={`movie-${i}`}
               movie={movie}
-              onMovieTitleClick={() => {
-                onMovieTitleClick(movie);
+              onMovieCardClick={() => {
+                onMovieCardClick(movie.id);
               }}
             />
           );
@@ -35,15 +37,13 @@ MoviesList.propTypes = {
     poster: PropTypes.string.isRequired
   })
   ),
-  onMovieTitleClick: PropTypes.func.isRequired
+  onMovieCardClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.selectedGenre === ALL_GENRES ?
-    state.movies.slice(0, state.showedMovies) :
-    state.movies.filter((movie) => movie.genre === state.selectedGenre).slice(0, state.showedMovies),
-  selectedGenre: state.selectedGenre,
-  showedMovies: state.showedMovies
+  movies: getMoviesByGenre(state),
+  selectedGenre: getGenre(state),
+  showedMovies: getShowedMovies(state)
 });
 
 export {MoviesList};

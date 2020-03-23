@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {getComments} from "../../reducer/data/selectors.js";
+import {connect} from "react-redux";
 
 const TabName = {
   OVERVIEW: `overview`,
@@ -29,8 +31,15 @@ const getRatingLevel = (ratingScore) => {
   return ``;
 };
 
+const formatMovieDuration = (duration) => {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+
+  return `${hours}h ${(`0` + minutes).slice(-2)}m`;
+};
+
 const Tabs = (props) => {
-  const {film, activeTab, onTabClick} = props;
+  const {movie, activeTab, onTabClick, comments} = props;
   return (
     <div className="movie-card__desc">
       <nav className="movie-nav movie-card__nav">
@@ -77,27 +86,27 @@ const Tabs = (props) => {
       {activeTab === TabName.OVERVIEW && (
         <React.Fragment>
           <div className="movie-rating">
-            <div className="movie-rating__score">{film.ratingScore}</div>
+            <div className="movie-rating__score">{movie.ratingScore}</div>
             <p className="movie-rating__meta">
               <span className="movie-rating__level">
-                {getRatingLevel(film.ratingScore)}
+                {getRatingLevel(movie.ratingScore)}
               </span>
               <span className="movie-rating__count">
-                {film.ratingCount} ratings
+                {movie.ratingCount} ratings
               </span>
             </p>
           </div>
 
           <div className="movie-card__text">
-            <p>{film.description}</p>
+            <p>{movie.description}</p>
 
             <p className="movie-card__director">
-              <strong>Director: {film.director}</strong>
+              <strong>Director: {movie.director}</strong>
             </p>
 
             <p className="movie-card__starring">
               <strong>
-                    Starring: {`${film.starring.join(`, `)} and other`}
+                    Starring: {`${movie.starring.join(`, `)} and other`}
               </strong>
             </p>
           </div>
@@ -111,16 +120,16 @@ const Tabs = (props) => {
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Director</strong>
                 <span className="movie-card__details-value">
-                  {film.director}
+                  {movie.director}
                 </span>
               </p>
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Starring</strong>
                 <span className="movie-card__details-value">
-                  {film.starring.map((actor, i) => (
+                  {movie.starring.map((actor, i) => (
                     <React.Fragment key={actor}>
                       {actor}
-                      {i < film.starring.length - 1 && <React.Fragment>,<br/></React.Fragment> }
+                      {i < movie.starring.length - 1 && <React.Fragment>,<br/></React.Fragment> }
                     </React.Fragment>))}
                 </span>
               </p>
@@ -129,19 +138,19 @@ const Tabs = (props) => {
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Run Time</strong>
                 <span className="movie-card__details-value">
-                  {film.runTime}
+                  {formatMovieDuration(movie.runTime)}
                 </span>
               </p>
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Genre</strong>
                 <span className="movie-card__details-value">
-                  {film.genre}
+                  {movie.genre}
                 </span>
               </p>
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Released</strong>
                 <span className="movie-card__details-value">
-                  {film.releaseYear}
+                  {movie.releaseYear}
                 </span>
               </p>
             </div>
@@ -152,18 +161,18 @@ const Tabs = (props) => {
         <React.Fragment>
           <div className="movie-card__reviews movie-card__row">
             <div className="movie-card__reviews-col">
-              {film.reviews.map((review, index) => (
-                <div className="review" key={index + review.author}>
+              {comments.map((review) => (
+                <div className="review" key={review.id}>
                   <blockquote className="review__quote">
-                    <p className="review__text">{review.text}</p>
+                    <p className="review__text">{review.comment}</p>
                     <footer className="review__details">
-                      <cite className="review__author">{review.author}</cite>
+                      <cite className="review__author">{review.user.name}</cite>
                       <time className="review__date" dateTime="2019-12-15">
                         {review.date}
                       </time>
                     </footer>
                   </blockquote>
-                  <div className="review__rating">{review.ratingScore}</div>
+                  <div className="review__rating">{review.rating}</div>
                 </div>
               ))}
             </div>
@@ -176,25 +185,34 @@ const Tabs = (props) => {
 
 
 Tabs.propTypes = {
-  film: PropTypes.shape({
+  movie: PropTypes.shape({
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runTime: PropTypes.string.isRequired,
+    runTime: PropTypes.number.isRequired,
     ratingScore: PropTypes.number.isRequired,
     ratingCount: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
-    reviews: PropTypes.arrayOf(
-        PropTypes.shape({
-          ratingScore: PropTypes.number.isRequired,
-          date: PropTypes.string.isRequired,
-          author: PropTypes.string.isRequired,
-          text: PropTypes.string.isRequired
-        })
-    ).isRequired
   }).isRequired,
   activeTab: PropTypes.string.isRequired,
-  onTabClick: PropTypes.func.isRequired
+  onTabClick: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(
+      PropTypes.shape({
+        comment: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        rating: PropTypes.number.isRequired,
+        user: PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired
+        }).isRequired,
+      })
+  )
 };
-export default Tabs;
+const mapStateToProps = (state) => ({
+  comments: getComments(state)
+});
+
+
+export default connect(mapStateToProps)(Tabs);
