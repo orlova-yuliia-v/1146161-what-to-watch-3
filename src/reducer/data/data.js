@@ -1,4 +1,4 @@
-import {extend} from "../../utils.js";
+import {extend, normalizeMovieData, normalizeMoviesData, formatReviewDate} from "../../utils.js";
 
 const initialState = {
   movies: [],
@@ -16,17 +16,19 @@ const Operation = {
   getMovies: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then((response) => {
-        dispatch(ActionCreator.getMovies(response.data));
+        dispatch(ActionCreator.getMovies(normalizeMoviesData(response.data)));
       });
   },
   getPromoMovie: () => (dispatch, getState, api) => {
-    return api.get(`/films/promo`).then((response) => {
-      dispatch(ActionCreator.getPromoMovie(response.data));
+    return api.get(`/films/promo`)
+    .then((response) => {
+      dispatch(ActionCreator.getPromoMovie(normalizeMovieData(response.data)));
     });
   },
   getComments: (movieId) => (dispatch, getState, api) => {
-    return api.get(`/comments/${movieId}`).then((response) => {
-      dispatch(ActionCreator.getComments(response.data));
+    return api.get(`/comments/${movieId}`)
+    .then((response) => {
+      dispatch(ActionCreator.getComments(response.data.map(formatReviewDate)));
     });
   }};
 
