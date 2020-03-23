@@ -2,41 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import {getComments} from "../../reducer/data/selectors.js";
 import {connect} from "react-redux";
-
-const TabName = {
-  OVERVIEW: `overview`,
-  DETAILS: `details`,
-  REVIEWS: `reviews`
-};
-
-const getRatingLevel = (ratingScore) => {
-  if (ratingScore < 0) {
-    throw new Error(`Score can't be negative`);
-  }
-  if (ratingScore < 3) {
-    return `Bad`;
-  }
-  if (ratingScore < 5) {
-    return `Normal`;
-  }
-  if (ratingScore < 8) {
-    return `Good`;
-  }
-  if (ratingScore < 10) {
-    return `Very good`;
-  }
-  if (ratingScore === 10) {
-    return `Awesome`;
-  }
-  return ``;
-};
-
-const formatMovieDuration = (duration) => {
-  const hours = Math.floor(duration / 60);
-  const minutes = duration % 60;
-
-  return `${hours}h ${(`0` + minutes).slice(-2)}m`;
-};
+import {TabName} from "../../const.js";
+import {getRatingLevel, formatMovieDuration} from "../../utils.js";
 
 const Tabs = (props) => {
   const {movie, activeTab, onTabClick, comments} = props;

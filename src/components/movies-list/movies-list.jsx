@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import SmallMovieCard from '../small-movie-card/small-movie-card.jsx';
 import {connect} from "react-redux";
 import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
-import {getShowedMovies, getGenre} from "../../reducer/state/selectors.js";
-import {getMoviesByGenre} from "../../reducer/data/selectors.js";
-
+import {getShowedMovies, getGenre, getMoviesByGenre} from "../../reducer/state/selectors.js";
 
 const SmallMovieCardtWrapped = withActiveMovieCard(SmallMovieCard);
 

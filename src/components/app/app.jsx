@@ -5,8 +5,8 @@ import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state.js";
-import {isFullVideoPlayer} from "../../reducer/state/selectors.js";
-import {getSelectedMovie, getPromoMovie} from "../../reducer/data/selectors.js";
+import {getPromoMovie} from "../../reducer/data/selectors.js";
+import {isFullVideoPlayer, getSelectedMovie} from "../../reducer/state/selectors.js";
 
 class App extends PureComponent {
   constructor(props) {

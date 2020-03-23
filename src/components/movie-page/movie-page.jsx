@@ -6,7 +6,7 @@ import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-m
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab.jsx';
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
-import {getSimilarMovies} from "../../reducer/data/selectors.js";
+import {getSimilarMovies} from "../../reducer/state/selectors.js";
 import {connect} from "react-redux";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
@@ -137,4 +137,4 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(MoviePage);
-// export default MoviePage;
+

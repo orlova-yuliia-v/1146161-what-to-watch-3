@@ -5,8 +5,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state.js";
 import {getGenre} from "../../reducer/state/selectors.js";
 import {getMovies} from "../../reducer/data/selectors.js";
-
-const MAX_GENRES_NUMBER = 10;
+import {MAX_GENRES_NUMBER} from "../../const.js";
 
 const getGenresList = (movies) => {
   return [ALL_GENRES, ...new Set(movies.map(({genre}) => genre))].slice(0, MAX_GENRES_NUMBER);

@@ -2,6 +2,35 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const getRatingLevel = (ratingScore) => {
+  if (ratingScore < 0) {
+    throw new Error(`Score can't be negative`);
+  }
+  if (ratingScore < 3) {
+    return `Bad`;
+  }
+  if (ratingScore < 5) {
+    return `Normal`;
+  }
+  if (ratingScore < 8) {
+    return `Good`;
+  }
+  if (ratingScore < 10) {
+    return `Very good`;
+  }
+  if (ratingScore === 10) {
+    return `Awesome`;
+  }
+  return ``;
+};
+
+export const formatMovieDuration = (duration) => {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+
+  return `${hours}h ${(`0` + minutes).slice(-2)}m`;
+};
+
 export const formatReviewDate = ({comment, date, id, rating, user}) => ({
   comment,
   date: new Date(date).toLocaleString(`en-us`, {
