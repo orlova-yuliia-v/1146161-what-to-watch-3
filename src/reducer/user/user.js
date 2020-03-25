@@ -24,7 +24,19 @@ const Operation = {
       .catch((err) => {
         throw err;
       });
-  }};
+  },
+
+  login: (authData) => (dispatch, getState, api) => {
+    return api
+      .post(`/login`, {
+        email: authData.login,
+        password: authData.password
+      })
+      .then(() => {
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      });
+  }
+};
 
 const ActionCreator = {
   requireAuthorization: (status) => {
