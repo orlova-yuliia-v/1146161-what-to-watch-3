@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state.js";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {isFullVideoPlayer, getSelectedMovie} from "../../reducer/state/selectors.js";
+import SignIn from "../sign-in/sign-in.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -51,6 +52,9 @@ class App extends PureComponent {
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
+          </Route>
+          <Route exact path="/dev-sign-in">
+            <SignIn />
           </Route>
           <Route exact path="/dev-film-page">
             {selectedMovie ?
