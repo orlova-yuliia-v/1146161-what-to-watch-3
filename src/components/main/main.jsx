@@ -7,11 +7,13 @@ import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {connect} from "react-redux";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const Main = (props) => {
-  const {promoMovie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange} = props;
+  const {promoMovie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus} = props;
 
   return (
     isFullVideoPlayerVisible ? (
@@ -41,14 +43,20 @@ const Main = (props) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img
-                src="img/avatar.jpg"
-                alt="User avatar"
-                width="63"
-                height="63"
-              />
-            </div>
+            {authorizationStatus === AuthorizationStatus.AUTH ? (
+              <div className="user-block__avatar">
+                <img
+                  src="img/avatar.jpg"
+                  alt="User avatar"
+                  width="63"
+                  height="63"
+                />
+              </div>
+            ) : (
+              <a href="#" className="user-block__link">
+                Sign in
+              </a>
+            )}
           </div>
         </header>
 
@@ -130,10 +138,12 @@ Main.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
   onVisibilityChange: PropTypes.func.isRequired,
   isFullVideoPlayerVisible: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  promoMovie: getPromoMovie(state)
+  promoMovie: getPromoMovie(state),
+  authorizationStatus: getAuthorizationStatus(state)
 });
 
 export default connect(mapStateToProps)(Main);
