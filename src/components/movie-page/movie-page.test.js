@@ -5,6 +5,8 @@ import configureStore from "redux-mock-store";
 import MoviePage from "./movie-page.jsx";
 import {ALL_GENRES, DEFAULT_SHOWED_MOVIES_NUMBER} from "../../const.js";
 import NameSpace from "../../reducer/name-space.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+
 
 const mockStore = configureStore([]);
 
@@ -207,6 +209,10 @@ it(`should render correctly`, () => {
       showedMovies: DEFAULT_SHOWED_MOVIES_NUMBER,
       isFullVideoPlayerVisible: false,
       selectedMovieId: 2
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authUserData: {}
     }
   });
 
