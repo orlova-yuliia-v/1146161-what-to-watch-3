@@ -64,3 +64,13 @@ export const normalizeMovieData = (movie) => ({
 });
 
 export const normalizeMoviesData = (movies) => movies.map(normalizeMovieData);
+
+
+export const normalizeUserData = (user) => {
+  return {
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    avatarUrl: user[`avatar_url`],
+  };
+};
