@@ -9,6 +9,8 @@ import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {isFullVideoPlayer, getSelectedMovie} from "../../reducer/state/selectors.js";
 import SignIn from "../sign-in/sign-in.jsx";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -46,7 +48,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {isFullVideoPlayerVisible, onVisibilityChange, selectedMovie} = this.props;
+    const {isFullVideoPlayerVisible, onVisibilityChange, selectedMovie, login, authorizationStatus} = this.props;
 
     return (
       <BrowserRouter>
@@ -55,7 +57,11 @@ class App extends PureComponent {
             {this._renderApp()}
           </Route>
           <Route exact path="/dev-sign-in">
-            <SignIn onSubmit={this.props.login}/>
+            {authorizationStatus === AuthorizationStatus.NO_AUTH ? (
+              <SignIn onSubmit={login} />
+            ) : (
+              this._renderApp()
+            )}
           </Route>
           <Route exact path="/dev-film-page">
             {selectedMovie ?
@@ -80,6 +86,7 @@ App.propTypes = {
   isFullVideoPlayerVisible: PropTypes.bool.isRequired,
   getComments: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
   changeSelectedMovieId: PropTypes.func.isRequired,
   selectedMovie: PropTypes.shape()
 };
@@ -87,7 +94,8 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   isFullVideoPlayerVisible: isFullVideoPlayer(state),
   selectedMovie: getSelectedMovie(state),
-  promoMovie: getPromoMovie(state)
+  promoMovie: getPromoMovie(state),
+  authorizationStatus: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
