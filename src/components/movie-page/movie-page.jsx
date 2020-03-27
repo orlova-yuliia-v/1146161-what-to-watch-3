@@ -8,12 +8,14 @@ import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
 import {getSimilarMovies} from "../../reducer/state/selectors.js";
 import {connect} from "react-redux";
+import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
-const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange}) => {
+const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData}) => {
   const {title, poster, bgPosterUrl, genre, releaseYear} = movie;
 
   return isFullVideoPlayerVisible ? (
@@ -43,7 +45,20 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
 
             <div className="user-block">
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                {authorizationStatus === AuthorizationStatus.AUTH ? (
+                  <div className="user-block__avatar">
+                    <img
+                      src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
+                      alt={authUserData.name}
+                      width="63"
+                      height="63"
+                    />
+                  </div>
+                ) : (
+                  <a href="/dev-sign-in" className="user-block__link">
+                Sign in
+                  </a>
+                )}
               </div>
             </div>
           </header>
@@ -129,11 +144,20 @@ MoviePage.propTypes = {
   })).isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
   onVisibilityChange: PropTypes.func.isRequired,
-  isFullVideoPlayerVisible: PropTypes.bool.isRequired
+  isFullVideoPlayerVisible: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  authUserData: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatarUrl: PropTypes.string
+  })
 };
 
 const mapStateToProps = (state) => ({
-  movies: getSimilarMovies(state)
+  movies: getSimilarMovies(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  authUserData: getAuthUser(state)
 });
 
 export default connect(mapStateToProps)(MoviePage);

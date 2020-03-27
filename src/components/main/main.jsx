@@ -7,12 +7,13 @@ import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {connect} from "react-redux";
+import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const Main = (props) => {
-  const {promoMovie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange} = props;
-
+  const {promoMovie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData} = props;
   return (
     isFullVideoPlayerVisible ? (
       <FullVideoPlayerWrapped
@@ -41,14 +42,20 @@ const Main = (props) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img
-                src="img/avatar.jpg"
-                alt="User avatar"
-                width="63"
-                height="63"
-              />
-            </div>
+            {authorizationStatus === AuthorizationStatus.AUTH ? (
+              <div className="user-block__avatar">
+                <img
+                  src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
+                  alt={authUserData.name}
+                  width="63"
+                  height="63"
+                />
+              </div>
+            ) : (
+              <a href="/dev-sign-in" className="user-block__link">
+                Sign in
+              </a>
+            )}
           </div>
         </header>
 
@@ -130,10 +137,19 @@ Main.propTypes = {
   onMovieCardClick: PropTypes.func.isRequired,
   onVisibilityChange: PropTypes.func.isRequired,
   isFullVideoPlayerVisible: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  authUserData: PropTypes.shape({
+    id: PropTypes.number,
+    email: PropTypes.string,
+    name: PropTypes.string,
+    avatarUrl: PropTypes.string
+  })
 };
 
 const mapStateToProps = (state) => ({
-  promoMovie: getPromoMovie(state)
+  promoMovie: getPromoMovie(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  authUserData: getAuthUser(state)
 });
 
 export default connect(mapStateToProps)(Main);

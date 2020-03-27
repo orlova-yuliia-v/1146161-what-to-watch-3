@@ -8,5 +8,5 @@ import NameSpace from "./name-space.js";
 export default combineReducers({
   [NameSpace.DATA]: data,
   [NameSpace.STATE]: state,
-  [NameSpace.USER]: user,
+  [NameSpace.USER]: user
 });
