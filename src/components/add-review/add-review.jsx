@@ -2,10 +2,9 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {getSelectedMovie} from "../../reducer/state/selectors.js";
-import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {getAuthUser} from "../../reducer/user/selectors.js";
 
-const AddReview = ({movie, authorizationStatus, authUserData}) => {
+const AddReview = ({movie, authUserData}) => {
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
@@ -39,20 +38,14 @@ const AddReview = ({movie, authorizationStatus, authUserData}) => {
 
           <div className="user-block">
             <div className="user-block__avatar">
-              {authorizationStatus === AuthorizationStatus.AUTH ? (
-                <div className="user-block__avatar">
-                  <img
-                    src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
-                    alt={authUserData.name}
-                    width="63"
-                    height="63"
-                  />
-                </div>
-              ) : (
-                <a href="/dev-sign-in" className="user-block__link">
-                Sign in
-                </a>
-              )}
+              <div className="user-block__avatar">
+                <img
+                  src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
+                  alt={authUserData.name}
+                  width="63"
+                  height="63"
+                />
+              </div>
             </div>
           </div>
         </header>
@@ -150,7 +143,6 @@ const AddReview = ({movie, authorizationStatus, authUserData}) => {
 
 const mapStateToProps = (state) => ({
   movie: getSelectedMovie(state),
-  authorizationStatus: getAuthorizationStatus(state),
   authUserData: getAuthUser(state)
 });
 
@@ -162,7 +154,6 @@ AddReview.propTypes = {
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired
   }).isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
   authUserData: PropTypes.shape({
     id: PropTypes.number,
     email: PropTypes.string,
