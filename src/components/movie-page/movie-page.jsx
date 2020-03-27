@@ -10,6 +10,7 @@ import {getSimilarMovies} from "../../reducer/state/selectors.js";
 import {connect} from "react-redux";
 import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {Link} from "react-router-dom";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
@@ -85,9 +86,9 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
                   <span>My list</span>
                 </button>
                 {authorizationStatus === AuthorizationStatus.AUTH && (
-                  <a href="add-review.html" className="btn movie-card__button">
+                  <Link to="/dev-review" className="btn movie-card__button">
                     Add review
-                  </a>
+                  </Link>
                 )}
               </div>
             </div>
