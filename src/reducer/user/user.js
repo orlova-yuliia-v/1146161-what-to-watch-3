@@ -16,7 +16,7 @@ const ActionType = {
 };
 
 const Operation = {
-  checkAuth: () => (dispatch, getState, api) => {
+  checkAuth: () => (dispatch, _getState, api) => {
 
     return api
     .get(`/login`)
@@ -25,18 +25,15 @@ const Operation = {
           return;
         }
         const normalizedAuthData = normalizeUserData(response.data);
-
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setAuthUserData(normalizedAuthData));
-
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
 
       .catch((err) => {
         throw err;
       });
   },
-
-  login: (authData) => (dispatch, getState, api) => {
+  login: (authData) => (dispatch, _getState, api) => {
     return api
       .post(`/login`, {
         email: authData.login,
@@ -47,9 +44,8 @@ const Operation = {
           return;
         }
         const normalizedAuthData = normalizeUserData(response.data);
-
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setAuthUserData(normalizedAuthData));
+        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
 
       .catch((err) => {
