@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {getSelectedMovie} from "../../reducer/state/selectors.js";
 import {getAuthUser} from "../../reducer/user/selectors.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {ReviewLength} from "../../utils.js";
 
 class AddReview extends PureComponent {
   constructor(props) {
@@ -156,6 +157,8 @@ class AddReview extends PureComponent {
                 id="review-text"
                 placeholder="Review text"
                 ref={this.commentRef}
+                minLength={ReviewLength.MIN}
+                maxLength={ReviewLength.MAX}
               />
               <div className="add-review__submit">
                 <button className="add-review__btn" type="submit">
