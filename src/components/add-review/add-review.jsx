@@ -22,19 +22,35 @@ class AddReview extends PureComponent {
 
     this._handleFormReviewSubmit = this._handleFormReviewSubmit.bind(this);
     this._handleTextareaChange = this._handleTextareaChange.bind(this);
+    this._handleFormDisabilityToggle = this._handleFormDisabilityToggle.bind(this);
+  }
+
+  _handleFormDisabilityToggle() {
+    this.commentRef.current.disabled = !this.commentRef.current.disabled;
+    this.sendCommentButtonRef.current.disabled = !this.sendCommentButtonRef.current.disabled;
   }
 
   _handleFormReviewSubmit(evt) {
     const {onSubmit} = this.props;
     evt.preventDefault();
-    onSubmit({
-      movieId: this.props.movie.id,
-      rating: this.submitFormRef.current.rating.value,
-      comment: this.commentRef.current.value
-    });
-    this.setState({
-      commentAdded: true
-    });
+
+    this._handleFormDisabilityToggle();
+
+    onSubmit(
+        {
+          movieId: this.props.movie.id,
+          rating: this.submitFormRef.current.rating.value,
+          comment: this.commentRef.current.value
+        },
+        () => {
+          this._handleFormDisabilityToggle();
+
+          this.setState({commentAdded: true});
+        },
+        () => {
+          this._handleFormDisabilityToggle();
+        }
+    );
   }
 
   _handleTextareaChange(evt) {
@@ -207,8 +223,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(commentData) {
-    dispatch(DataOperation.addComment(commentData));
+  onSubmit(commentData, onSuccess, onError) {
+    dispatch(DataOperation.addComment(commentData, onSuccess, onError));
   }
 });
 
