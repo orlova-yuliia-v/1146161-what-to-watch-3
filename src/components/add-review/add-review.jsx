@@ -12,13 +12,16 @@ class AddReview extends PureComponent {
     super(props);
 
     this.state = {
-      commentAdded: false
+      commentAdded: false,
+      isFormInvalid: true
     };
 
     this.submitFormRef = createRef();
     this.commentRef = createRef();
+    this.sendCommentButtonRef = createRef();
 
     this._handleFormReviewSubmit = this._handleFormReviewSubmit.bind(this);
+    this._handleTextareaChange = this._handleTextareaChange.bind(this);
   }
 
   _handleFormReviewSubmit(evt) {
@@ -34,8 +37,17 @@ class AddReview extends PureComponent {
     });
   }
 
+  _handleTextareaChange(evt) {
+    this.setState({
+      isFormInvalid:
+        evt.target.value.length < ReviewLength.MIN ||
+        evt.target.value.length > ReviewLength.MAX
+    });
+  }
+
   render() {
     const {movie, authUserData} = this.props;
+
     return (
       <React.Fragment>
         {(this.state.commentAdded || !this.props.movie) && <Redirect to="/" />}
@@ -169,9 +181,14 @@ class AddReview extends PureComponent {
                   ref={this.commentRef}
                   minLength={ReviewLength.MIN}
                   maxLength={ReviewLength.MAX}
+                  onChange={this._handleTextareaChange}
                 />
                 <div className="add-review__submit">
-                  <button className="add-review__btn" type="submit">
+                  <button
+                    className="add-review__btn"
+                    type="submit"
+                    ref={this.sendCommentButtonRef}
+                    disabled={this.state.isFormInvalid}>
                 Post
                   </button>
                 </div>
