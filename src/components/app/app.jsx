@@ -8,6 +8,7 @@ import {ActionCreator} from "../../reducer/state/state.js";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {isFullVideoPlayer, getSelectedMovie} from "../../reducer/state/selectors.js";
 import SignIn from "../sign-in/sign-in.jsx";
+import AddReview from "../add-review/add-review.jsx";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
@@ -49,7 +50,7 @@ class App extends PureComponent {
 
   render() {
     const {isFullVideoPlayerVisible, onVisibilityChange, selectedMovie, login, authorizationStatus} = this.props;
-
+    const selectedMovieId = selectedMovie && selectedMovie.id;
     return (
       <BrowserRouter>
         <Switch>
@@ -72,6 +73,9 @@ class App extends PureComponent {
                 onVisibilityChange={onVisibilityChange}
               /> :
               null}
+          </Route>
+          <Route exact path={`/dev-review/${selectedMovieId}`}>
+            <AddReview movie={selectedMovie}/>
           </Route>
         </Switch>
       </BrowserRouter>

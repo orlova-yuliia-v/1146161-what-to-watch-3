@@ -6,6 +6,7 @@ import MoviePage from "./movie-page.jsx";
 import {ALL_GENRES, DEFAULT_SHOWED_MOVIES_NUMBER} from "../../const.js";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {MemoryRouter} from "react-router-dom";
 
 
 const mockStore = configureStore([]);
@@ -219,13 +220,15 @@ it(`should render correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <MoviePage
-            movies={movies}
-            movie={movies[0]}
-            onMovieCardClick={() => {}}
-            isFullVideoPlayerVisible={false}
-            onVisibilityChange={() => {}}
-          />
+          <MemoryRouter>
+            <MoviePage
+              movies={movies}
+              movie={movies[0]}
+              onMovieCardClick={() => {}}
+              isFullVideoPlayerVisible={false}
+              onVisibilityChange={() => {}}
+            />
+          </MemoryRouter>
         </Provider>,
         {
           createNodeMock: () => ({})

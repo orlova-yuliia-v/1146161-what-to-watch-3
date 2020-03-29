@@ -74,3 +74,8 @@ export const normalizeUserData = (user) => {
     avatarUrl: user[`avatar_url`],
   };
 };
+
+export const ReviewLength = {
+  MIN: 50,
+  MAX: 400
+};

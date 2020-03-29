@@ -30,6 +30,20 @@ const Operation = {
     .then((response) => {
       dispatch(ActionCreator.getComments(response.data.map(formatReviewDate)));
     });
+  },
+  addComment: (commentData, onSuccess, onError) => (dispatch, getState, api) => {
+    return api
+      .post(`/comments/${commentData.movieId}`, {
+        rating: commentData.rating,
+        comment: commentData.comment
+      })
+      .then(() => {
+        dispatch(Operation.getComments(commentData.movieId));
+        onSuccess();
+      })
+      .catch(() => {
+        onError();
+      });
   }};
 
 const ActionCreator = {
