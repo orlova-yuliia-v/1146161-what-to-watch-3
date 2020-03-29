@@ -50,7 +50,7 @@ class App extends PureComponent {
 
   render() {
     const {isFullVideoPlayerVisible, onVisibilityChange, selectedMovie, login, authorizationStatus} = this.props;
-
+    const selectedMovieId = selectedMovie && selectedMovie.id;
     return (
       <BrowserRouter>
         <Switch>
@@ -74,8 +74,8 @@ class App extends PureComponent {
               /> :
               null}
           </Route>
-          <Route exact path="/dev-review">
-            <AddReview />
+          <Route exact path={`/dev-review/${selectedMovieId}`}>
+            <AddReview movie={selectedMovie}/>
           </Route>
         </Switch>
       </BrowserRouter>

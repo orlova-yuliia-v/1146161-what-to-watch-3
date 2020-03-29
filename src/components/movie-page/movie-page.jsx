@@ -17,7 +17,7 @@ const TabsWrapped = withActiveTab(Tabs);
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData}) => {
-  const {title, poster, bgPosterUrl, genre, releaseYear} = movie;
+  const {title, poster, bgPosterUrl, genre, releaseYear, id} = movie;
 
   return isFullVideoPlayerVisible ? (
     <FullVideoPlayerWrapped
@@ -86,7 +86,7 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
                   <span>My list</span>
                 </button>
                 {authorizationStatus === AuthorizationStatus.AUTH && (
-                  <Link to="/dev-review" className="btn movie-card__button">
+                  <Link to={`/dev-review/${id}`} className="btn movie-card__button">
                     Add review
                   </Link>
                 )}
@@ -134,6 +134,7 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
 
 MoviePage.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     bgPosterUrl: PropTypes.string.isRequired,
