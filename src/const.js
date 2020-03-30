@@ -11,3 +11,11 @@ export const TabName = {
   DETAILS: `details`,
   REVIEWS: `reviews`
 };
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  ROOT: `/`,
+  ADD_REVIEW: `/review`,
+  MY_LIST: `/mylist`,
+  FILMS: `/films`,
+};
