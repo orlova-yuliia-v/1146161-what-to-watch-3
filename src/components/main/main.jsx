@@ -9,6 +9,7 @@ import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {connect} from "react-redux";
 import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {Link} from "react-router-dom";
 
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
@@ -52,9 +53,9 @@ const Main = (props) => {
                 />
               </div>
             ) : (
-              <a href="/dev-sign-in" className="user-block__link">
+              <Link to="login" className="user-block__link">
                 Sign in
-              </a>
+              </Link>
             )}
           </div>
         </header>
