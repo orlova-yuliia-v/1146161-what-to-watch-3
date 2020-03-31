@@ -5,7 +5,8 @@ import {getSelectedMovie} from "../../reducer/state/selectors.js";
 import {getAuthUser} from "../../reducer/user/selectors.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {ReviewLength} from "../../utils.js";
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import {AppRoute} from "../../const.js";
 
 class AddReview extends PureComponent {
   constructor(props) {
@@ -77,11 +78,11 @@ class AddReview extends PureComponent {
 
             <header className="page-header">
               <div className="logo">
-                <a href="main.html" className="logo__link">
+                <Link to={AppRoute.ROOT} className="logo__link">
                   <span className="logo__letter logo__letter--1">W</span>
                   <span className="logo__letter logo__letter--2">T</span>
                   <span className="logo__letter logo__letter--3">W</span>
-                </a>
+                </Link>
               </div>
 
               <nav className="breadcrumbs">

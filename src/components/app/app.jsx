@@ -13,6 +13,7 @@ import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -51,14 +52,13 @@ class App extends PureComponent {
 
   render() {
     const {isFullVideoPlayerVisible, onVisibilityChange, selectedMovie, login, authorizationStatus} = this.props;
-    const selectedMovieId = selectedMovie && selectedMovie.id;
     return (
       <Router history={history}>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/login">
+          <Route exact path={AppRoute.LOGIN}>
             {authorizationStatus === AuthorizationStatus.NO_AUTH ? (
               <SignIn onSubmit={login} />
             ) : (
@@ -75,7 +75,7 @@ class App extends PureComponent {
               /> :
               null}
           </Route>
-          <Route exact path={`/dev-review/${selectedMovieId}`}>
+          <Route exact path={AppRoute.ADD_REVIEW}>
             <AddReview movie={selectedMovie}/>
           </Route>
         </Switch>

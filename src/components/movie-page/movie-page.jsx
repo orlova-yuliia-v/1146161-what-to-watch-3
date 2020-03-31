@@ -11,13 +11,14 @@ import {connect} from "react-redux";
 import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData}) => {
-  const {title, poster, bgPosterUrl, genre, releaseYear, id} = movie;
+  const {title, poster, bgPosterUrl, genre, releaseYear} = movie;
 
   return isFullVideoPlayerVisible ? (
     <FullVideoPlayerWrapped
@@ -37,11 +38,11 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
 
           <header className="page-header movie-card__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to={AppRoute.ROOT} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <div className="user-block">
@@ -56,9 +57,9 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
                     />
                   </div>
                 ) : (
-                  <a href="/dev-sign-in" className="user-block__link">
+                  <Link to={AppRoute.LOGIN} className="user-block__link">
                 Sign in
-                  </a>
+                  </Link>
                 )}
               </div>
             </div>
@@ -86,7 +87,7 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
                   <span>My list</span>
                 </button>
                 {authorizationStatus === AuthorizationStatus.AUTH && (
-                  <Link to={`/dev-review/${id}`} className="btn movie-card__button">
+                  <Link to={AppRoute.ADD_REVIEW} className="btn movie-card__button">
                     Add review
                   </Link>
                 )}
@@ -116,11 +117,11 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
+            <Link to={AppRoute.ROOT} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">
