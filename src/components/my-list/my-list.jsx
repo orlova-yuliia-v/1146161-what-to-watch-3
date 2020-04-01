@@ -3,7 +3,7 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {AppRoute} from "../../utils/constants";
+import {AppRoute} from "../../const.js";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 
