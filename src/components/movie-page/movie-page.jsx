@@ -12,13 +12,15 @@ import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
-const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData}) => {
-  const {title, poster, bgPosterUrl, genre, releaseYear} = movie;
+const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData, addMovieToMyList, removeMovieFromMyList}) => {
+
+  const {id, title, poster, bgPosterUrl, genre, releaseYear, isFavorite} = movie;
 
   return isFullVideoPlayerVisible ? (
     <FullVideoPlayerWrapped
@@ -74,16 +76,36 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={onVisibilityChange}>
+                <button
+                  className="btn btn--play movie-card__button"
+                  type="button"
+                  onClick={onVisibilityChange}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                <button
+                  className="btn btn--list movie-card__button"
+                  type="button"
+                  onClick={() => {
+                    if (isFavorite) {
+                      removeMovieFromMyList(id);
+                    } else {
+                      addMovieToMyList(id);
+                    }
+                  }}
+                >
+                  {isFavorite ? (
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>
+                  )}
                   <span>My list</span>
                 </button>
                 {authorizationStatus === AuthorizationStatus.AUTH && (
@@ -140,7 +162,8 @@ MoviePage.propTypes = {
     poster: PropTypes.string.isRequired,
     bgPosterUrl: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    releaseYear: PropTypes.number.isRequired
+    releaseYear: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired
   }).isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -158,7 +181,9 @@ MoviePage.propTypes = {
     email: PropTypes.string,
     name: PropTypes.string,
     avatarUrl: PropTypes.string
-  })
+  }),
+  addMovieToMyList: PropTypes.func.isRequired,
+  removeMovieFromMyList: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -167,5 +192,13 @@ const mapStateToProps = (state) => ({
   authUserData: getAuthUser(state)
 });
 
-export default connect(mapStateToProps)(MoviePage);
+const mapDispatchToProps = (dispatch) => ({
+  addMovieToMyList(id) {
+    dispatch(DataOperation.addMovieToMyList(id));
+  },
+  removeMovieFromMyList(id) {
+    dispatch(DataOperation.removeMovieFromMyList(id));
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
 

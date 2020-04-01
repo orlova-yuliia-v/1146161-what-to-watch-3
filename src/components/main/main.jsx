@@ -11,11 +11,21 @@ import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const Main = (props) => {
-  const {promoMovie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData} = props;
+  const {
+    promoMovie,
+    onMovieCardClick,
+    isFullVideoPlayerVisible,
+    onVisibilityChange,
+    authorizationStatus,
+    authUserData,
+    addMovieToMyList,
+    removeMovieFromMyList} = props;
+
   return (
     isFullVideoPlayerVisible ? (
       <FullVideoPlayerWrapped
@@ -94,10 +104,23 @@ const Main = (props) => {
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
+                  onClick={() => {
+                    if (promoMovie.isFavorite) {
+                      removeMovieFromMyList(promoMovie.id);
+                    } else {
+                      addMovieToMyList(promoMovie.id);
+                    }
+                  }}
                 >
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                  {promoMovie.isFavorite ? (
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>
+                  )}
                   <span>My list</span>
                 </button>
               </div>
@@ -145,7 +168,9 @@ Main.propTypes = {
     email: PropTypes.string,
     name: PropTypes.string,
     avatarUrl: PropTypes.string
-  })
+  }),
+  addMovieToMyList: PropTypes.func.isRequired,
+  removeMovieFromMyList: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -154,4 +179,12 @@ const mapStateToProps = (state) => ({
   authUserData: getAuthUser(state)
 });
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = (dispatch) => ({
+  addMovieToMyList(id) {
+    dispatch(DataOperation.addMovieToMyList(id));
+  },
+  removeMovieFromMyList(id) {
+    dispatch(DataOperation.removeMovieFromMyList(id));
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
