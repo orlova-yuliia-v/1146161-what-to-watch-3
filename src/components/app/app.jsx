@@ -14,6 +14,7 @@ import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
+import MyList from "../my-list/my-list.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -78,6 +79,13 @@ class App extends PureComponent {
           <Route exact path={AppRoute.ADD_REVIEW}>
             <AddReview movie={selectedMovie}/>
           </Route>
+          <Route
+            exact
+            path={AppRoute.MY_LIST}
+            render={() => (
+              <MyList onMovieCardClick={this._handleCardClick} />
+            )}
+          />
         </Switch>
       </Router>
     );
