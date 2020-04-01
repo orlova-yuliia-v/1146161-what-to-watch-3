@@ -1,4 +1,6 @@
 import axios from "axios";
+import history from "./history.js";
+import {AppRoute} from "./const.js";
 
 const Error = {
   UNAUTHORIZED: 401,
@@ -6,6 +8,7 @@ const Error = {
 };
 
 const TIMEOUT = 5000;
+const LOGIN_URL = `https://htmlacademy-react-3.appspot.com/wtw/login`;
 
 export const createAPI = (onUnauthorized) => {
   const api = axios.create({
@@ -19,11 +22,14 @@ export const createAPI = (onUnauthorized) => {
   };
 
   const onError = (err) => {
-    const {response} = err;
+    const {response, request} = err;
 
     if (response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
 
+      if (request.responseURL !== LOGIN_URL) {
+        history.push(AppRoute.LOGIN);
+      }
       throw err;
     }
 
