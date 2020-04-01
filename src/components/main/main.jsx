@@ -55,14 +55,16 @@ const Main = (props) => {
 
           <div className="user-block">
             {authorizationStatus === AuthorizationStatus.AUTH ? (
-              <div className="user-block__avatar">
-                <img
-                  src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
-                  alt={authUserData.name}
-                  width="63"
-                  height="63"
-                />
-              </div>
+              <Link to={AppRoute.MY_LIST}>
+                <div className="user-block__avatar">
+                  <img
+                    src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
+                    alt={authUserData.name}
+                    width="63"
+                    height="63"
+                  />
+                </div>
+              </Link>
             ) : (
               <Link to={AppRoute.LOGIN} className="user-block__link">
                 Sign in

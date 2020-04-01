@@ -48,8 +48,8 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
             </div>
 
             <div className="user-block">
-              <div className="user-block__avatar">
-                {authorizationStatus === AuthorizationStatus.AUTH ? (
+              {authorizationStatus === AuthorizationStatus.AUTH ? (
+                <Link to={AppRoute.MY_LIST}>
                   <div className="user-block__avatar">
                     <img
                       src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
@@ -58,12 +58,12 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
                       height="63"
                     />
                   </div>
-                ) : (
-                  <Link to={AppRoute.LOGIN} className="user-block__link">
+                </Link>
+              ) : (
+                <Link to={AppRoute.LOGIN} className="user-block__link">
                 Sign in
-                  </Link>
-                )}
-              </div>
+                </Link>
+              )}
             </div>
           </header>
 

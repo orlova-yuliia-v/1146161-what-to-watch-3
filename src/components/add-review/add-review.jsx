@@ -99,7 +99,7 @@ class AddReview extends PureComponent {
               </nav>
 
               <div className="user-block">
-                <div className="user-block__avatar">
+                <Link to={AppRoute.MY_LIST}>
                   <div className="user-block__avatar">
                     <img
                       src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
@@ -108,7 +108,7 @@ class AddReview extends PureComponent {
                       height="63"
                     />
                   </div>
-                </div>
+                </Link>
               </div>
             </header>
 
