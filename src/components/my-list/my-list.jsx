@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
 import {getMyMoviesList} from "../../reducer/data/selectors.js";
+import {getAuthUser} from "../../reducer/user/selectors.js";
 import {connect} from "react-redux";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
@@ -70,7 +71,8 @@ MyList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  movies: getMyMoviesList(state)
+  movies: getMyMoviesList(state),
+  authUserData: getAuthUser(state)
 });
 
 export default connect(mapStateToProps)(MyList);
