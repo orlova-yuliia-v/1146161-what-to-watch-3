@@ -70,7 +70,8 @@ class App extends PureComponent {
             exact
             path={AppRoute.MY_LIST}
             render={() => (
-              <MyList onMovieCardClick={this._handleCardClick} />
+              <MyList
+                onMovieCardClick={this._handleCardClick} />
             )}
           />
         </Switch>

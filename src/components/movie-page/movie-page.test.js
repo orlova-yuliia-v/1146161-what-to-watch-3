@@ -33,7 +33,8 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
     id: 2,
@@ -56,7 +57,8 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
     id: 3,
@@ -79,7 +81,8 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
     id: 4,
@@ -102,7 +105,8 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
     id: 5,
@@ -125,7 +129,8 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
     id: 6,
@@ -148,7 +153,8 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
     id: 7,
@@ -171,7 +177,8 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
     id: 8,
@@ -194,7 +201,8 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   }
 ];
 
@@ -203,7 +211,8 @@ it(`should render correctly`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       movies,
-      promoMovie: movies[0]
+      promoMovie: movies[0],
+      movieComments: []
     },
     [NameSpace.STATE]: {
       selectedGenre: ALL_GENRES,

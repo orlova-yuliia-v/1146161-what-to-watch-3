@@ -7,6 +7,7 @@ import Main from "./main.jsx";
 import {ALL_GENRES, DEFAULT_SHOWED_MOVIES_NUMBER} from "../../const.js";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {MemoryRouter} from "react-router-dom";
 
 const mockStore = configureStore([]);
 
@@ -197,7 +198,9 @@ it(`should call a callback when the movie title is pressed`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       movies,
-      promoMovie: movies[0]
+      promoMovie: movies[0],
+      movieComments: [],
+      myMoviesList: []
     },
     [NameSpace.STATE]: {
       selectedGenre: ALL_GENRES,
@@ -214,15 +217,17 @@ it(`should call a callback when the movie title is pressed`, () => {
   const onMovieCardClick = jest.fn();
 
   const main = mount(
-      <Provider store={store}>
-        <Main
-          promoMovie={movies[0]}
-          movies={movies}
-          onMovieCardClick={onMovieCardClick}
-          isFullVideoPlayerVisible={false}
-          onVisibilityChange={() => {}}
-        />
-      </Provider>
+      <MemoryRouter>
+        <Provider store={store}>
+          <Main
+            promoMovie={movies[0]}
+            movies={movies}
+            onMovieCardClick={onMovieCardClick}
+            isFullVideoPlayerVisible={false}
+            onVisibilityChange={() => {}}
+          />
+        </Provider>
+      </MemoryRouter>
   );
 
   const moviesTitle = main.find(`article.small-movie-card.catalog__movies-card`);
