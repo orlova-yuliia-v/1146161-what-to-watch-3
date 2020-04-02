@@ -4,8 +4,7 @@ import NameSpace from "../name-space.js";
 const initialState = {
   movies: [],
   promoMovie: {},
-  movieComments: [],
-  myMoviesList: []
+  movieComments: []
 };
 
 const ActionType = {
