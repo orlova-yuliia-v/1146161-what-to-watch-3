@@ -22,6 +22,8 @@ class SignIn extends PureComponent {
       login: this.loginRef.current.value,
       password: this.passwordRef.current.value
     });
+
+    this.props.history.goBack();
   }
 
   render() {
@@ -106,7 +108,8 @@ class SignIn extends PureComponent {
 }
 
 SignIn.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired
 };
 
 export default SignIn;
