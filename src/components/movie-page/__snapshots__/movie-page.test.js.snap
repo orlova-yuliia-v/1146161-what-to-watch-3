@@ -29,7 +29,8 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
+            href="/"
+            onClick={[Function]}
           >
             <span
               className="logo__letter logo__letter--1"
@@ -51,16 +52,13 @@ Array [
         <div
           className="user-block"
         >
-          <div
-            className="user-block__avatar"
+          <a
+            className="user-block__link"
+            href="/login"
+            onClick={[Function]}
           >
-            <a
-              className="user-block__link"
-              href="/dev-sign-in"
-            >
-              Sign in
-            </a>
-          </div>
+            Sign in
+          </a>
         </div>
       </header>
       <div
@@ -111,15 +109,16 @@ Array [
             </button>
             <button
               className="btn btn--list movie-card__button"
+              onClick={[Function]}
               type="button"
             >
               <svg
-                height="20"
-                viewBox="0 0 19 20"
-                width="19"
+                height="14"
+                viewBox="0 0 18 14"
+                width="18"
               >
                 <use
-                  xlinkHref="#add"
+                  xlinkHref="#in-list"
                 />
               </svg>
               <span>
@@ -261,7 +260,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"

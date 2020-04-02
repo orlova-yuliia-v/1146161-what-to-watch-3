@@ -11,13 +11,16 @@ import {connect} from "react-redux";
 import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
-const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData}) => {
-  const {title, poster, bgPosterUrl, genre, releaseYear, id} = movie;
+const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData, addMovieToMyList, removeMovieFromMyList}) => {
+
+  const {id, title, poster, bgPosterUrl, genre, releaseYear, isFavorite} = movie;
 
   return isFullVideoPlayerVisible ? (
     <FullVideoPlayerWrapped
@@ -37,16 +40,16 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
 
           <header className="page-header movie-card__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to={AppRoute.ROOT} className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <div className="user-block">
-              <div className="user-block__avatar">
-                {authorizationStatus === AuthorizationStatus.AUTH ? (
+              {authorizationStatus === AuthorizationStatus.AUTH ? (
+                <Link to={AppRoute.MY_LIST}>
                   <div className="user-block__avatar">
                     <img
                       src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
@@ -55,12 +58,12 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
                       height="63"
                     />
                   </div>
-                ) : (
-                  <a href="/dev-sign-in" className="user-block__link">
+                </Link>
+              ) : (
+                <Link to={AppRoute.LOGIN} className="user-block__link">
                 Sign in
-                  </a>
-                )}
-              </div>
+                </Link>
+              )}
             </div>
           </header>
 
@@ -73,20 +76,40 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button" onClick={onVisibilityChange}>
+                <button
+                  className="btn btn--play movie-card__button"
+                  type="button"
+                  onClick={onVisibilityChange}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                <button
+                  className="btn btn--list movie-card__button"
+                  type="button"
+                  onClick={() => {
+                    if (isFavorite) {
+                      removeMovieFromMyList(id);
+                    } else {
+                      addMovieToMyList(id);
+                    }
+                  }}
+                >
+                  {isFavorite ? (
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>
+                  )}
                   <span>My list</span>
                 </button>
                 {authorizationStatus === AuthorizationStatus.AUTH && (
-                  <Link to={`/dev-review/${id}`} className="btn movie-card__button">
+                  <Link to={AppRoute.ADD_REVIEW} className="btn movie-card__button">
                     Add review
                   </Link>
                 )}
@@ -116,11 +139,11 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
 
         <footer className="page-footer">
           <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
+            <Link to={AppRoute.ROOT} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">
@@ -139,7 +162,8 @@ MoviePage.propTypes = {
     poster: PropTypes.string.isRequired,
     bgPosterUrl: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    releaseYear: PropTypes.number.isRequired
+    releaseYear: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired
   }).isRequired,
   movies: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
@@ -157,7 +181,9 @@ MoviePage.propTypes = {
     email: PropTypes.string,
     name: PropTypes.string,
     avatarUrl: PropTypes.string
-  })
+  }),
+  addMovieToMyList: PropTypes.func.isRequired,
+  removeMovieFromMyList: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -166,5 +192,13 @@ const mapStateToProps = (state) => ({
   authUserData: getAuthUser(state)
 });
 
-export default connect(mapStateToProps)(MoviePage);
+const mapDispatchToProps = (dispatch) => ({
+  addMovieToMyList(id) {
+    dispatch(DataOperation.addMovieToMyList(id));
+  },
+  removeMovieFromMyList(id) {
+    dispatch(DataOperation.removeMovieFromMyList(id));
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(MoviePage);
 

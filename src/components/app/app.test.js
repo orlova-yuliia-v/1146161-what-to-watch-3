@@ -192,7 +192,8 @@ it(`should render correctly`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       movies,
-      promoMovie: movies[0]
+      promoMovie: movies[0],
+      movieComments: []
     },
     [NameSpace.STATE]: {
       selectedGenre: ALL_GENRES,

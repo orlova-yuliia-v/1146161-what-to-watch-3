@@ -9,11 +9,23 @@ import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {connect} from "react-redux";
 import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
 const Main = (props) => {
-  const {promoMovie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData} = props;
+  const {
+    promoMovie,
+    onMovieCardClick,
+    isFullVideoPlayerVisible,
+    onVisibilityChange,
+    authorizationStatus,
+    authUserData,
+    addMovieToMyList,
+    removeMovieFromMyList} = props;
+
   return (
     isFullVideoPlayerVisible ? (
       <FullVideoPlayerWrapped
@@ -34,27 +46,29 @@ const Main = (props) => {
 
         <header className="page-header movie-card__head">
           <div className="logo">
-            <a className="logo__link">
+            <Link to={AppRoute.ROOT} className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="user-block">
             {authorizationStatus === AuthorizationStatus.AUTH ? (
-              <div className="user-block__avatar">
-                <img
-                  src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
-                  alt={authUserData.name}
-                  width="63"
-                  height="63"
-                />
-              </div>
+              <Link to={AppRoute.MY_LIST}>
+                <div className="user-block__avatar">
+                  <img
+                    src={`https://htmlacademy-react-3.appspot.com/${authUserData.avatarUrl}`}
+                    alt={authUserData.name}
+                    width="63"
+                    height="63"
+                  />
+                </div>
+              </Link>
             ) : (
-              <a href="/dev-sign-in" className="user-block__link">
+              <Link to={AppRoute.LOGIN} className="user-block__link">
                 Sign in
-              </a>
+              </Link>
             )}
           </div>
         </header>
@@ -92,10 +106,23 @@ const Main = (props) => {
                 <button
                   className="btn btn--list movie-card__button"
                   type="button"
+                  onClick={() => {
+                    if (promoMovie.isFavorite) {
+                      removeMovieFromMyList(promoMovie.id);
+                    } else {
+                      addMovieToMyList(promoMovie.id);
+                    }
+                  }}
                 >
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                  {promoMovie.isFavorite ? (
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>
+                  )}
                   <span>My list</span>
                 </button>
               </div>
@@ -117,11 +144,11 @@ const Main = (props) => {
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <Link to={AppRoute.ROOT} className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">
@@ -143,7 +170,9 @@ Main.propTypes = {
     email: PropTypes.string,
     name: PropTypes.string,
     avatarUrl: PropTypes.string
-  })
+  }),
+  addMovieToMyList: PropTypes.func.isRequired,
+  removeMovieFromMyList: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -152,4 +181,12 @@ const mapStateToProps = (state) => ({
   authUserData: getAuthUser(state)
 });
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = (dispatch) => ({
+  addMovieToMyList(id) {
+    dispatch(DataOperation.addMovieToMyList(id));
+  },
+  removeMovieFromMyList(id) {
+    dispatch(DataOperation.removeMovieFromMyList(id));
+  }
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

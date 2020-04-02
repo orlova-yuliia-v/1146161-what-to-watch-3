@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router} from "react-router-dom";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import {connect} from "react-redux";
@@ -11,7 +11,9 @@ import SignIn from "../sign-in/sign-in.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
+import MyList from "../my-list/my-list.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -49,36 +51,31 @@ class App extends PureComponent {
   }
 
   render() {
-    const {isFullVideoPlayerVisible, onVisibilityChange, selectedMovie, login, authorizationStatus} = this.props;
-    const selectedMovieId = selectedMovie && selectedMovie.id;
+    const {selectedMovie, login} = this.props;
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/dev-sign-in">
-            {authorizationStatus === AuthorizationStatus.NO_AUTH ? (
-              <SignIn onSubmit={login} />
-            ) : (
-              this._renderApp()
-            )}
-          </Route>
-          <Route exact path="/dev-film-page">
-            {selectedMovie ?
-              <MoviePage
-                movie={selectedMovie}
-                onMovieCardClick={this._handleCardClick}
-                isFullVideoPlayerVisible={isFullVideoPlayerVisible}
-                onVisibilityChange={onVisibilityChange}
-              /> :
-              null}
-          </Route>
-          <Route exact path={`/dev-review/${selectedMovieId}`}>
+          <Route
+            exact
+            path={AppRoute.LOGIN}
+            render={(props) => <SignIn {...props} onSubmit={login} />}
+          />
+          <Route exact path={AppRoute.ADD_REVIEW}>
             <AddReview movie={selectedMovie}/>
           </Route>
+          <Route
+            exact
+            path={AppRoute.MY_LIST}
+            render={() => (
+              <MyList
+                onMovieCardClick={this._handleCardClick} />
+            )}
+          />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

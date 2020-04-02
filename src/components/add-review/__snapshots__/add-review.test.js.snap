@@ -28,7 +28,8 @@ exports[`should render correctly 1`] = `
       >
         <a
           className="logo__link"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -77,8 +78,9 @@ exports[`should render correctly 1`] = `
       <div
         className="user-block"
       >
-        <div
-          className="user-block__avatar"
+        <a
+          href="/mylist"
+          onClick={[Function]}
         >
           <div
             className="user-block__avatar"
@@ -89,7 +91,7 @@ exports[`should render correctly 1`] = `
               width="63"
             />
           </div>
-        </div>
+        </a>
       </div>
     </header>
     <div
