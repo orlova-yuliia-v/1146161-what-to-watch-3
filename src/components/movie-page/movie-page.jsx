@@ -4,8 +4,6 @@ import {MoviesList} from "../movies-list/movies-list.jsx";
 import Tabs from "../tabs/tabs.jsx";
 import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab.jsx';
-import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
-import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
 import {getSimilarMovies} from "../../reducer/state/selectors.js";
 import {connect} from "react-redux";
 import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
@@ -13,22 +11,24 @@ import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
+import history from "../../history.js";
 
 const MoviesListWrapped = withActiveMovieCard(MoviesList);
 const TabsWrapped = withActiveTab(Tabs);
-const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
 
-const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, onVisibilityChange, authorizationStatus, authUserData, addMovieToMyList, removeMovieFromMyList}) => {
+const MoviePage = ({
+  movies,
+  movie,
+  onMovieCardClick,
+  authorizationStatus,
+  authUserData,
+  addMovieToMyList,
+  removeMovieFromMyList
+}) => {
 
   const {id, title, poster, bgPosterUrl, genre, releaseYear, isFavorite} = movie;
 
-  return isFullVideoPlayerVisible ? (
-    <FullVideoPlayerWrapped
-      onExitButtonClick={onVisibilityChange}
-      movie={movie}
-      autoPlay={true}
-    />
-  ) : (
+  return (
     <React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
@@ -79,7 +79,11 @@ const MoviePage = ({movies, movie, onMovieCardClick, isFullVideoPlayerVisible, o
                 <button
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick={onVisibilityChange}
+                  onClick={() =>
+                    history.push(
+                        `${AppRoute.FILMS}/${movie.id}${AppRoute.PLAYER}`
+                    )
+                  }
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -173,8 +177,6 @@ MoviePage.propTypes = {
     releaseYear: PropTypes.number.isRequired
   })).isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
-  onVisibilityChange: PropTypes.func.isRequired,
-  isFullVideoPlayerVisible: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   authUserData: PropTypes.shape({
     id: PropTypes.number,

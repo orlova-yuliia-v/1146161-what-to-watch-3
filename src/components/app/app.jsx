@@ -6,7 +6,7 @@ import MoviePage from "../movie-page/movie-page.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state.js";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
-import {isFullVideoPlayer, getSelectedMovie} from "../../reducer/state/selectors.js";
+import {getSelectedMovie} from "../../reducer/state/selectors.js";
 import SignIn from "../sign-in/sign-in.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
@@ -15,6 +15,10 @@ import history from "../../history.js";
 import {AppRoute} from "../../const.js";
 import MyList from "../my-list/my-list.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
+import withPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
+import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
+
+const FullVideoPlayerWrapped = withPlayer(FullVideoPlayer);
 
 class App extends PureComponent {
   constructor(props) {
@@ -32,8 +36,6 @@ class App extends PureComponent {
   render() {
     const {
       promoMovie,
-      isFullVideoPlayerVisible,
-      onVisibilityChange,
       selectedMovie,
       login
     } = this.props;
@@ -48,8 +50,6 @@ class App extends PureComponent {
               <Main
                 promoMovie={promoMovie}
                 onMovieCardClick={this._handleCardClick}
-                isFullVideoPlayerVisible={isFullVideoPlayerVisible}
-                onVisibilityChange={onVisibilityChange}
               />
             )}
           />
@@ -60,8 +60,6 @@ class App extends PureComponent {
               <MoviePage
                 movie={selectedMovie}
                 onMovieCardClick={this._handleCardClick}
-                isFullVideoPlayerVisible={isFullVideoPlayerVisible}
-                onVisibilityChange={onVisibilityChange}
               />
             )}
           />
@@ -69,6 +67,18 @@ class App extends PureComponent {
             exact
             path={`${AppRoute.FILMS}/:id${AppRoute.ADD_REVIEW}`}
             render={() => <AddReview />}
+          />
+          <Route
+            exact
+            path={`${AppRoute.FILMS}/:id${AppRoute.PLAYER}`}
+            render={(props) => (
+              <FullVideoPlayerWrapped
+                {...props}
+                onExitButtonClick={props.history.goBack}
+                movie={selectedMovie || promoMovie}
+                autoPlay={true}
+              />
+            )}
           />
           <Route
             exact
@@ -92,8 +102,6 @@ class App extends PureComponent {
 
 App.propTypes = {
   promoMovie: PropTypes.shape().isRequired,
-  onVisibilityChange: PropTypes.func.isRequired,
-  isFullVideoPlayerVisible: PropTypes.bool.isRequired,
   getComments: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
@@ -102,16 +110,12 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  isFullVideoPlayerVisible: isFullVideoPlayer(state),
   selectedMovie: getSelectedMovie(state),
   promoMovie: getPromoMovie(state),
   authorizationStatus: getAuthorizationStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onVisibilityChange() {
-    dispatch(ActionCreator.changeVisibility());
-  },
   changeSelectedMovieId(id) {
     dispatch(ActionCreator.changeSelectedMovieId(id));
   },
