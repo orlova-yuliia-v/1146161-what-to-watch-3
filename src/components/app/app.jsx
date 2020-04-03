@@ -85,7 +85,9 @@ class App extends PureComponent {
           <Route
             exact
             path={AppRoute.LOGIN}
-            render={(props) => <SignIn {...props} onSubmit={login} />}
+            render={(props) => (
+              <SignIn goBack={props.history.goBack} onSubmit={login} />
+            )}
           />
           <PrivateRoute
             exact
