@@ -113,7 +113,8 @@ const MoviePage = ({
                   <span>My list</span>
                 </button>
                 {authorizationStatus === AuthorizationStatus.AUTH && (
-                  <Link to={AppRoute.ADD_REVIEW} className="btn movie-card__button">
+                  <Link to={`${AppRoute.FILMS}/${movie.id}${AppRoute.ADD_REVIEW}`}
+                    className="btn movie-card__button">
                     Add review
                   </Link>
                 )}

@@ -5,15 +5,15 @@ import {getSelectedMovie} from "../../reducer/state/selectors.js";
 import {getAuthUser} from "../../reducer/user/selectors.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {ReviewLength} from "../../utils.js";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
+import history from "../../history.js";
 
 class AddReview extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      commentAdded: false,
       isFormInvalid: true
     };
 
@@ -45,8 +45,7 @@ class AddReview extends PureComponent {
         },
         () => {
           this._handleFormDisabilityToggle();
-
-          this.setState({commentAdded: true});
+          history.goBack();
         },
         () => {
           this._handleFormDisabilityToggle();
@@ -65,9 +64,8 @@ class AddReview extends PureComponent {
   render() {
     const {movie, authUserData} = this.props;
 
-    return (
+    return movie ? (
       <React.Fragment>
-        {(this.state.commentAdded || !this.props.movie) && <Redirect to="/" />}
         <section className="movie-card movie-card--full">
           <div className="movie-card__header">
             <div className="movie-card__bg">
@@ -214,6 +212,8 @@ class AddReview extends PureComponent {
           </div>
         </section>
       </React.Fragment>
+    ) : (
+      <h1>Loading...</h1>
     );
   }
 }
