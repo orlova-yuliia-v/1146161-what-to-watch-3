@@ -14,6 +14,7 @@ import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
 import MyList from "../my-list/my-list.jsx";
+import PrivateRoute from "../private-route/private-route.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -25,48 +26,56 @@ class App extends PureComponent {
   _handleCardClick(selectedMovieId) {
     this.props.changeSelectedMovieId(selectedMovieId);
     this.props.getComments(selectedMovieId);
-  }
-
-  _renderApp() {
-    const {promoMovie, isFullVideoPlayerVisible, onVisibilityChange, selectedMovie} = this.props;
-
-    if (selectedMovie) {
-      return (
-        <MoviePage
-          movie={selectedMovie}
-          onMovieCardClick={this._handleCardClick}
-          isFullVideoPlayerVisible={isFullVideoPlayerVisible}
-          onVisibilityChange={onVisibilityChange}
-        />
-      );
-    }
-    return (
-      <Main
-        promoMovie={promoMovie}
-        onMovieCardClick={this._handleCardClick}
-        isFullVideoPlayerVisible={isFullVideoPlayerVisible}
-        onVisibilityChange={onVisibilityChange}
-      />
-    );
+    history.push(`${AppRoute.FILMS}/${selectedMovieId}`);
   }
 
   render() {
-    const {selectedMovie, login} = this.props;
+    const {
+      promoMovie,
+      isFullVideoPlayerVisible,
+      onVisibilityChange,
+      selectedMovie,
+      login
+    } = this.props;
+
     return (
       <Router history={history}>
         <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
+          <Route
+            exact
+            path={AppRoute.ROOT}
+            render={() => (
+              <Main
+                promoMovie={promoMovie}
+                onMovieCardClick={this._handleCardClick}
+                isFullVideoPlayerVisible={isFullVideoPlayerVisible}
+                onVisibilityChange={onVisibilityChange}
+              />
+            )}
+          />
+          <Route
+            exact
+            path={`${AppRoute.FILMS}/:id`}
+            render={() => (
+              <MoviePage
+                movie={selectedMovie}
+                onMovieCardClick={this._handleCardClick}
+                isFullVideoPlayerVisible={isFullVideoPlayerVisible}
+                onVisibilityChange={onVisibilityChange}
+              />
+            )}
+          />
+          <PrivateRoute
+            exact
+            path={`${AppRoute.FILMS}/:id${AppRoute.ADD_REVIEW}`}
+            render={() => <AddReview />}
+          />
           <Route
             exact
             path={AppRoute.LOGIN}
             render={(props) => <SignIn {...props} onSubmit={login} />}
           />
-          <Route exact path={AppRoute.ADD_REVIEW}>
-            <AddReview movie={selectedMovie}/>
-          </Route>
-          <Route
+          <PrivateRoute
             exact
             path={AppRoute.MY_LIST}
             render={() => (
