@@ -10,6 +10,7 @@ import {getSelectedMovie} from "../../reducer/state/selectors.js";
 import SignIn from "../sign-in/sign-in.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import history from "../../history.js";
 import {AppRoute} from "../../const.js";
@@ -28,8 +29,11 @@ class App extends PureComponent {
   }
 
   _handleCardClick(selectedMovieId) {
-    this.props.changeSelectedMovieId(selectedMovieId);
-    this.props.getComments(selectedMovieId);
+    const {changeSelectedMovieId, getComments, selectedMovie} = this.props;
+    if (selectedMovie && selectedMovie.id !== selectedMovieId) {
+      changeSelectedMovieId(selectedMovieId);
+      getComments(selectedMovieId);
+    }
     history.push(`${AppRoute.FILMS}/${selectedMovieId}`);
   }
 
@@ -56,9 +60,9 @@ class App extends PureComponent {
           <Route
             exact
             path={`${AppRoute.FILMS}/:id`}
-            render={() => (
+            render={(props) => (
               <MoviePage
-                movie={selectedMovie}
+                id={Number(props.match.params.id)}
                 onMovieCardClick={this._handleCardClick}
               />
             )}
@@ -67,7 +71,8 @@ class App extends PureComponent {
             exact
             path={`${AppRoute.FILMS}/:id${AppRoute.ADD_REVIEW}`}
             render={(props) =>
-              <AddReview id={Number(props.computedMatch.params.id)}/>
+              <AddReview
+                id={Number(props.computedMatch.params.id)}/>
             }
           />
           <Route
@@ -125,6 +130,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   login(authData) {
     dispatch(UserOperation.login(authData));
+  },
+  getComments(id) {
+    dispatch(DataOperation.getComments(id));
   }
 });
 
