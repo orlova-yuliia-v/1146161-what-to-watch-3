@@ -94,13 +94,13 @@ const ActionCreator = {
     type: ActionType.GET_COMMENTS,
     payload: comments
   }),
-  addMovieToMyList: (movie = {}) => ({
+  addMovieToMyList: (id) => ({
     type: ActionType.ADD_MOVIE_TO_MY_LIST,
-    payload: movie
+    payload: id
   }),
-  removeMovieFromMyList: (movie = {}) => ({
+  removeMovieFromMyList: (id) => ({
     type: ActionType.REMOVE_MOVIE_FROM_MY_LIST,
-    payload: movie
+    payload: id
   }),
   getMyMoviesList: () => ({
     type: ActionType.GET_MY_MOVIES_LIST,
