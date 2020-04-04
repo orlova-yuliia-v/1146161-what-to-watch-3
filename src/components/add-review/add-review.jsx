@@ -218,17 +218,6 @@ class AddReview extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => ({
-  movie: getSelectedMovie(state),
-  authUserData: getAuthUser(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(commentData, onSuccess, onError) {
-    dispatch(DataOperation.addComment(commentData, onSuccess, onError));
-  }
-});
-
 AddReview.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -246,6 +235,17 @@ AddReview.propTypes = {
   }).isRequired,
   onSubmit: PropTypes.func.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  movie: getSelectedMovie(state),
+  authUserData: getAuthUser(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(commentData, onSuccess, onError) {
+    dispatch(DataOperation.addComment(commentData, onSuccess, onError));
+  }
+});
 
 export {AddReview};
 export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
