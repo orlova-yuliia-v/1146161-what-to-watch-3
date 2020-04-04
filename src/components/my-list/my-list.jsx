@@ -1,5 +1,5 @@
 import React from "react";
-import MoviesList from "../movies-list/movies-list.jsx";
+import {MoviesList} from "../movies-list/movies-list.jsx";
 import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
