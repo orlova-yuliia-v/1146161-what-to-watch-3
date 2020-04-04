@@ -18,8 +18,10 @@ import MyList from "../my-list/my-list.jsx";
 import PrivateRoute from "../private-route/private-route.jsx";
 import withPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
+import withFormValidation from "../../hocs/with-form-validation/with-form-validation.jsx";
 
 const FullVideoPlayerWrapped = withPlayer(FullVideoPlayer);
+const AddReviewWrapped = withFormValidation(AddReview);
 
 class App extends PureComponent {
   constructor(props) {
@@ -71,7 +73,7 @@ class App extends PureComponent {
             exact
             path={`${AppRoute.FILMS}/:id${AppRoute.ADD_REVIEW}`}
             render={(props) =>
-              <AddReview
+              <AddReviewWrapped
                 id={Number(props.computedMatch.params.id)}/>
             }
           />

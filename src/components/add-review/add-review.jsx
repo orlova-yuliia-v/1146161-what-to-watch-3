@@ -13,16 +13,11 @@ class AddReview extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isFormInvalid: true
-    };
-
     this.submitFormRef = createRef();
     this.commentRef = createRef();
     this.sendCommentButtonRef = createRef();
 
     this._handleFormReviewSubmit = this._handleFormReviewSubmit.bind(this);
-    this._handleTextareaChange = this._handleTextareaChange.bind(this);
     this._handleFormDisabilityToggle = this._handleFormDisabilityToggle.bind(this);
   }
 
@@ -53,16 +48,8 @@ class AddReview extends PureComponent {
     );
   }
 
-  _handleTextareaChange(evt) {
-    this.setState({
-      isFormInvalid:
-        evt.target.value.length < ReviewLength.MIN ||
-        evt.target.value.length > ReviewLength.MAX
-    });
-  }
-
   render() {
-    const {movie, authUserData} = this.props;
+    const {movie, authUserData, isFormInvalid, onTextareaChange} = this.props;
 
     return movie ? (
       <React.Fragment>
@@ -196,14 +183,14 @@ class AddReview extends PureComponent {
                   ref={this.commentRef}
                   minLength={ReviewLength.MIN}
                   maxLength={ReviewLength.MAX}
-                  onChange={this._handleTextareaChange}
+                  onChange={onTextareaChange}
                 />
                 <div className="add-review__submit">
                   <button
                     className="add-review__btn"
                     type="submit"
                     ref={this.sendCommentButtonRef}
-                    disabled={this.state.isFormInvalid}>
+                    disabled={isFormInvalid}>
                 Post
                   </button>
                 </div>
@@ -233,7 +220,9 @@ AddReview.propTypes = {
     name: PropTypes.string,
     avatarUrl: PropTypes.string
   }).isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  isFormInvalid: PropTypes.bool.isRequired,
+  onTextareaChange: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
