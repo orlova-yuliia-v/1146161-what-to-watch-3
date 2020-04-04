@@ -86,9 +86,9 @@ class AddReview extends PureComponent {
               <nav className="breadcrumbs">
                 <ul className="breadcrumbs__list">
                   <li className="breadcrumbs__item">
-                    <a href="movie-page.html" className="breadcrumbs__link">
+                    <Link to={`${AppRoute.FILMS}/${movie.id}`} className="breadcrumbs__link">
                       {movie.title}
-                    </a>
+                    </Link>
                   </li>
                   <li className="breadcrumbs__item">
                     <a className="breadcrumbs__link">Add review</a>

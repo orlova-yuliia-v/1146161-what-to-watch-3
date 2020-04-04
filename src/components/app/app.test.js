@@ -210,9 +210,7 @@ it(`should render correctly`, () => {
   const tree = renderer
    .create(
        <Provider store={store}>
-         <App
-           getComments={() => {}}
-         />
+         <App />
        </Provider>
    )
    .toJSON();

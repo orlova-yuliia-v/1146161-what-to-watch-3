@@ -216,8 +216,6 @@ it(`should render correctly`, () => {
              promoFilm={movies[0]}
              movies={movies}
              onMovieCardClick={() => {}}
-             isFullVideoPlayerVisible={false}
-             onVisibilityChange={() => {}}
            />
          </MemoryRouter>
        </Provider>

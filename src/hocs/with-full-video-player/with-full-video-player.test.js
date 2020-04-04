@@ -12,6 +12,7 @@ it(`should render withFullVideoPlayer HOC correctly`, () => {
       <
         MockComponentWrapped
         autoPlay = {true}
+        onExitButtonClick={() => {}}
       />).toJSON();
 
   expect(tree).toMatchSnapshot();
