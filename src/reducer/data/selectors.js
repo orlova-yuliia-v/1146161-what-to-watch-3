@@ -13,9 +13,9 @@ export const getComments = (state) => {
   return state[NameSpace.DATA].movieComments;
 };
 
-const findMyMoviesList = (state) =>
-  state[NameSpace.DATA].movies.filter((movie) => movie.isFavorite);
-
+const findMyMoviesList = (movies) => {
+  return movies.filter((movie) => movie.isFavorite === true);
+};
 export const getMyMoviesList = createSelector(
-    (state) => state,
+    (state) => state[NameSpace.DATA].movies,
     findMyMoviesList);
