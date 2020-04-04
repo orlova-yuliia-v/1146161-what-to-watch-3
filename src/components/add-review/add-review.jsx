@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {getSelectedMovie} from "../../reducer/state/selectors.js";
 import {getAuthUser} from "../../reducer/user/selectors.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
-import {ReviewLength} from "../../utils.js";
+import {ReviewLength} from "../../const.js";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
 import history from "../../history.js";
