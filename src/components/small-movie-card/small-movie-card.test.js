@@ -1,8 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import SmallMovieCard from "./small-movie-card.jsx";
+import {MemoryRouter} from "react-router-dom";
 
 const movie = {
+  id: 1,
   title: `Some title`,
   poster: `1.jpg`,
   bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -28,13 +30,15 @@ const movie = {
 it(`should render correctly`, () => {
   const tree = renderer
     .create(
-        <SmallMovieCard
-          movie={movie}
-          onMovieEnter={() => {}}
-          onMovieLeave={() => {}}
-          onMovieCardClick={() => {}}
-          isPlaying={true}
-        />,
+        <MemoryRouter>
+          <SmallMovieCard
+            movie={movie}
+            onMovieEnter={() => {}}
+            onMovieLeave={() => {}}
+            onMovieCardClick={() => {}}
+            isPlaying={true}
+          />
+        </MemoryRouter>,
         {
           createNodeMock: (element) => {
             if (element.type === `video`) {
