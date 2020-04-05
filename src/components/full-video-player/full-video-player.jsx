@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createRef} from "react";
 import PropTypes from "prop-types";
 
 const FullVideoPlayer = (props) => {
@@ -16,8 +16,10 @@ const FullVideoPlayer = (props) => {
     onExitButtonClick
   } = props;
 
+  const playerRef = createRef();
+
   return (
-    <div className="player">
+    <div className="player" ref={playerRef}>
       <video
         className="player__video"
         ref={videoRef}
@@ -81,7 +83,7 @@ const FullVideoPlayer = (props) => {
           <button
             type="button"
             className="player__full-screen"
-            onClick={onFullscreenButtonClick}
+            onClick={() => onFullscreenButtonClick(playerRef.current)}
           >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen" />

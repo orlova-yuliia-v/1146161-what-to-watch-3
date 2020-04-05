@@ -31,6 +31,12 @@ export const formatMovieDuration = (duration) => {
   return `${hours}h ${(`0` + minutes).slice(-2)}m`;
 };
 
+export const formatPlayerTime = (time) => [60, 60, 24].map((n) => {
+  const result = time % n;
+  time = (time - result) / n;
+  return (`0` + result).slice(-2);
+}).reverse().join(`:`);
+
 export const formatReviewDate = ({comment, date, id, rating, user}) => ({
   comment,
   date: new Date(date).toLocaleString(`en-us`, {
@@ -74,4 +80,3 @@ export const normalizeUserData = (user) => {
     avatarUrl: user[`avatar_url`],
   };
 };
-
