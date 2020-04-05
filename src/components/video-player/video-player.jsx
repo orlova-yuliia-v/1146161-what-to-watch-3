@@ -16,6 +16,14 @@ class VideoPlayer extends PureComponent {
     }
   }
 
+  componentDidUpdate() {
+    const video = this._videoRef.current;
+    if (this.props.isPlaying) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  }
   render() {
     const {poster, previewUrl} = this.props;
 
@@ -29,14 +37,6 @@ class VideoPlayer extends PureComponent {
     );
   }
 
-  componentDidUpdate() {
-    const video = this._videoRef.current;
-    if (this.props.isPlaying) {
-      video.play();
-    } else {
-      video.pause();
-    }
-  }
 }
 VideoPlayer.propTypes = {
   previewUrl: propTypes.string.isRequired,
