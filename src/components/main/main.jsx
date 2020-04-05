@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import MoviesList from '../movies-list/movies-list.jsx';
 import GenresList from '../genres-list/genres-list.jsx';
 import ShowMoreButton from "../show-more-button/show-more-button.jsx";
-import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
-import withFullVideoPlayer from "../../hocs/with-full-video-player/with-full-video-player.jsx";
 import {getPromoMovie} from "../../reducer/data/selectors.js";
 import {connect} from "react-redux";
 import {getAuthorizationStatus, getAuthUser} from "../../reducer/user/selectors.js";
@@ -12,28 +10,19 @@ import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
-
-const FullVideoPlayerWrapped = withFullVideoPlayer(FullVideoPlayer);
+import history from "../../history.js";
 
 const Main = (props) => {
   const {
     promoMovie,
     onMovieCardClick,
-    isFullVideoPlayerVisible,
-    onVisibilityChange,
     authorizationStatus,
     authUserData,
     addMovieToMyList,
     removeMovieFromMyList} = props;
 
   return (
-    isFullVideoPlayerVisible ? (
-      <FullVideoPlayerWrapped
-        onExitButtonClick={onVisibilityChange}
-        movie={promoMovie}
-        autoPlay={true}
-      />
-    ) : (<React.Fragment>
+    <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
           <img
@@ -96,7 +85,11 @@ const Main = (props) => {
                 <button
                   className="btn btn--play movie-card__button"
                   type="button"
-                  onClick={onVisibilityChange}
+                  onClick={() =>
+                    history.push(
+                        `${AppRoute.FILMS}/${promoMovie.id}${AppRoute.PLAYER}`
+                    )
+                  }
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -157,13 +150,11 @@ const Main = (props) => {
         </footer>
       </div>
     </React.Fragment>
-    ));
+  );
 };
 Main.propTypes = {
   promoMovie: PropTypes.shape().isRequired,
   onMovieCardClick: PropTypes.func.isRequired,
-  onVisibilityChange: PropTypes.func.isRequired,
-  isFullVideoPlayerVisible: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   authUserData: PropTypes.shape({
     id: PropTypes.number,

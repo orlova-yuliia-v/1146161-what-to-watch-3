@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import MoviePage from "./movie-page.jsx";
+import {MoviePage} from "./movie-page.jsx";
 import {ALL_GENRES, DEFAULT_SHOWED_MOVIES_NUMBER} from "../../const.js";
 import NameSpace from "../../reducer/name-space.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
@@ -236,6 +236,12 @@ it(`should render correctly`, () => {
               onMovieCardClick={() => {}}
               isFullVideoPlayerVisible={false}
               onVisibilityChange={() => {}}
+              addMovieToMyList={() => {}}
+              removeMovieFromMyList={() => {}}
+              getComments={() => {}}
+              changeSelectedMovieId={() => {}}
+              authorizationStatus={AuthorizationStatus.NO_AUTH}
+              id={0}
             />
           </MemoryRouter>
         </Provider>,

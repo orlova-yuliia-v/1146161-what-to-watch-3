@@ -61,6 +61,7 @@ const withFullVideoPlayer = (Component) => {
     }
 
     render() {
+      const {onExitButtonClick} = this.props;
       const {isPlaying} = this.state;
 
       return (
@@ -74,13 +75,15 @@ const withFullVideoPlayer = (Component) => {
           getElapsedTime={this._getElapsedTime}
           onLoadedMetadata={this._handleMetadataLoad}
           onTimeUpdate={this._handleTimeUpdate}
+          onExitButtonClick={onExitButtonClick}
         />
       );
     }
   }
 
   WithFullVideoPlayer.propTypes = {
-    autoPlay: PropTypes.bool.isRequired
+    autoPlay: PropTypes.bool.isRequired,
+    onExitButtonClick: PropTypes.func.isRequired
   };
 
   return WithFullVideoPlayer;

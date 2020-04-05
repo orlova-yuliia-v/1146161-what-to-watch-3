@@ -4,25 +4,20 @@ import PropTypes from "prop-types";
 import {getSelectedMovie} from "../../reducer/state/selectors.js";
 import {getAuthUser} from "../../reducer/user/selectors.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
-import {ReviewLength} from "../../utils.js";
-import {Link, Redirect} from "react-router-dom";
+import {ReviewLength} from "../../const.js";
+import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
+import history from "../../history.js";
 
 class AddReview extends PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = {
-      commentAdded: false,
-      isFormInvalid: true
-    };
 
     this.submitFormRef = createRef();
     this.commentRef = createRef();
     this.sendCommentButtonRef = createRef();
 
     this._handleFormReviewSubmit = this._handleFormReviewSubmit.bind(this);
-    this._handleTextareaChange = this._handleTextareaChange.bind(this);
     this._handleFormDisabilityToggle = this._handleFormDisabilityToggle.bind(this);
   }
 
@@ -45,8 +40,7 @@ class AddReview extends PureComponent {
         },
         () => {
           this._handleFormDisabilityToggle();
-
-          this.setState({commentAdded: true});
+          history.goBack();
         },
         () => {
           this._handleFormDisabilityToggle();
@@ -54,20 +48,11 @@ class AddReview extends PureComponent {
     );
   }
 
-  _handleTextareaChange(evt) {
-    this.setState({
-      isFormInvalid:
-        evt.target.value.length < ReviewLength.MIN ||
-        evt.target.value.length > ReviewLength.MAX
-    });
-  }
-
   render() {
-    const {movie, authUserData} = this.props;
+    const {movie, authUserData, isFormInvalid, onTextareaChange} = this.props;
 
-    return (
+    return movie ? (
       <React.Fragment>
-        {(this.state.commentAdded || !this.props.movie) && <Redirect to="/" />}
         <section className="movie-card movie-card--full">
           <div className="movie-card__header">
             <div className="movie-card__bg">
@@ -88,9 +73,9 @@ class AddReview extends PureComponent {
               <nav className="breadcrumbs">
                 <ul className="breadcrumbs__list">
                   <li className="breadcrumbs__item">
-                    <a href="movie-page.html" className="breadcrumbs__link">
+                    <Link to={`${AppRoute.FILMS}/${movie.id}`} className="breadcrumbs__link">
                       {movie.title}
-                    </a>
+                    </Link>
                   </li>
                   <li className="breadcrumbs__item">
                     <a className="breadcrumbs__link">Add review</a>
@@ -198,14 +183,14 @@ class AddReview extends PureComponent {
                   ref={this.commentRef}
                   minLength={ReviewLength.MIN}
                   maxLength={ReviewLength.MAX}
-                  onChange={this._handleTextareaChange}
+                  onChange={onTextareaChange}
                 />
                 <div className="add-review__submit">
                   <button
                     className="add-review__btn"
                     type="submit"
                     ref={this.sendCommentButtonRef}
-                    disabled={this.state.isFormInvalid}>
+                    disabled={isFormInvalid}>
                 Post
                   </button>
                 </div>
@@ -214,20 +199,11 @@ class AddReview extends PureComponent {
           </div>
         </section>
       </React.Fragment>
+    ) : (
+      <h1>Loading...</h1>
     );
   }
 }
-
-const mapStateToProps = (state) => ({
-  movie: getSelectedMovie(state),
-  authUserData: getAuthUser(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(commentData, onSuccess, onError) {
-    dispatch(DataOperation.addComment(commentData, onSuccess, onError));
-  }
-});
 
 AddReview.propTypes = {
   movie: PropTypes.shape({
@@ -244,8 +220,21 @@ AddReview.propTypes = {
     name: PropTypes.string,
     avatarUrl: PropTypes.string
   }).isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  isFormInvalid: PropTypes.bool.isRequired,
+  onTextareaChange: PropTypes.func.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  movie: getSelectedMovie(state),
+  authUserData: getAuthUser(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(commentData, onSuccess, onError) {
+    dispatch(DataOperation.addComment(commentData, onSuccess, onError));
+  }
+});
 
 export {AddReview};
 export default connect(mapStateToProps, mapDispatchToProps)(AddReview);

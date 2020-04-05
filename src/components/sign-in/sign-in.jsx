@@ -14,7 +14,7 @@ class SignIn extends PureComponent {
   }
 
   _handleFormSubmit(evt) {
-    const {onSubmit} = this.props;
+    const {onSubmit, goBack} = this.props;
 
     evt.preventDefault();
 
@@ -23,7 +23,7 @@ class SignIn extends PureComponent {
       password: this.passwordRef.current.value
     });
 
-    this.props.history.goBack();
+    goBack();
   }
 
   render() {
@@ -109,7 +109,7 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  history: PropTypes.func
+  goBack: PropTypes.func
 };
 
 export default SignIn;

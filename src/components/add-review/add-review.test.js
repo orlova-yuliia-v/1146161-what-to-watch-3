@@ -66,7 +66,10 @@ it(`should render correctly`, () => {
             <AddReview
               onSubmit={() => {}}
               movie={movie}
-              authUserData={authDataMock}/>
+              authUserData={authDataMock}
+              onTextareaChange={() => {}}
+              isFormInvalid={false}
+            />
           </Provider>
         </MemoryRouter>
     )

@@ -1,14 +1,11 @@
 import React from "react";
-import MoviesList from "../movies-list/movies-list.jsx";
-import withActiveMovieCard from "../../hocs/with-active-movie-card/with-active-movie-card.jsx";
+import {MoviesList} from "../movies-list/movies-list.jsx";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
 import {getMyMoviesList} from "../../reducer/data/selectors.js";
 import {getAuthUser} from "../../reducer/user/selectors.js";
 import {connect} from "react-redux";
-
-const MoviesListWrapped = withActiveMovieCard(MoviesList);
 
 const MyList = ({onMovieCardClick, movies, authUserData}) => {
   return (
@@ -41,7 +38,7 @@ const MyList = ({onMovieCardClick, movies, authUserData}) => {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <MoviesListWrapped onMovieCardClick={onMovieCardClick} movies={movies} />
+        <MoviesList onMovieCardClick={onMovieCardClick} movies={movies} />
       </section>
 
       <footer className="page-footer">

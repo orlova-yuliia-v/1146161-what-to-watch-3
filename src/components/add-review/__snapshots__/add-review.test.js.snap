@@ -59,7 +59,8 @@ exports[`should render correctly 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="movie-page.html"
+              href="/films/1"
+              onClick={[Function]}
             >
               Some title
             </a>
@@ -204,7 +205,7 @@ exports[`should render correctly 1`] = `
         >
           <button
             className="add-review__btn"
-            disabled={true}
+            disabled={false}
             type="submit"
           >
             Post

@@ -75,7 +75,3 @@ export const normalizeUserData = (user) => {
   };
 };
 
-export const ReviewLength = {
-  MIN: 50,
-  MAX: 400
-};
