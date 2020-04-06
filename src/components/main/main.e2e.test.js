@@ -17,6 +17,7 @@ Enzyme.configure({
 
 const movies = [
   {
+    id: 1,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -36,9 +37,11 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 2,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -58,9 +61,11 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 3,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -80,9 +85,11 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 4,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -102,9 +109,11 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 5,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -124,9 +133,11 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 6,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -146,9 +157,11 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 7,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -168,9 +181,11 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 8,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
@@ -190,7 +205,8 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   }
 ];
 
