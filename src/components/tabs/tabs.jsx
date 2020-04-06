@@ -73,7 +73,7 @@ const Tabs = (props) => {
 
             <p className="movie-card__starring">
               <strong>
-                    Starring: {`${movie.starring.join(`, `)} and other`}
+                    Starring: {`${movie.actors.join(`, `)} and other`}
               </strong>
             </p>
           </div>
@@ -93,10 +93,10 @@ const Tabs = (props) => {
               <p className="movie-card__details-item">
                 <strong className="movie-card__details-name">Starring</strong>
                 <span className="movie-card__details-value">
-                  {movie.starring.map((actor, i) => (
+                  {movie.actors.map((actor, i) => (
                     <React.Fragment key={actor}>
                       {actor}
-                      {i < movie.starring.length - 1 && <React.Fragment>,<br/></React.Fragment> }
+                      {i < movie.actors.length - 1 && <React.Fragment>,<br/></React.Fragment> }
                     </React.Fragment>))}
                 </span>
               </p>
@@ -156,7 +156,7 @@ Tabs.propTypes = {
     genre: PropTypes.string.isRequired,
     releaseYear: PropTypes.number.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string).isRequired,
     runTime: PropTypes.number.isRequired,
     ratingScore: PropTypes.number.isRequired,
     ratingCount: PropTypes.number.isRequired,

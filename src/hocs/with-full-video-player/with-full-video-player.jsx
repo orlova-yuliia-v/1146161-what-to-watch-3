@@ -1,5 +1,6 @@
 import React, {createRef} from "react";
 import PropTypes from "prop-types";
+import {formatPlayerTime} from "../../utils.js";
 
 const withFullVideoPlayer = (Component) => {
   class WithFullVideoPlayer extends React.PureComponent {
@@ -33,9 +34,11 @@ const withFullVideoPlayer = (Component) => {
       }
     }
 
-    _handleFullscreen() {
-      const video = this._videoRef.current;
-      video.requestFullscreen();
+    _handleFullscreen(player) {
+      if (document.fullscreenElement === player) {
+        document.exitFullscreen();
+      }
+      player.requestFullscreen();
     }
 
     _getProgress() {
@@ -44,7 +47,7 @@ const withFullVideoPlayer = (Component) => {
 
     _getElapsedTime() {
       const diff = this.state.videoDuration - this.state.currentTime;
-      return `${Math.floor(diff / 3600)}:${Math.floor((diff / 60) % 60)}:${diff % 60}`;
+      return formatPlayerTime(diff);
     }
 
     _handleTimeUpdate(evt) {

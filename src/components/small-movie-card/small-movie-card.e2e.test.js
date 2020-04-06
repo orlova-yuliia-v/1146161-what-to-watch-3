@@ -7,6 +7,7 @@ configure({adapter: new Adapter()});
 
 const mock = {
   movie: {
+    id: 1,
     title: `one`,
     poster: `pic-one`,
     previewUrl: `https://preview-url.com/1.mp4`,

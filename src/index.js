@@ -26,11 +26,12 @@ const store = createStore(
 
 store.dispatch(DataOperation.getMovies());
 store.dispatch(DataOperation.getPromoMovie());
-store.dispatch(UserOperation.checkAuth());
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+store.dispatch(UserOperation.checkAuth()).finally(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+});

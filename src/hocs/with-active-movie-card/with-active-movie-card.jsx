@@ -15,6 +15,10 @@ const withActiveMovieCard = (Component) => {
       this._handleCardLeave = this._handleCardLeave.bind(this);
     }
 
+    componentWillUnmount() {
+      clearTimeout(this.mouseEnterTimer);
+    }
+
     _handleCardEnter() {
       this.mouseEnterTimer = setTimeout(() => {
         this.setState(() => ({
@@ -27,10 +31,6 @@ const withActiveMovieCard = (Component) => {
       this.setState(() => ({
         isPlaying: false
       }));
-      clearTimeout(this.mouseEnterTimer);
-    }
-
-    componentWillUnmount() {
       clearTimeout(this.mouseEnterTimer);
     }
 

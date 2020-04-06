@@ -1,16 +1,18 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {MoviesList} from '../movies-list/movies-list.jsx';
+import {MemoryRouter} from "react-router-dom";
 
 const movies = [
   {
+    id: 1,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -23,16 +25,18 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 2,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -45,16 +49,18 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 3,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -67,16 +73,18 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 4,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -89,16 +97,18 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 5,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -111,16 +121,18 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 6,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -133,16 +145,18 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 7,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -155,16 +169,18 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   },
   {
+    id: 8,
     title: `Some title`,
     poster: `1.jpg`,
     bgPosterUrl: `https://image-url.com/1.jpg`,
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -177,17 +193,20 @@ const movies = [
         author: `Yuliia Orlova`,
         text: `Review text`
       }
-    ]
+    ],
+    isFavorite: true
   }
 ];
 
 it(`should render correctly`, () => {
   const tree = renderer
     .create(
-        <MoviesList
-          movies={movies}
-          onMovieCardClick={() => {}}
-        />
+        <MemoryRouter>
+          <MoviesList
+            movies={movies}
+            onMovieCardClick={() => { }}
+          />
+        </MemoryRouter>
     )
     .toJSON();
 
