@@ -25,7 +25,7 @@ const movies = [{
   genre: `Some genre`,
   releaseYear: 2020,
   director: `Director name`,
-  starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+  actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
   runTime: 2,
   ratingScore: 7.5,
   ratingCount: 1234,
@@ -48,7 +48,7 @@ const movies = [{
   genre: `Some genre`,
   releaseYear: 2020,
   director: `Director name`,
-  starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+  actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
   runTime: 2,
   ratingScore: 7.5,
   ratingCount: 1234,
@@ -89,8 +89,8 @@ it(`Should render MyList component`, () => {
           <Provider store={store}>
             <MyList
               movies={movies}
-              onMovieCardClick={() => {}}
-              authUserData = {authDataMock}/>
+              onMovieCardClick={() => { }}
+              authUserData={authDataMock} />
           </Provider>
         </MemoryRouter>
     )

@@ -18,7 +18,7 @@ const film = [
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: `2h 00m`,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -39,7 +39,7 @@ const film = [
 it(`should change state of property "isPlaying" on mouseenter/mouseleave`, (done) => {
   const wrapper = mount(<MockComponentWrapped
     film={film}
-    onMovieTitleClick={() => {}}
+    onMovieTitleClick={() => { }}
   />);
 
   const mockComponent = wrapper.find(MockComponent);

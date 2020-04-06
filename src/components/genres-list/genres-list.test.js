@@ -16,7 +16,7 @@ const movies = [
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -38,7 +38,7 @@ const movies = [
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -60,7 +60,7 @@ const movies = [
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -82,7 +82,7 @@ const movies = [
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -104,7 +104,7 @@ const movies = [
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -126,7 +126,7 @@ const movies = [
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -148,7 +148,7 @@ const movies = [
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -170,7 +170,7 @@ const movies = [
     genre: `Some genre`,
     releaseYear: 2020,
     director: `Director name`,
-    starring: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
+    actors: [`Actor 1`, `Actor 2`, `Actor 3`, `Actor 4`, `Actor 5`],
     runTime: 2,
     ratingScore: 7.5,
     ratingCount: 1234,
@@ -206,8 +206,8 @@ it(`should render correctly`, () => {
           <GenresList
             movies={movies}
             selectedGenre={ALL_GENRES}
-            changeGenre={() => {}}
-            resetShowedMoviesAmount ={() => {}}
+            changeGenre={() => { }}
+            resetShowedMoviesAmount={() => { }}
           />
         </Provider>
     )
