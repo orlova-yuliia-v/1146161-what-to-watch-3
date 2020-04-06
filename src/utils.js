@@ -59,7 +59,7 @@ export const normalizeMovieData = (movie) => ({
   ratingScore: movie.rating,
   ratingCount: movie.scores_count,
   director: movie.director,
-  starring: movie.starring,
+  actors: movie.starring,
   runTime: movie.run_time,
   genre: movie.genre,
   releaseYear: movie.released,
