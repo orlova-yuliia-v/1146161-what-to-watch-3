@@ -61,6 +61,13 @@ class App extends PureComponent {
           />
           <Route
             exact
+            path={AppRoute.LOGIN}
+            render={(props) => (
+              <SignIn goBack={props.history.goBack} onSubmit={login} />
+            )}
+          />
+          <Route
+            exact
             path={`${AppRoute.FILMS}/:id`}
             render={(props) => (
               <MoviePage
@@ -68,14 +75,6 @@ class App extends PureComponent {
                 onMovieCardClick={this._handleCardClick}
               />
             )}
-          />
-          <PrivateRoute
-            exact
-            path={`${AppRoute.FILMS}/:id${AppRoute.ADD_REVIEW}`}
-            render={(props) =>
-              <AddReviewWrapped
-                id={Number(props.computedMatch.params.id)}/>
-            }
           />
           <Route
             exact
@@ -89,12 +88,13 @@ class App extends PureComponent {
               />
             )}
           />
-          <Route
+          <PrivateRoute
             exact
-            path={AppRoute.LOGIN}
-            render={(props) => (
-              <SignIn goBack={props.history.goBack} onSubmit={login} />
-            )}
+            path={`${AppRoute.FILMS}/:id${AppRoute.ADD_REVIEW}`}
+            render={(props) =>
+              <AddReviewWrapped
+                id={Number(props.computedMatch.params.id)}/>
+            }
           />
           <PrivateRoute
             exact
