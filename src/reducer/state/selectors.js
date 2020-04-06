@@ -42,7 +42,7 @@ const filterSimilarMovies = (movies, selectedMovieId, maxNumber = MAX_SIMILAR_MO
   const selectedMovie = movies.find((movie) => movie.id === selectedMovieId);
   return movies.filter(
       (similarMovie) =>
-        similarMovie.genre === selectedMovie.genre && similarMovie.title !== selectedMovie.title).slice(0, maxNumber);
+        selectedMovie && similarMovie.genre === selectedMovie.genre && similarMovie.title !== selectedMovie.title).slice(0, maxNumber);
 };
 
 export const getSimilarMovies = createSelector(
